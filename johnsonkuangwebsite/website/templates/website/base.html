@@ -1,5 +1,4 @@
-﻿{
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +9,6 @@
     <meta name="author" content="">
 
     {% load staticfiles %}
-    {% load cropping %}
 
     <link rel="shortcut icon" href="{% static 'website/img/ml-favicon.png' %}" />
 
@@ -29,16 +27,16 @@
     <!-- A modified version of the grayscale css -->
     <link rel="stylesheet" type="text/css" href="{% static 'website/css/grayscale.css' %}"/>
 
-    <!-- Our custom style sheets -->    
+    <!-- Our custom style sheets -->
     <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
-    
+
     {% block stylesheets %}
-    
+
     {% endblock %}
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>    
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
 
 	<!-- jQuery: v1.9.1 necessary for Bootstrap's JavaScript plugins -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -69,7 +67,7 @@
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    % block navbar %}
+    {% block navbar %}
         <!-- Navigation -->
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" >
             <div class="container-fluid" style="width:100%; max-width:1170px; margin:auto">
@@ -94,7 +92,7 @@
                         </div>
 
                         <div class="collapse navbar-collapse navbar-main-collapse">
-                            <ul class="nav navbar-nav pull-right">                                
+                            <ul class="nav navbar-nav pull-right">
                                 {% with request.resolver_match.url_name as url_name %}
                                     <li class="{% if url_name == 'index' %}active{% endif %}"><a href="{% url 'website:index' %}">Home</a></li>
                                     <li class="{% if url_name == 'about' %}active{% endif %}"><a href="{% url 'website:about' %}">About</a></li>
@@ -110,6 +108,9 @@
 
             <!-- /.container -->
         </nav>
+    {% endblock %}
+
+    {% block content %}
     {% endblock %}
 
 </body>
