@@ -1,0 +1,116 @@
+﻿{
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% load staticfiles %}
+    {% load cropping %}
+
+    <link rel="shortcut icon" href="{% static 'website/img/ml-favicon.png' %}" />
+
+    <!-- Load some fonts -->
+    <!-- Raleway: https://fonts.google.com/specimen/Raleway -->
+{#    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />#}
+{#    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Roboto" rel="stylesheet">#}
+{#    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700|Raleway:400,800|Roboto:400,700" rel="stylesheet">    #}
+{#    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">#}
+    <!-- Raleway 300 is light, 400 is regular, 500 is medium, 600 is semi-bold, 700 is bold -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/bootstrap.min.css' %}"/>
+
+    <!-- A modified version of the grayscale css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/grayscale.css' %}"/>
+
+    <!-- Our custom style sheets -->    
+    <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
+    
+    {% block stylesheets %}
+    
+    {% endblock %}
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>    
+    
+
+	<!-- jQuery: v1.9.1 necessary for Bootstrap's JavaScript plugins -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<!-- Bootstrap: Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- Grayscale template -->
+	<script src="{% static 'website/js/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'website/js/grayscale.js' %}"></script>
+	<script src="{% static 'website/js/backtop.js' %}"></script>
+
+    <title>
+        {% block pagetitle %}
+            {{ request.resolver_match.url_name }}
+        {% endblock %}
+    </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124720949-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-124720949-1');
+    </script>
+
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    % block navbar %}
+        <!-- Navigation -->
+        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" >
+            <div class="container-fluid" style="width:100%; max-width:1170px; margin:auto">
+                <div class = "row">
+                    <div class="col-xs-12" style="padding:0px">
+
+                        <div class="navbar-header">
+
+                            <button style="" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                                <i class="fa fa-bars"></i>
+                            </button>
+
+                            <a class="navbar-brand page-scroll" href="{% url 'website:index' %}">
+                                <!-- <i class="fa fa-gears"></i>  <span style="font-family: roboto-bold">make</span>ability</span> lab-->
+                                <!-- <img src="{% static 'website/img/logos/makelab_logo_bolder_white_no_text_100x68.png' %}" height="20" /> -->
+                                {# TODO: the text following the logo does not look vertically centered. Should be fixed. #}
+                                <img src="{% static 'website/img/logos/makelab_logo_white_no_text_100x67.png' %}" height="20" />
+
+                                <!--<div class="lab-text"><span style="font-family: roboto-bold; margin-left: 2px;">JOHNSON</span>ability</span> Lab</div>-->
+                            </a>
+
+                        </div>
+
+                        <div class="collapse navbar-collapse navbar-main-collapse">
+                            <ul class="nav navbar-nav pull-right">                                
+                                {% with request.resolver_match.url_name as url_name %}
+                                    <li class="{% if url_name == 'index' %}active{% endif %}"><a href="{% url 'website:index' %}">Home</a></li>
+                                    <li class="{% if url_name == 'about' %}active{% endif %}"><a href="{% url 'website:about' %}">About</a></li>
+                                {% endwith %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <!-- /.navbar-collapse -->
+                </div>
+            </div>
+
+            <!-- /.container -->
+        </nav>
+    {% endblock %}
+
+</body>
+</html>
