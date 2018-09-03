@@ -2,6 +2,23 @@
 
 {% block pagetitle %}Johnson Kuang{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'website/css/index.css' %}"/>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'website/js/load.js' %}"></script>
+{% endblock %} 
+
+
 {% block content %}
+
 <h1>Home</h1>
+    <div style="display:none" id="popup">
+        <div class="fullscreen-bg">
+            <video loop muted autoplay poster="img/videoframe.jpg" class="fullscreen-bg__video">                
+                <source src="video/big_buck_bunny.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
 {% endblock %}

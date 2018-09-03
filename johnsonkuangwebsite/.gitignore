@@ -1,0 +1,4 @@
+media/*
+website/migrations/*
+env/*
+db.sqlite3

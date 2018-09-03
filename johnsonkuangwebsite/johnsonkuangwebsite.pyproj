@@ -44,6 +44,9 @@
     <Compile Include="website\urls.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="website\utils\fileutils.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="website\views.py" />
     <Compile Include="website\__init__.py" />
   </ItemGroup>
@@ -52,6 +55,7 @@
     <Folder Include="media\" />
     <Folder Include="website\" />
     <Folder Include="website\migrations\" />
+    <Folder Include="website\utils\" />
     <Folder Include="website\static\" />
     <Folder Include="website\static\website\css\" />
     <Folder Include="website\static\website\js\" />
