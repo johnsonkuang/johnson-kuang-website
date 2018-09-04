@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'website/css/bootstrap.min.css' %}"/>
 
     <!-- A modified version of the grayscale css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'website/css/grayscale.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/grayscale.css' %}?version=1"/>
 
     <!-- Our custom style sheets -->
     <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
@@ -73,6 +73,7 @@
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <div id="hide-on-load">
     {% block navbar %}
         <!-- Navigation -->
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" >
@@ -118,6 +119,6 @@
 
     {% block content %}
     {% endblock %}
-
+    </div>
 </body>
 </html>

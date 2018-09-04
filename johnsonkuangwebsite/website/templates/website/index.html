@@ -1,5 +1,8 @@
 {% extends "website/base.html" %}
 
+{% load staticfiles %}
+
+
 {% block pagetitle %}Johnson Kuang{% endblock %}
 
 {% block stylesheets %}
@@ -7,17 +10,20 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'website/js/load.js' %}"></script>
+    <script src="{% static 'website/js/load.js' %}?version=4"></script>
 {% endblock %} 
 
 
 {% block content %}
+<script>
 
+</script>
 <h1>Home</h1>
-    <div style="display:none" id="popup">
+    <!--TODO: find way to hide the rest of the page on load-->
+    <div style="display:none; z-index: 99;" id="popup">
         <div class="fullscreen-bg">
-            <video loop muted autoplay poster="img/videoframe.jpg" class="fullscreen-bg__video">                
-                <source src="video/big_buck_bunny.mp4" type="video/mp4">
+            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="z-index: 99;">
+                <source src="{{ MEDIA_URL }}videos/load.mp4" type="video/mp4">
             </video>
         </div>
     </div>

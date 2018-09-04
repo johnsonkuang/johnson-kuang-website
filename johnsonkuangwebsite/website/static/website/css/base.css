@@ -1,0 +1,56 @@
+h1 {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: 36px;
+	margin-bottom:0;
+	padding-bottom:0;
+	margin-left:-1px;
+}
+
+/* Custom navbar for filters */
+/* TODO: what is this doing here? Why is navbar stuff in here and not grayscale.css? Discuss with Lee */
+.breadcrumb {
+	background-color: transparent;
+	margin-bottom:0;
+}
+
+.navbar-custom {
+	/*font-family: helvetica-neue-lt;*/
+	font-family: roboto;
+	font-variant: normal;
+	/*text-transform: lowercase;*/
+}
+
+.navbar-custom .navbar-brand {
+	font-weight: normal;
+	font-size: 14px;
+}
+
+.navbar-custom .nav li a {
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 14px;
+}
+
+.navbar-filter {
+    margin-bottom: 0;
+    min-height: 30px;
+}
+
+ @media screen and (max-width: 767px) {
+      .navbar-nav {
+         float: left !important;
+      }
+ }
+
+.navbar-filter .navbar-nav > li > a {
+    /*color:#fff;*/
+}
+.navbar-filter .navbar-nav > li > a:hover, .navbar-filter .navbar-nav > li > a:focus {
+    background-color: transparent;
+    color: #23527c;
+    text-decoration: underline;
+}
+.navbar-filter .navbar-brand {
+
+}
