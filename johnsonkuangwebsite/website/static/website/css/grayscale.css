@@ -5,8 +5,8 @@
  */
 .navbar-custom {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,.3);
-    text-transform: uppercase;
+    /*border-bottom: 1px solid rgba(255,255,255,.3);*/
+    text-transform: none;
     font-family: Raleway;
     background-color: #000;
     min-height: 44px;
@@ -47,6 +47,13 @@
     color: #fff;
 }
 
+.navbar-custom .nav li {
+    vertical-align: middle;
+    margin: 5px 10px;
+    padding: 0 5px;
+    border: 1px #00B0F0 solid;
+}
+
 .navbar-custom .nav li a {
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
@@ -54,15 +61,22 @@
 }
 
 .navbar-custom .nav li a:hover {
-    outline: 0;
-    color: rgba(255,255,255,.8);
-    background-color: transparent;
+    color: #00B0F0;
+
+    background-color: inherit;
+
+}
+
+.navbar-custom .nav li:hover{
+    vertical-align: middle;
+    margin: 6px 11px;
+    padding: 0 5px;
+    border: transparent;
 }
 
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li a:active {
     outline: 0;
-    background-color: transparent;
     font-family: Raleway;
 }
 
@@ -93,7 +107,7 @@
         letter-spacing: 1px;
         /*background: 0 0;*/
         /*background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.5) 60%, rgba(0,0,0,0));*/
-        background: rgba(0,0,0,0.6);
+        background: rgba(0,0,0,0.9);
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -106,7 +120,7 @@
     }
 
     .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
     }
 }

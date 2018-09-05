@@ -1,11 +1,12 @@
 $(document).ready(function () {
-
+    //TODO: remove localStorage.setItem
     localStorage.setItem('popState', 'askjldf');
     if (localStorage.getItem('popState') != 'shown') {
-        $('body').css({backgroundColor: '#222A35'})
-        $("#popup").delay(200).fadeIn(1000);
+        $('body').css({backgroundColor: '#FFF'})
+        $("#popup").delay(200).fadeIn(500);
         localStorage.setItem('popState', 'shown');
-        $('#popup').delay(3400).fadeOut(600);
+        $('#popup').delay(4000).fadeOut(600);
+
         //find good animation method to convert background back to white
 
     }

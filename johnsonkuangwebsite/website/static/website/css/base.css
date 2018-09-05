@@ -9,10 +9,6 @@ h1 {
 
 /* Custom navbar for filters */
 /* TODO: what is this doing here? Why is navbar stuff in here and not grayscale.css? Discuss with Lee */
-.breadcrumb {
-	background-color: transparent;
-	margin-bottom:0;
-}
 
 .navbar-custom {
 	/*font-family: helvetica-neue-lt;*/
@@ -47,7 +43,8 @@ h1 {
     /*color:#fff;*/
 }
 .navbar-filter .navbar-nav > li > a:hover, .navbar-filter .navbar-nav > li > a:focus {
-    background-color: transparent;
+    /*background-color: transparent;*/
+    opacity: 80%;
     color: #23527c;
     text-decoration: underline;
 }

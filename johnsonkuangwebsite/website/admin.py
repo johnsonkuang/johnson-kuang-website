@@ -1,5 +1,7 @@
 from django.contrib import admin
+
 from website.models import *
+from image_cropping import ImageCroppingMixin
 
 class VideoAdmin(admin.ModelAdmin):
     # The list display lets us control what is shown in the default persons table at Home > Website > Videos
@@ -9,5 +11,9 @@ class VideoAdmin(admin.ModelAdmin):
     # default the sort order in table to descending order by date
     ordering = ('-date',)
 
+class ImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    list_display = ('__str__',)
+
 # Register your models here.
 admin.site.register(Video, VideoAdmin)
+admin.site.register(Image, ImageAdmin)
