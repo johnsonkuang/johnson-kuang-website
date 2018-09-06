@@ -12,3 +12,15 @@ def index(request):
 
 def about(request):
     return render(request, 'website/about.html')
+
+def resume(request):
+    return render(request, 'website/resume.html')
+
+def blog(request):
+    return render(request, 'website/blog.html')
+
+def projects(request):
+    return render(request, 'website/projects.html')
+
+def sandbox(request):
+    return render(request, 'website/sandbox.html')

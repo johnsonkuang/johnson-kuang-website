@@ -1,6 +1,5 @@
 $(document).ready(function () {
     //TODO: remove localStorage.setItem
-    localStorage.setItem('popState', 'askjldf');
     if (localStorage.getItem('popState') != 'shown') {
         $('body').css({backgroundColor: '#FFF'})
         $("#popup").delay(200).fadeIn(500);

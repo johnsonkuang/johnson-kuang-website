@@ -97,8 +97,6 @@ class Image(models.Model):
     # LS: Added image cropping to fixed ratio
     # See https://github.com/jonasundderwolf/django-image-cropping
     # size is "width x height"
-    # TODO: update with desired aspect ratio and maximum resolution
-    cropping = ImageRatioField('image', '3000x2000', size_warning=True)
 
     def __str__(self):
         return self.caption

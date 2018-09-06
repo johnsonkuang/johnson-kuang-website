@@ -10,6 +10,9 @@
 
     {% load staticfiles %}
 
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
     <link rel="shortcut icon" href="{% static 'website/img/ml-favicon.png' %}" />
 
     <!-- Load some fonts -->
@@ -73,7 +76,6 @@
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <div id="hide-on-load">
     {% block navbar %}
         <!-- Navigation -->
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="z-index: 0; <!--background-image: url('{{ MEDIA_URL }}images/10.1.jpg.300x300_q85_detail_upscale.jpg'); background-repeat: repeat-x;-->">
@@ -103,6 +105,10 @@
                                 {% with request.resolver_match.url_name as url_name %}
                                     <li class="{% if url_name == 'index' %}active{% endif %}"><a href="{% url 'website:index' %}">Home</a></li>
                                     <li class="{% if url_name == 'about' %}active{% endif %}"><a href="{% url 'website:about' %}">About</a></li>
+                                    <li class="{% if url_name == 'resume' %}active{% endif %}"><a href="{% url 'website:resume' %}">Resume</a></li>
+                                    <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'website:blog' %}">Blog</a></li>
+                                    <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
+                                    <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>hangout
                                 {% endwith %}
                             </ul>
                         </div>
@@ -119,6 +125,5 @@
 
     {% block content %}
     {% endblock %}
-    </div>
 </body>
 </html>
