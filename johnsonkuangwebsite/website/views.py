@@ -4,9 +4,12 @@ from website.models import *
 
 # Create your views here.
 def index(request):
-    load = Video.objects.filter(name='load')
+    load = Video.objects.get(name='load')
+    pic = Image.objects.get(caption='About 1 No Blur')
+    print(pic.image.height)
     context = {
         'load': load,
+        'about': pic,
     }
     return render(request, 'website/index.html', context)
 

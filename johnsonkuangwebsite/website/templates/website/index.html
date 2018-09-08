@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'website/js/load.js' %}?version=6"></script>
+    <script src="{% static 'website/js/load.js' %}?version=1.0.2"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="{% static 'website/js/skrollr.js' %}"></script>
@@ -77,16 +77,43 @@
         </div>
     </div>
 
-    <div class="container initial-load" style="z-index: 0;">
-        <h1>Home</h1>
+    <style>
+    body {
+        overflow-x: hidden;
+    }
+    .test div {
+          width: 100%;
+          min-height: 100%;
+          text-align: center;
+            position: absolute;
+          opacity: 0;
+          font-size: 30px;
+        display: inline-block;
+        }
+    </style>
+    <div class="container initial-load" style="z-index: 45; height:100vh;">
+            <h1>Home</h1>
+        </div>
+        <div class="test" id="slide-1">
+
+            <div 	data-0="opacity: 1;"
+                        data--0p-top="opacity: 1;" data--88p-top="opacity: 0;" data-anchor-target="#slide-1"><img src="{{ MEDIA_URL }}images/About_1.png" style="max-width: 100%; position: relative;"></div>
+            <div 	data-55p-top="opacity: 0;" data--66p-top="opacity: 1.5;" data--44p-top="opacity: 0;" data-anchor-target="#slide-1"><img src="{{ MEDIA_URL }}images/About_1_Blur.png" style="max-width: 100%; position: relative;"></div>
+        </div>
+        <div style="height:{{ about.image.height }}px;">{{ about.image.height }}</div>
+    <div style="height:1000px;background-color:red;font-size:36px">
+    Scroll Up and Down this page to see the parallax scrolling effect.
+    This div is just here to enable scrolling.
+    Tip: Try to remove the background-attachment property to remove the scrolling effect.
     </div>
+    <!--
     <section id="slide-5" class="homeSlide homeSlideTall" style="height:2000px">
 		    	<div class="bcg">
 			    	&nbsp;
 		    	</div>
 		    	<div class="bcg bcg2" data-bottom-top="opacity: 0;" data--33p-top="opacity: 0;" data--66p-top="opacity: 1;" data-anchor-target="#slide-5">
 			    	<div class="hsContainer">
-				    	<div class="hsContent" data-bottom-top="opacity: 0;" data-center="opacity: 1; z-index:99" data-anchor-target="#slide-5">
+				    	<div class="hsContent" data-bottom-top="opacity: 0;" data-center="opacity: 1; z-index:999" data-anchor-target="#slide-5">
 				    		<h2>Hi, I'm Johnson Kuang</h2>
 				    		<p>Welcome to my website! The links above will take you where you want to go, but if you're just looking, keep scrolling down!</p>
 			    		</div>
@@ -113,7 +140,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--
     <section id="slide-5" class="homeSlide homeSlideTall2">
         <div class="bcg">&nbsp;</div>
@@ -149,28 +176,9 @@
             </div>
         </div>
     </section>-->
-
-    <section id="slide-1" class="homeSlide" style="height:939px;">
-    <div class="bcg"
-        data-center="background-position: 50% 0px;"
-        data-top-bottom="background-position: 50% -100px;"
-        data-anchor-target="#slide-1"
-    >
-        <div class="hsContainer">
-            <div class="hsContent"
-                data-center="opacity: 1"
-                data-106-top="opacity: 0"
-                data-anchor-target="#slide-1 h2"
-            >
-                <h2>Fade out elements before <br>they leave viewport</h2>
-            </div>
-        </div>
-    </div>
-    </section>
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-    <script src="{% static 'website/js/skrollr.js' %}?version=1.0.4"></script>
+    <script src="{% static 'website/js/skrollr.js' %}?version=1.0.5"></script>
     <script src="{% static 'website/js/imagesloaded.js' %}"></script>
     <script src="{% static 'website/js/_main.js' %}"></script>
 

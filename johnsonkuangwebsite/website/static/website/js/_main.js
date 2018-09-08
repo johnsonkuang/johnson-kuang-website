@@ -34,13 +34,7 @@
 		
 		// Init Skrollr
 		var s = skrollr.init({
-            forceHeight:false,
-		    render: function(data) {
-		        forceHeight: false;
-
-		        //Debugging - Log the current scroll position.
-		        //console.log(data.curTop);
-		    }
+			forceHeight: false
 		});
 		
 		// Get window size
