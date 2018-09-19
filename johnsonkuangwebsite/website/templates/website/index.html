@@ -14,7 +14,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="{% static 'website/js/skrollr.js' %}"></script>
-    <script src="{% static 'website/js/_main.js' %}"></script>
+    <script src="{% static 'website/js/_main.js' %}?version=1.0.6"></script>
 {% endblock %} 
 
 
@@ -94,13 +94,16 @@
     <div class="container initial-load" style="z-index: 45; height:100vh;">
             <h1>Home</h1>
         </div>
-        <div class="test" id="slide-1">
+        <div class="test" id="slide-1" style="height:1000px;">
 
-            <div 	data-0="opacity: 1;"
-                        data--0p-top="opacity: 1;" data--88p-top="opacity: 0;" data-anchor-target="#slide-1"><img src="{{ MEDIA_URL }}images/About_1.png" style="max-width: 100%; position: relative;"></div>
-            <div 	data-55p-top="opacity: 0;" data--66p-top="opacity: 1.5;" data--44p-top="opacity: 0;" data-anchor-target="#slide-1"><img src="{{ MEDIA_URL }}images/About_1_Blur.png" style="max-width: 100%; position: relative;"></div>
+            <div 	data-0="opacity: 1;" data--0p-top="opacity: 1;" data--88p-top="opacity: 0;" data-anchor-target="#slide-1" class=".about-slide-img" id="about-image">
+                <img src="{{ MEDIA_URL }}images/About_1.png" style="max-width: 100%; position: relative;" >
+            </div>
+            <div 	data-55p-top="opacity: 0;" data--66p-top="opacity: 1.5;" data--44p-top="opacity: 0;" data-anchor-target="#slide-1">
+                <img src="{{ MEDIA_URL }}images/About_1_Blur.png" style="max-width: 100%; position: relative;">
+            </div>
         </div>
-        <div style="height:{{ about.image.height }}px;">{{ about.image.height }}</div>
+        <div class=".about-displacer-div">{{ about.image.height }}</div>
     <div style="height:1000px;background-color:red;font-size:36px">
     Scroll Up and Down this page to see the parallax scrolling effect.
     This div is just here to enable scrolling.
