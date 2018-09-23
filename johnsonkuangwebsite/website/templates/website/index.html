@@ -13,60 +13,11 @@
     <script src="{% static 'website/js/load.js' %}?version=1.0.2"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-    <script src="{% static 'website/js/skrollr.js' %}"></script>
     <script src="{% static 'website/js/_main.js' %}"></script>
-{% endblock %} 
+{% endblock %}
 
 
 {% block content %}
-<style>
-    /* Slide 1 */
-    #slide-1 .bcg {background-image:url('{{ MEDIA_URL }}images/About_1.png')}
-
-    /*wipes across screen*/
-    #slide-2 .bcg {
-        background: none;
-        background-color: #97F7FA;
-        height: 310px;
-        text-align: center
-    }
-
-    /*Scrolls to the left*/
-    #slide-3 .bcg {background-image:url('../img/bcg_slide-3.jpg')}
-
-    /* Slide 4 */
-    /*Curtain effect*/
-    .curtainContainer {
-        width: 100%; height: 100%;
-        position: relative;
-    }
-    .curtainContainer .curtain {
-        width: 300%; height: 1px;
-        background-color: #000000;
-        position: absolute; top: 25%; left: 0;
-        opacity: 0
-    }
-    .curtainContainer .copy {
-        position: absolute;
-        bottom: 30%; left: 0;
-        width: 100%; text-align: center;
-    }
-    #slide-4 .bcg {background-image:url('../img/bcg_slide-4.jpg')}
-
-    /* Slide 5 */
-    #slide-5 {position: relative; height:1500px;}
-    #slide-5 .bcg {background-image:url('{{ MEDIA_URL }}images/About_1.png');}
-    #slide-5 .bcg2 {
-        background-image:url('{{ MEDIA_URL }}images/About_1_Blur.png');
-        position: fixed; bottom: 0; left: 0;
-        opacity: 0; z-index: 1
-    }
-    #slide-5 .bcg3 {
-        background: none; background-color: #010101;
-        position: fixed; bottom: 0; left: 0;
-        opacity: 0; z-index: 2
-    }
-</style>
 
     <!--TODO: find way to hide the rest of the page on load-->
     <div style="display:none; z-index: 99;" id="popup">
@@ -77,35 +28,26 @@
         </div>
     </div>
 
-    <style>
-    body {
-        overflow-x: hidden;
-    }
-    .test div {
-          width: 100%;
-          min-height: 100%;
-          text-align: center;
-            position: absolute;
-          opacity: 0;
-          font-size: 30px;
-        display: inline-block;
-        }
-    </style>
-    <div class="container initial-load" style="z-index: 45; height:100vh;">
-            <h1>Home</h1>
-        </div>
-        <div class="test" id="slide-1">
-
-            <div 	data-0="opacity: 1;"
-                        data--0p-top="opacity: 1;" data--88p-top="opacity: 0;" data-anchor-target="#slide-1"><img src="{{ MEDIA_URL }}images/About_1.png" style="max-width: 100%; position: relative;"></div>
-            <div 	data-55p-top="opacity: 0;" data--66p-top="opacity: 1.5;" data--44p-top="opacity: 0;" data-anchor-target="#slide-1"><img src="{{ MEDIA_URL }}images/About_1_Blur.png" style="max-width: 100%; position: relative;"></div>
-        </div>
-        <div style="height:{{ about.image.height }}px;">{{ about.image.height }}</div>
-    <div style="height:1000px;background-color:red;font-size:36px">
-    Scroll Up and Down this page to see the parallax scrolling effect.
-    This div is just here to enable scrolling.
-    Tip: Try to remove the background-attachment property to remove the scrolling effect.
+    <div class="container">
+  <section class="background">
+    <div class="content-wrapper">
+      <p class="content-title">Full Page Parallax Effect</p>
+      <p class="content-subtitle">Scroll down and up to see the effect!</p>
     </div>
+  </section>
+  <section class="background">
+    <div class="content-wrapper">
+      <p class="content-title">Cras lacinia non eros nec semper.</p>
+      <p class="content-subtitle">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras ut massa mattis nibh semper pretium.</p>
+    </div>
+  </section>
+  <section class="background">
+    <div class="content-wrapper">
+      <p class="content-title">Etiam consequat lectus.</p>
+      <p class="content-subtitle">Nullam tristique urna sed tellus ornare congue. Etiam vitae erat at nibh aliquam dapibus.</p>
+    </div>
+  </section>
+</div>
     <!--
     <section id="slide-5" class="homeSlide homeSlideTall" style="height:2000px">
 		    	<div class="bcg">

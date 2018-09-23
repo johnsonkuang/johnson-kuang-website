@@ -1,58 +1,65 @@
-/*! viewportSize | Author: Tyson Matanich, 2013 | License: MIT */
-(function(n){n.viewportSize={},n.viewportSize.getHeight=function(){return t("Height")},n.viewportSize.getWidth=function(){return t("Width")};var t=function(t){var f,o=t.toLowerCase(),e=n.document,i=e.documentElement,r,u;return n["inner"+t]===undefined?f=i["client"+t]:n["inner"+t]!=i["client"+t]?(r=e.createElement("body"),r.id="vpw-test-b",r.style.cssText="overflow:scroll",u=e.createElement("div"),u.id="vpw-test-d",u.style.cssText="position:absolute;top:-1000px",u.innerHTML="<style>@media("+o+":"+i["client"+t]+"px){body#vpw-test-b div#vpw-test-d{"+o+":7px!important}}<\/style>",r.appendChild(u),i.insertBefore(r,e.head),f=u["offset"+t]==7?i["client"+t]:n["inner"+t],i.removeChild(r)):f=n["inner"+t],f}})(this);
+// ------------- VARIABLES ------------- //
+var ticking = false;
+var isFirefox = (/Firefox/i.test(navigator.userAgent));
+var isIe = (/MSIE/i.test(navigator.userAgent)) || (/Trident.*rv\:11\./i.test(navigator.userAgent));
+var scrollSensitivitySetting = 30; //Increase/decrease this number to change sensitivity to trackpad gestures (up = less sensitive; down = more sensitive)
+var slideDurationSetting = 600; //Amount of time for which slide is "locked"
+var currentSlideNumber = 0;
+var totalSlideNumber = $(".background").length;
 
-/**
- * How to create a parallax scrolling website
- * Author: Petr Tichy
- * URL: www.ihatetomatoes.net
- * Article URL: http://ihatetomatoes.net/how-to-create-a-parallax-scrolling-website/
- */
+// ------------- DETERMINE DELTA/SCROLL DIRECTION ------------- //
+function parallaxScroll(evt) {
+  if (isFirefox) {
+    //Set delta for Firefox
+    delta = evt.detail * (-120);
+  } else if (isIe) {
+    //Set delta for IE
+    delta = -evt.deltaY;
+  } else {
+    //Set delta for all other browsers
+    delta = evt.wheelDelta;
+  }
 
-( function( $ ) {
-	
-	// Setup variables
-	$window = $(window);
-	$slide = $('.homeSlide');
-	$slideTall = $('.homeSlideTall');
-	$slideTall2 = $('.homeSlideTall2');
-	$body = $('body');
-	
-    //FadeIn all sections   
-	$body.imagesLoaded( function() {
-		setTimeout(function() {
-		      
-		      // Resize sections
-		      adjustWindow();
-		      
-		      // Fade in sections
-			  $body.removeClass('loading').addClass('loaded');
-			  
-		}, 800);
-	});
-	
-	function adjustWindow(){
-		
-		// Init Skrollr
-		var s = skrollr.init({
-			forceHeight: false
-		});
-		
-		// Get window size
-	    winH = $window.height();
-	    
-	    // Keep minimum height 550
-	    if(winH <= 550) {
-			winH = 550;
-		} 
-	    
-	    // Resize our slides
-	    $slide.height(winH);
-	    $slideTall.height(winH*2);
-	    $slideTall2.height(winH*2);
-	    
-	    // Refresh Skrollr after resizing our sections
-	    s.refresh($('.homeSlide'));
-	    
-	}
-		
-} )( jQuery );
+  if (ticking != true) {
+    if (delta <= -scrollSensitivitySetting) {
+      //Down scroll
+      ticking = true;
+      if (currentSlideNumber !== totalSlideNumber - 1) {
+        currentSlideNumber++;
+        nextItem();
+      }
+      slideDurationTimeout(slideDurationSetting);
+    }
+    if (delta >= scrollSensitivitySetting) {
+      //Up scroll
+      ticking = true;
+      if (currentSlideNumber !== 0) {
+        currentSlideNumber--;
+      }
+      previousItem();
+      slideDurationTimeout(slideDurationSetting);
+    }
+  }
+}
+
+// ------------- SET TIMEOUT TO TEMPORARILY "LOCK" SLIDES ------------- //
+function slideDurationTimeout(slideDuration) {
+  setTimeout(function() {
+    ticking = false;
+  }, slideDuration);
+}
+
+// ------------- ADD EVENT LISTENER ------------- //
+var mousewheelEvent = isFirefox ? "DOMMouseScroll" : "wheel";
+window.addEventListener(mousewheelEvent, _.throttle(parallaxScroll, 60), false);
+
+// ------------- SLIDE MOTION ------------- //
+function nextItem() {
+  var $previousSlide = $(".background").eq(currentSlideNumber - 1);
+  $previousSlide.removeClass("up-scroll").addClass("down-scroll");
+}
+
+function previousItem() {
+  var $currentSlide = $(".background").eq(currentSlideNumber);
+  $currentSlide.removeClass("down-scroll").addClass("up-scroll");
+}
