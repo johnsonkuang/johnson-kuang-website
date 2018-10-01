@@ -59,10 +59,6 @@
   margin: auto;
 }
 */
-html, body {
-  overflow: hidden;
-}
-
 .background {
   background-size: cover;
   background-repeat: no-repeat;
@@ -157,6 +153,11 @@ html, body {
 }
 .background.down-scroll + .background:not(.down-scroll) .content-wrapper {
   transform: translateY(15vh);
+}
+
+.parallax-window {
+  min-height: 400px;
+  background: transparent;
 }
 
 /*# sourceMappingURL=index.css.map */

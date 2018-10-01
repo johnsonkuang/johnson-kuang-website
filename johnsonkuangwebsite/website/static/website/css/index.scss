@@ -71,9 +71,6 @@
     $transition-speed: 1.2s;
     $slide-number: 3;
 
-    html, body {
-      overflow: hidden;
-    }
 
     .background {
       background-size: cover;
@@ -167,4 +164,9 @@
             transform: translateY($parallax-offset / 2);
           }
       }
+    }
+
+    .parallax-window {
+      min-height: 400px;
+      background:transparent;
     }
