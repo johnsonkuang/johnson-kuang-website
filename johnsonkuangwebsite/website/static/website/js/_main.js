@@ -63,3 +63,21 @@ function previousItem() {
   var $currentSlide = $(".background").eq(currentSlideNumber);
   $currentSlide.removeClass("down-scroll").addClass("up-scroll");
 }
+=======
+$(document).ready(function () {
+	console.log("reached");
+	var $heightDiv = $('.about-slide-img');
+	$('.about-displacer-div').height($('.about-slide-img').scrollHeight);
+	console.log($heightDiv.height());
+});
+$(document).ready(function () {
+	var height = document.getElementById('#about-image').offsetHeight;
+	console.log(height);
+})
+
+$(function(){
+		skrollr.init({
+		forceHeight: false
+	});
+});
+
