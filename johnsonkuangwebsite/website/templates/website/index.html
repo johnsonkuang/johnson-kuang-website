@@ -22,9 +22,9 @@
 {% block content %}
 
     <!--TODO: find way to hide the rest of the page on load-->
-    <div style="display:none; z-index: 99;" id="popup">
+    <div style="display:none; z-index: 99; max-width: 100%;" id="popup">
         <div class="fullscreen-bg">
-            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="z-index: 99;">
+            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="max-width: 100%; z-index: 99">
                 <source src="{{ MEDIA_URL }}videos/load.mp4" type="video/mp4">
             </video>
         </div>
