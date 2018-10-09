@@ -13,27 +13,27 @@
     <script src="{% static 'website/js/load.js' %}?version=1.0.2"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
     <script src="{% static 'website/js/_main.js' %}"></script>
 {% endblock %}
+
 
 
 {% block content %}
 
     <!--TODO: find way to hide the rest of the page on load-->
-    <div style="display:none; z-index: 99;" id="popup">
+    <div style="display:none; z-index: 99; max-width: 100%;" id="popup">
         <div class="fullscreen-bg">
-            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="z-index: 99; width: 100%;">
+            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="max-width: 100%; z-index: 99">
                 <source src="{{ MEDIA_URL }}videos/load.mp4" type="video/mp4">
             </video>
         </div>
     </div>
 
-
     <!--TODO adjust the height of the sections to make it more aesthetically pleasing-->
     <!--TODO get graphic for the welcome page-->
     <section>
         <div style="height: 100vh">
-
         </div>
     </section>
 
@@ -58,13 +58,9 @@
         </div>
     </section>
 
-    <style></style>
-
     <div class="parallax-window" data-parallax="scroll">
-    
+        <!--For the parallax code feature-->
     </div>
-
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
