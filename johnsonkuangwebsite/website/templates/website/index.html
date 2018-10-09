@@ -22,7 +22,7 @@
     <!--TODO: find way to hide the rest of the page on load-->
     <div style="display:none; z-index: 99;" id="popup">
         <div class="fullscreen-bg">
-            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="z-index: 99;">
+            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="z-index: 99; width: 100%;">
                 <source src="{{ MEDIA_URL }}videos/load.mp4" type="video/mp4">
             </video>
         </div>
@@ -38,17 +38,17 @@
     </section>
 
     <!--TODO: crop the about photo-->
-    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/About_1.png"></div>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/About_Slide.jpg" style="min-height: 60vh;"></div>
     <section>
         <div class="container">
-            <div style="height: 60vh;">
+            <div style="height: 40vh;">
                 <h1 class="">About</h1>
             </div>
         </div>
     </section>
 
     <!--TODO integrate a slider with parallax-->
-    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/Vacation_Slide_1.JPG" style="height:50vh;"></div>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/Vacation_Slide_3.jpg" style="height:50vh;"></div>
 
     <section>
         <div class="container">
