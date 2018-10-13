@@ -28,11 +28,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'johnsonqkuang@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'h"dhC\!KD[FN%u(.+rpTp,Q\'\Cs\'J&)-Ka\'K>6yq'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Application definition
 
 INSTALLED_APPS = [
     'website',
+    'blog',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,11 +58,11 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'johnsonkuangwebsite.urls'
