@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from website.models import *
+from blog.models import *
 from image_cropping import ImageCroppingMixin
 
 class VideoAdmin(admin.ModelAdmin):
@@ -17,3 +18,4 @@ class ImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Image, ImageAdmin)
+

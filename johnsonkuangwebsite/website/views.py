@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from website.models import *
 
@@ -19,8 +20,6 @@ def about(request):
 def resume(request):
     return render(request, 'website/resume.html')
 
-def blog(request):
-    return render(request, 'website/blog.html')
 
 def projects(request):
     return render(request, 'website/projects.html')

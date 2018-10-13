@@ -1,6 +1,8 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete, post_delete, pre_save, post_save, m2m_changed
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 from image_cropping import ImageRatioField
 from sortedm2m.fields import SortedManyToManyField
@@ -130,3 +132,5 @@ class Video(models.Model):
 
     def __str__(self):
         return self.name + ": " + str(self.video)
+
+

@@ -106,7 +106,7 @@
                                     <li class="{% if url_name == 'index' %}active{% endif %}"><a href="{% url 'website:index' %}">Home</a></li>
                                     <li class="{% if url_name == 'about' %}active{% endif %}"><a href="{% url 'website:about' %}">About</a></li>
                                     <li class="{% if url_name == 'resume' %}active{% endif %}"><a href="{% url 'website:resume' %}">Resume</a></li>
-                                    <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'website:blog' %}">Blog</a></li>
+                                    <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog:post_list' %}">Blog</a></li>
                                     <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
                                     <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>hangout
                                 {% endwith %}
