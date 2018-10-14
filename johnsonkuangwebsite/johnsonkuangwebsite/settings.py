@@ -38,12 +38,16 @@ EMAIL_HOST_PASSWORD = 'h"dhC\!KD[FN%u(.+rpTp,Q\'\Cs\'J&)-Ka\'K>6yq'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+SITE_ID = 1
+
 
 # Application definition
 
 INSTALLED_APPS = [
     'website',
     'blog',
+    'taggit',
+    'markdown',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'easy_thumbnails',
-
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +71,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'johnsonkuangwebsite.urls'
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.app_directories.load_template_source',
+)
 
 TEMPLATES = [
     {

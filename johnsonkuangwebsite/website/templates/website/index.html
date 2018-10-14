@@ -1,7 +1,7 @@
 {% extends "website/base.html" %}
 
 {% load staticfiles %}
-
+{% load blog_tags %}
 
 {% block pagetitle %}Johnson Kuang{% endblock %}
 
@@ -52,6 +52,7 @@
         <div class="container">
             <div style="height: 40vh;">
                 <h1 class="">Blog</h1>
+                <p>This is my blog. I've written {% total_posts %} posts so far.</p>
             </div>
         </div>
     </section>

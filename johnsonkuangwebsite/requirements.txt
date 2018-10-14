@@ -4,4 +4,6 @@ django-extensions==2.0.7
 django-image-cropping==1.1.0
 django-sortedm2m==1.5.0
 easy_thumbnails==2.5
+django_taggit==0.22.2
+Markdown==2.6.11
 pytz
