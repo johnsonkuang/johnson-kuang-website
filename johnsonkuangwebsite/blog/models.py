@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 
 from django.urls import reverse
 from taggit.managers import TaggableManager
+from image_cropping import ImageRatioField
+
+from website.utils.fileutils import UniquePathAndRename
 
 # Create your models here.
 
@@ -17,6 +20,9 @@ class PublishedManager(models.Manager):
 
 class Post(models.Model):
     tags = TaggableManager()
+    image = models.ImageField(blank=True, upload_to=UniquePathAndRename("blog/posts", True), max_length=255)
+
+    cropping = ImageRatioField('image', '245x245', size_warning=True)
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # custom manager.
     STATUS_CHOICES = (
@@ -42,6 +48,10 @@ class Post(models.Model):
                              self.publish.strftime('%m'),
                              self.publish.strftime('%d'),
                              self.slug])
+
+    def get_date_month_year(self):
+        returnString = str(self.publish.day) + " " + self.publish.strftime('%B') + " | " + str(self.publish.year)
+        return returnString
 
     class Meta:
         ordering = ('-publish',)
