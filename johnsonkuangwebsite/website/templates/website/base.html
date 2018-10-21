@@ -35,19 +35,21 @@
     <!-- Our custom style sheets -->
     <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
 
-    {% block stylesheets %}
-        <!-- Bootstrap CSS-->
+
+<!-- Bootstrap CSS-->
         <link rel="stylesheet" href="{{ STATIC_URL }}website/vendor/bootstrap/css/bootstrap.min.css">
 
         <!-- Font Awesome CSS-->
         <link rel="stylesheet" href="{{ STATIC_URL }}website/vendor/font-awesome/css/font-awesome.min.css">
         <!-- Custom icon font-->
-        <link rel="stylesheet" href=".../../../../johnsonkuangwebsite/blog/static/blog/css/fontastic.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}blog/css/fontastic.css">
         <!-- Google fonts - Open Sans-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
         <!-- Fancybox-->
-        <link rel="stylesheet" href="../../../../johnsonkuangwebsite/blog/static/blog/vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
-        <link rel="stylesheet" href="../../../../johnsonkuangwebsite/blog/static/blog/blog/css/style.default.css" id="theme-stylesheet">
+        <link rel="stylesheet" href="{{ STATIC_URL }}blog/vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}blog/css/style.default.css" id="theme-stylesheet">
+    {% block stylesheets %}
+
     {% endblock %}
 
     <!-- Font Awesome -->
@@ -61,10 +63,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<!-- Grayscale template -->
-	<script src="{% static 'website/js/jquery.easing.min.js' %}"></script>
+	<!--<script src="{% static 'website/js/jquery.easing.min.js' %}"></script>
 	<script src="{% static 'website/js/grayscale.js' %}"></script>
 	<script src="{% static 'website/js/backtop.js' %}"></script>
-
+    -->
     <title>
         {% block pagetitle %}
             {{ request.resolver_match.url_name }}
