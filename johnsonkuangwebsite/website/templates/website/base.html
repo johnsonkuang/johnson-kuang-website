@@ -1,4 +1,5 @@
-﻿{% load blog_tags %}
+﻿        <!-- theme stylesheet-->
+{% load blog_tags %}
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -18,10 +19,10 @@
 
     <!-- Load some fonts -->
     <!-- Raleway: https://fonts.google.com/specimen/Raleway -->
-{#    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />#}
-{#    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Roboto" rel="stylesheet">#}
-{#    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700|Raleway:400,800|Roboto:400,700" rel="stylesheet">    #}
-{#    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">#}
+    {#    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Roboto" rel="stylesheet">#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700|Raleway:400,800|Roboto:400,700" rel="stylesheet">    #}
+    {#    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">#}
     <!-- Raleway 300 is light, 400 is regular, 500 is medium, 600 is semi-bold, 700 is bold -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -35,7 +36,18 @@
     <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
 
     {% block stylesheets %}
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" href="{{ STATIC_URL }}website/vendor/bootstrap/css/bootstrap.min.css">
 
+        <!-- Font Awesome CSS-->
+        <link rel="stylesheet" href="{{ STATIC_URL }}website/vendor/font-awesome/css/font-awesome.min.css">
+        <!-- Custom icon font-->
+        <link rel="stylesheet" href=".../../../../johnsonkuangwebsite/blog/static/blog/css/fontastic.css">
+        <!-- Google fonts - Open Sans-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <!-- Fancybox-->
+        <link rel="stylesheet" href="../../../../johnsonkuangwebsite/blog/static/blog/vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
+        <link rel="stylesheet" href="../../../../johnsonkuangwebsite/blog/static/blog/blog/css/style.default.css" id="theme-stylesheet">
     {% endblock %}
 
     <!-- Font Awesome -->
@@ -78,50 +90,36 @@
 </head>
 <body>
     {% block navbar %}
-        <!-- Navigation -->
-        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="z-index: 999; <!--background-image: url('{{ MEDIA_URL }}images/10.1.jpg.300x300_q85_detail_upscale.jpg'); background-repeat: repeat-x;-->">
-            <div class="container-fluid" style="width:100%; max-width:1170px; margin:auto; margin-top: 3px; vertical-align: middle;">
-                <div class = "row">
-                    <div class="col-xs-12" style="padding:0px">
 
-                        <div class="navbar-header">
-
-                            <button style="" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                                <i class="fa fa-bars"></i>
-                            </button>
-
-                            <a class="navbar-brand page-scroll" href="{% url 'website:index' %}">
-                                <!-- <i class="fa fa-gears"></i>  <span style="font-family: roboto-bold">make</span>ability</span> lab-->
-                                <!-- <img src="{% static 'website/img/logos/makelab_logo_bolder_white_no_text_100x68.png' %}" height="20" /> -->
-                                {# TODO: the text following the logo does not look vertically centered. Should be fixed. #}
-                                <img src="{% static 'website/img/logos/makelab_logo_white_no_text_100x67.png' %}" height="20" />
-
-                                <!--<div class="lab-text"><span style="font-family: roboto-bold; margin-left: 2px;">JOHNSON</span>ability</span> Lab</div>-->
-                            </a>
-
-                        </div>
-
-                        <div class="collapse navbar-collapse navbar-main-collapse">
-                            <ul class="nav navbar-nav pull-right">
-                                {% with request.resolver_match.url_name as url_name %}
-                                    <li class="{% if url_name == 'index' %}active{% endif %}"><a href="{% url 'website:index' %}">Home</a></li>
-                                    <li class="{% if url_name == 'about' %}active{% endif %}"><a href="{% url 'website:about' %}">About</a></li>
-                                    <li class="{% if url_name == 'resume' %}active{% endif %}"><a href="{% url 'website:resume' %}">Resume</a></li>
-                                    <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog:post_list' %}">Blog</a></li>
-                                    <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
-                                    <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>hangout
-                                {% endwith %}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <!-- /.navbar-collapse -->
-                </div>
-            </div>
-
-            <!-- /.container -->
-        </nav>
+        <header class="header">
+      <!-- Main Navbar-->
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <!-- Navbar Brand -->
+          <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Johnson Kuang</a>
+              <h1>Logo</h1>
+            <!-- Toggle Button-->
+            <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
+          </div>
+          <!-- Navbar Menu -->
+          <div id="navbarcollapse" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              {% with request.resolver_match.url_name as url_name %}
+                <li class=" nav-item"><a class="nav-link {% if url_name == 'index' %}active{% endif %}" href="{% url 'website:index' %}">Home</a></li>
+                <li class="nav-item"><a href="{% url 'website:about' %}" class="{% if url_name == 'about' %}active{% endif %} nav-link">About</a></li>
+                <li class=" nav-item"><a href="{% url 'website:resume' %}" class="{% if url_name == 'resume' %}active{% endif %} nav-link">Resume</a></li>
+                <li class="nav-item"><a href="{% url 'blog:post_list' %}" class="nav-link {% if url_name == 'blog' %}active{% endif %} ">Blog</a></li>
+                <li class="nav-item"><a href="{% url 'website:projects' %}" class="{% if url_name == 'projects' %}active{% endif %} nav-link">Projects</a></li>
+                <li class=" nav-item"><a href="{% url 'website:sandbox' %}" class="nav-link {% if url_name == 'sandbox' %}active{% endif %}">Sandbox</a></li>
+            {% endwith %}
+            </ul>
+            <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
+            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     {% endblock %}
 
     {% block content %}

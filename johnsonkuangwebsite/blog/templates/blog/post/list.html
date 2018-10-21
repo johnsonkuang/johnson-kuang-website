@@ -6,7 +6,18 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href=""
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="../../../static/blog/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="../../../static/blog/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom icon font-->
+    <link rel="stylesheet" href="../../../static/blog/css/fontastic.css">
+    <!-- Google fonts - Open Sans-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <!-- Fancybox-->
+    <link rel="stylesheet" href="../../../static/blog/vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="../../../static/blog/blog/css/style.default.css" id="theme-stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -21,43 +32,35 @@
           <div class="container">
             <div class="row">
               {% for post in posts %}
-        <div class="post col-xl-6">
-                <div class="post-thumbnail"><a href="{{ post.get_absolute_url }}"><img src="post.image{#  {{ thumbnail post.image 200x200 box=posts.cropping detail }} #}" alt="..." class="img-fluid"></a></div>
-                <div class="post-details">
-                  <div class="post-meta d-flex justify-content-between">
-                    <div class="date meta-last">{{ post.get_date_month_year }} </div>
-                    <div class="category">
-			<h3>Tags</h3>
-			{% for tag in post.tags.all %}
-		                <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-                		  #{{ tag.name }}
-		                </a>
-          		      	{% if not forloop.last %}, {% endif %}
-	                {% endfor %}
-		    </div>
-                  </div><a href="{{ post.get_absolute_url }}">
-                    <h3 class="h4">{{ post.title }}</h3></a>
-                  <p class="text-muted">{{ post.body|markdown|truncatewords_html:30 }}</p>
-                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                      <div class="title"><span>Johnson Kuang</span></div></a>
-                    <div class="date"><i class="icon-clock"></i> Some way of calculating time Return String</div>
-                    <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments.count }}</div>
-                  </footer>
+                <div class="post col-xl-6">
+                        <div class="post-thumbnail"><a href="{{ post.get_absolute_url }}"><img src="post.image{#  {{ thumbnail post.image 200x200 box=posts.cropping detail }} #}" alt="..." class="img-fluid"></a></div>
+                    <div class="post-details">
+                          <div class="post-meta d-flex justify-content-between">
+                                <div class="date meta-last">{{ post.get_date_month_year }} </div>
+                                <div class="category">
+                                Tags:
+                                    {% for tag in post.tags.all %}
+                                            <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+                                                #{{ tag.name }}
+                                            </a>
+                                            {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                          </div>
+                          <h3 class="h4"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                          <p class="text-muted">{{ post.body|markdown|truncatewords_html:30 }}</p>
+                          <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                                  <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                                  <div class="title"><span>Johnson Kuang</span></div></a>
+                                <div class="date"><i class="icon-clock"></i>Some Method to get time from now and display as string</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments.count }}</div>
+                          </div>
+                    </div>
                 </div>
-              </div>
-          {% endfor %}
+                {% endfor %}
             </div>
-            <!-- Pagination -->
-            <nav aria-label="Page navigation example">
-              <ul class="pagination pagination-template d-flex justify-content-center">
-                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
-                <li class="page-item"><a href="#" class="page-link active">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
-              </ul>
-            </nav>
+            {% include "blog/post/pagination.html" with page=posts %}
+
           </div>
         </main>
         <aside class="col-lg-4">
@@ -154,7 +157,12 @@
         </ul>
         <p><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed</a></p>
     </div>
-    {% include "blog/post/pagination.html" with page=posts %}
 
+    <script src="../../../static/blog/vendor/jquery/jquery.min.js"></script>
+    <script src="../../../static/blog/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="../../../static/blog/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../static/blog/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="../../../static/blog/vendor/@fancyapps/fancybox/jquery.fancybox.min.js"></script>
+    <script src="../../../static/blog/js/front.js"></script>
 
 {% endblock %}
