@@ -5,7 +5,6 @@ app_name = 'website'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about, name='about'),
-    url(r'^blog/', views.blog, name='blog'),
     url(r'^resume/', views.resume, name='resume'),
     url(r'^projects/', views.projects, name='projects'),
     url(r'^sandbox/', views.sandbox, name='sandbox'),
