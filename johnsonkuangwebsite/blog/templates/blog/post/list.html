@@ -20,16 +20,30 @@
     <link rel="stylesheet" href="../../../static/blog/blog/css/style.default.css" id="theme-stylesheet">
 {% endblock %}
 
+
+<style>
+    section {
+        display: grid;
+        grid-template-columns: auto minmax(800px, 3fr) 1fr;
+    }
+    main {
+        grid-column: 1 / 2;
+    }
+    aside{
+        grid-column: 2 / 3;
+    }
+</style>
 {% block content %}
     <h1>TThis is List</h1>
     {% if tag %}
       <h2>Posts tagged with "{{ tag.name }}"</h2>
     {% endif %}
-    <div class="container">
+    <div class="container" style="margin-top: 69px;">
       <div class="row">
         <!-- Latest Posts -->
+        <section>
         <main class="posts-listing col-lg-8">
-          <div class="container">
+          <div class="container" style="width: auto;">
             <div class="row">
               {% for post in posts %}
                 <div class="post col-xl-6">
@@ -64,99 +78,23 @@
           </div>
         </main>
         <aside class="col-lg-4">
-          <!-- Widget [Search Bar Widget]-->
-          <div class="widget search">
-            <header>
-              <h3 class="h6">Search the blog</h3>
-            </header>
-            <form action="#" class="search-form">
-              <div class="form-group">
-                <input type="search" placeholder="What are you looking for?">
-                <button type="submit" class="submit"><i class="icon-search"></i></button>
-              </div>
-            </form>
-          </div>
           <!-- Widget [Latest Posts Widget]        -->
           <div class="widget latest-posts">
-            <header>
-              <h3 class="h6">Latest Posts</h3>
-            </header>
-            <div class="blog-posts"><a href="#">
-                <div class="item d-flex align-items-center">
-                  <div class="image"><img src="img/small-thumbnail-1.jpg" alt="..." class="img-fluid"></div>
-                  <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                    <div class="d-flex align-items-center">
-                      <div class="views"><i class="icon-eye"></i> 500</div>
-                      <div class="comments"><i class="icon-comment"></i>12</div>
-                    </div>
-                  </div>
-                </div></a><a href="#">
-                <div class="item d-flex align-items-center">
-                  <div class="image"><img src="img/small-thumbnail-2.jpg" alt="..." class="img-fluid"></div>
-                  <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                    <div class="d-flex align-items-center">
-                      <div class="views"><i class="icon-eye"></i> 500</div>
-                      <div class="comments"><i class="icon-comment"></i>12</div>
-                    </div>
-                  </div>
-                </div></a><a href="#">
-                <div class="item d-flex align-items-center">
-                  <div class="image"><img src="img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
-                  <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                    <div class="d-flex align-items-center">
-                      <div class="views"><i class="icon-eye"></i> 500</div>
-                      <div class="comments"><i class="icon-comment"></i>12</div>
-                    </div>
-                  </div>
-                </div></a></div>
+            <h2>Johnson's Corner of the Internet</h2>
+            <p>This is my blog. I've written {% total_posts %} posts so far.</p>
+            <h3>Latest posts</h3>
+            <div class="blog-posts">
+                {% show_latest_posts 3 %}
+            </div>
           </div>
-          <!-- Widget [Categories Widget]-->
-          <div class="widget categories">
-            <header>
-              <h3 class="h6">Categories</h3>
-            </header>
-            <div class="item d-flex justify-content-between"><a href="#">Growth</a><span>12</span></div>
-            <div class="item d-flex justify-content-between"><a href="#">Local</a><span>25</span></div>
-            <div class="item d-flex justify-content-between"><a href="#">Sales</a><span>8</span></div>
-            <div class="item d-flex justify-content-between"><a href="#">Tips</a><span>17</span></div>
-            <div class="item d-flex justify-content-between"><a href="#">Local</a><span>25</span></div>
-          </div>
-          <!-- Widget [Tags Cloud Widget]-->
-          <div class="widget tags">
-            <header>
-              <h3 class="h6">Tags</h3>
-            </header>
-            <ul class="list-inline">
-              <li class="list-inline-item"><a href="#" class="tag">#Business</a></li>
-              <li class="list-inline-item"><a href="#" class="tag">#Technology</a></li>
-              <li class="list-inline-item"><a href="#" class="tag">#Fashion</a></li>
-              <li class="list-inline-item"><a href="#" class="tag">#Sports</a></li>
-              <li class="list-inline-item"><a href="#" class="tag">#Economy</a></li>
-            </ul>
-          </div>
+            <h3>Most commented posts</h3>
+            {% get_most_commented_posts 3 %}
+            <p><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed</a></p>
         </aside>
+        </section>
       </div>
     </div>
     <!--/container-->
-
-    <div class="sidebar">
-        <h2>My blog</h2>
-        <p>This is my blog. I've written {% total_posts %} posts so far.</p>
-
-        <h3>Latest posts</h3>
-        {% show_latest_posts 3 %}
-
-        <h3>Most commented posts</h3>
-        {% get_most_commented_posts as most_commented_posts %}
-        <ul>
-        {% for post in most_commented_posts %}
-          <li>
-            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-          </li>
-        {% endfor %}
-        </ul>
-        <p><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed</a></p>
-    </div>
 
     <script src="../../../static/blog/vendor/jquery/jquery.min.js"></script>
     <script src="../../../static/blog/vendor/popper.js/umd/popper.min.js"> </script>

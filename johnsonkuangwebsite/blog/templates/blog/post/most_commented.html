@@ -1,12 +1,11 @@
 <ul>
-{% for post in latest_posts %}
+{% for post in most_commented_posts %}
   <li>
-
     <div class="item d-flex align-items-center">
 
       <div class="image"><img src="{{ post.image }}" alt="..." class="img-fluid"></div>
       <div class="title">
-          <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
+           <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
         <div class="d-flex align-items-center">
           <div class="views"><i class="icon-eye"></i>#</div>
           <div class="comments"><i class="icon-comment"></i>{{ post.comments.count }}</div>
