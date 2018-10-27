@@ -27,10 +27,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'website/css/bootstrap.min.css' %}"/>
 
-    <!-- A modified version of the grayscale css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'website/css/grayscale.css' %}?version=1"/>
 
     <!-- Our custom style sheets -->
     <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
@@ -61,12 +58,10 @@
 
 	<!-- Bootstrap: Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<!-- Grayscale template -->
-	<!--<script src="{% static 'website/js/jquery.easing.min.js' %}"></script>
-	<script src="{% static 'website/js/grayscale.js' %}"></script>
-	<script src="{% static 'website/js/backtop.js' %}"></script>
-    -->
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/navbar.css'%}?version=0.0.1">
     <title>
         {% block pagetitle %}
             {{ request.resolver_match.url_name }}
@@ -92,36 +87,25 @@
 </head>
 <body>
     {% block navbar %}
-
-        <header class="header">
-      <!-- Main Navbar-->
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <!-- Navbar Brand -->
-          <div class="navbar-header d-flex align-items-center justify-content-between">
-            <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Johnson Kuang</a>
-              <h1>Logo</h1>
-            <!-- Toggle Button-->
-            <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
-          </div>
-          <!-- Navbar Menu -->
-          <div id="navbarcollapse" class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-              {% with request.resolver_match.url_name as url_name %}
-                <li class=" nav-item"><a class="nav-link {% if url_name == 'index' %}active{% endif %}" href="{% url 'website:index' %}">Home</a></li>
-                <li class="nav-item"><a href="{% url 'website:about' %}" class="{% if url_name == 'about' %}active{% endif %} nav-link">About</a></li>
-                <li class=" nav-item"><a href="{% url 'website:resume' %}" class="{% if url_name == 'resume' %}active{% endif %} nav-link">Resume</a></li>
-                <li class="nav-item"><a href="{% url 'blog:post_list' %}" class="nav-link {% if url_name == 'blog' %}active{% endif %} ">Blog</a></li>
-                <li class="nav-item"><a href="{% url 'website:projects' %}" class="{% if url_name == 'projects' %}active{% endif %} nav-link">Projects</a></li>
-                <li class=" nav-item"><a href="{% url 'website:sandbox' %}" class="nav-link {% if url_name == 'sandbox' %}active{% endif %}">Sandbox</a></li>
-            {% endwith %}
-            </ul>
-            <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
-            <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+        <header>
+            <h1 class="logo">Logo</h1>
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <nav>
+                    <ul>
+                        {% with request.resolver_match.url_name as url_name %}
+                            <li class="{% if url_name == 'index' %}active{% endif %}"><a href="{% url 'website:index' %}">Home</a></li>
+                            <li class="{% if url_name == 'about' %}active{% endif %}"><a href="{% url 'website:about' %}">About</a></li>
+                            <li class="{% if url_name == 'resume' %}active{% endif %}"><a href="{% url 'website:resume' %}">Resume</a></li>
+                            <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog:post_list' %}">Blog</a></li>
+                            <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
+                            <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>
+                        {% endwith %}
+                    </ul>
+            </nav>
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+        </header>
     {% endblock %}
 
     {% block content %}
