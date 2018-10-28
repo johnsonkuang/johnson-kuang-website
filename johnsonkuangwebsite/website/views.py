@@ -15,7 +15,13 @@ def index(request):
     return render(request, 'website/index.html', context)
 
 def about(request):
-    return render(request, 'website/about.html')
+    banner = Image.objects.get(name='about_banner')
+    gallery = About_Gallery.objects.all()
+    context = {
+        'banner': banner,
+        'gallery': gallery,
+    }
+    return render(request, 'website/about.html', context)
 
 def resume(request):
     return render(request, 'website/resume.html')

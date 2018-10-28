@@ -15,7 +15,15 @@ class VideoAdmin(admin.ModelAdmin):
 class ImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('__str__',)
 
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('__str__',)
+
+class AboutGalleryAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    list_display = ('name',)
+
 # Register your models here.
+admin.site.register(About_Gallery, AboutGalleryAdmin)
+admin.site.register(Banner, BannerAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Image, ImageAdmin)
 

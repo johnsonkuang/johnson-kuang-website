@@ -1,16 +1,55 @@
 {% extends "website/base.html" %}
 
-{% block pagetitle %}About{% endblock %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load cropping %}
 
+{% block pagetitle %}About{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/about.css' %}">
+{% endblock %}
 {% block content %}
 <!-- reference 1: https://ana-santos.com/about/-->
     <!-- simple but gets the job done: https://osvaldas.info/about-->
     <!--http://www.goldsquare.co/about-->
     <!--Nice simple style, worth modeling: https://www.devonstank.com/about/-->
-    <div class="jumbotron">
-        <h1>This is a nice UI</h1>
+
+    <div class="container" style="padding-top: 69px;">
+        <img src="{% cropped_thumbnail banner "cropping" scale=1.0 %}" class="img-responsive fill">
+    </div>
+    <div class="jumbotron" style="text-align: center;">
+        <div class="container">
+            <h1>A few fun facts about myself . . .</h1>
+            <h4>I love home-cooking, I am an avid reader, my favorite number is 1, I'm not a huge fan of writing essays, I play video games like it's my life,
+            I am a 16 year-old aspiring entreprenuer, I do downhill skiing and hope to one day do back country, my favorite food is beef noodles (with handmade noodles),
+            I was hit by a car at the age of 3, and I am definitely single.</h4>
+        </div>
+
     </div>
     <div class="container">
+        <h1>Gallery</h1>
+    </div>
+    <section id="gallery">
+        {% for image in gallery %}
+            <img src="{{ image.image.url }}" style="">
+        {% endfor %}
+    </section>
 
+    <div class="container">
+        <h1>Understanding who I am as a person</h1>
+    </div>
+
+
+    <div class="container">
+        <h1>Where I come from</h1>
+    </div>
+    <div class="container">
+        <h1>What I do</h1>
+    </div>
+    <div class="container">
+        <h1>What are my passions</h1>
+    </div>
+    <div class="container">
+        <h1>My Instagram Feed</h1>
     </div>
 {% endblock %}
