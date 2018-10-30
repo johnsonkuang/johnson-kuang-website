@@ -2,3 +2,4 @@
 website/migrations/*
 env/*
 db.sqlite3
+johnsonkuangwebsite/*
