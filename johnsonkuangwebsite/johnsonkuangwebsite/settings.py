@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'johnsonkuangwebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
+        'NAME': 'devtest',
         'USER': 'johnson',
         'PASSWORD': 'P@ssw0rd',
         'HOST': 'kuang-ubuntu.westus.cloudapp.azure.com',
