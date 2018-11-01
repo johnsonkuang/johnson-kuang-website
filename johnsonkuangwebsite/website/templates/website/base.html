@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿        <!-- theme stylesheet-->
+{% load blog_tags %}
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,14 +15,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-    <link rel="shortcut icon" href="{% static 'website/img/ml-favicon.png' %}" />
+    <link rel="shortcut icon" href="" />
 
     <!-- Load some fonts -->
     <!-- Raleway: https://fonts.google.com/specimen/Raleway -->
-{#    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />#}
-{#    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Roboto" rel="stylesheet">#}
-{#    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700|Raleway:400,800|Roboto:400,700" rel="stylesheet">    #}
-{#    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">#}
+    {#    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Roboto" rel="stylesheet">#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,700|Raleway:400,800|Roboto:400,700" rel="stylesheet">    #}
+    {#    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">#}
     <!-- Raleway 300 is light, 400 is regular, 500 is medium, 600 is semi-bold, 700 is bold -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -31,7 +33,18 @@
     <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
 
     {% block stylesheets %}
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" href="{{ STATIC_URL }}website/vendor/bootstrap/css/bootstrap.min.css">
 
+        <!-- Font Awesome CSS-->
+        <link rel="stylesheet" href="{{ STATIC_URL }}website/vendor/font-awesome/css/font-awesome.min.css">
+        <!-- Custom icon font-->
+        <link rel="stylesheet" href=".../../../../johnsonkuangwebsite/blog/static/blog/css/fontastic.css">
+        <!-- Google fonts - Open Sans-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <!-- Fancybox-->
+        <link rel="stylesheet" href="../../../../johnsonkuangwebsite/blog/static/blog/vendor/@fancyapps/fancybox/jquery.fancybox.min.css">
+        <link rel="stylesheet" href="../../../../johnsonkuangwebsite/blog/static/blog/blog/css/style.default.css" id="theme-stylesheet">
     {% endblock %}
 
     <!-- Font Awesome -->
