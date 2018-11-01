@@ -1,42 +1,60 @@
-@media screen and (min-width: 800px) {
+.main-menu {
+    display: none;
+}
 
-    .fa-2x {
-        font-size: 2em;
-    }
 
-    .fa {
-        position: relative;
-        display: table-cell;
-        width: 60px;
-        height: 36px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 20px;
-    }
+.fa-2x {
+    font-size: 2em;
+}
 
-    .main-menu:hover, nav.main-menu.expanded {
-        width: 250px;
+.fa {
+    padding-top: 5px;
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+@media screen and (min-width: 850px) {
+
+
+    .main-menu:hover, nav.main-menu.expanded{
+        width: 160px;
         overflow: visible;
-
     }
 
-    .main-menu {
-        background: #212121;
-        border-right: 1px solid white;
+    .main-menu:hover ~ .nav-text{
+        opacity: 100%;
+    }
+
+    .main-menu{
+        display: block;
+        background: #F0F0F0;
         position: fixed;
-        top: 25%;
+        top: 17%;
         bottom: 0;
-        height: 50%;
+        height:30%;
         left: 0;
         width: 60px;
         overflow: hidden;
         transition: width 0.25s ease-in-out;
         z-index: 1000;
         -webkit-transform: translateZ(0) scale(1, 1);
+        -webkit-border-radius: 0px 25px 25px 0px;
+        -moz-border-radius: 0px 25px 25px 0px;
+        border-radius: 0px 25px 25px 0px;
     }
 
     .main-menu > ul {
         margin: 7px 0;
+        height: 100%;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     .main-menu li {
@@ -50,7 +68,7 @@
         display: table;
         border-collapse: collapse;
         border-spacing: 0;
-        color: #999;
+        color: #000;
         font-family: 'Work Sans', sans-serif;
         font-size: 14px;
         text-decoration: none;
@@ -72,8 +90,11 @@
         position: relative;
         display: table-cell;
         vertical-align: middle;
-        width: 190px;
-        font-family: Tahoma;
+        width: 150px;
+        font-family: "Work Sans", sans-serif;
+        text-transform: uppercase;
+        opacity: 0%;
+        transition: opacity 1s ease-in-out 5s;
     }
 
     .no-touch .scrollable.hover {

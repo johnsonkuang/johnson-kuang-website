@@ -10,32 +10,20 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{% static 'website/css/aos.css' %}" rel="stylesheet">
-    <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'website/styles/main.css' %}" rel="stylesheet">
+    <link href="{% static 'website/styles/main.css' %}?version=1.0.1" rel="stylesheet">
     <link href="{% static 'website/css/resume.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block scripts %}
-<script href="{% static 'website/js/sm.js' %}"></script>
 {% endblock %} 
 
 
 {% block content %}
-<div id="mySidemenu" class="sidemenu">
-    <a href="javascript:void(0)" class="close" onclick="closeSM()" style="">&times;</a>
-    <div class="sm-wrapper">
-        <ul class="navbar-nav">
-                <a class="nav-link smooth-scroll" href="#about">About</a>
-                <a class="nav-link smooth-scroll" href="#skill">Skills</a>
-                <a class="nav-link smooth-scroll" href="#experience">Experience</a>
-              </ul>
-    </div>
-</div>
-<div class="area"></div>
+    <div class="area"></div>
     <div class="main-menu">
         <ul>
             <li>
-                <a href="#about" class="smooth-scroll nav-link"><i class="fa fa-home fa-2x">
+                <a href="#about" class="smooth-scroll nav-link"><i class="fa fa-address-card fa-2x">
                 </i>
                 <span class="nav-text">
                     About
@@ -43,7 +31,7 @@
                 </a>
             </li>
             <li>
-                <a href="#skill" class="smooth-scroll nav-link"><i class="fa fa-folder fa-2x">
+                <a href="#skill" class="smooth-scroll nav-link"><i class="fa fa-cogs fa-2x">
                 </i>
                 <span class="nav-text">
                     Experience
@@ -51,10 +39,18 @@
                 </a>
             </li>
             <li>
-                <a href="#experience" class="smooth-scroll nav-link"><i class="fa fa-list fa-2x">
+                <a href="#experience" class="smooth-scroll nav-link"><i class="fa fa-code fa-2x">
                 </i>
                 <span class="nav-text">
                     Skills
+                </span>
+                </a>
+            </li>
+            <li>
+                <a href="#education" class="smooth-scroll nav-link"><i class="fa fa-graduation-cap fa-2x">
+                </i>
+                <span class="nav-text">
+                    Education
                 </span>
                 </a>
             </li>
@@ -67,60 +63,76 @@
   <div class="wrapper">
     <div class="page-header page-header-small" filter-color="blue" style="margin-top:0px">
         <!--TODO: Change to image of me-->
-      <div class="page-header-image" data-parallax="true" style="background-image: url('images/cc-bg-1.jpg');"></div>
+      <div class="page-header-image" data-parallax="true" style="background-image: url('{{ banner.image.url }}');"></div>
       <div class="container">
         <div class="content-center">
-          <div class="h1 title">Johnson Kuang</div>
-          <p class="category text-white">Aspiring Entrepreneur, Full Stack Web Developer, Software Engineer</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="#" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>
+            <div class="cc-profile-image"><a href="#"><img src="{{ MEDIA_URL }}images/test1.JPG" alt="Image"/></a></div>
+            <div class="h1 title">Johnson Kuang</div>
+            <p class="category text-white">A Student with a Dream</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="#" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>
         </div>
       </div>
       <div class="section">
         <div class="container">
-          <div class="button-container"><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook"><i class="fa fa-facebook"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram"><i class="fa fa-instagram"></i></a></div>
+          <div class="button-container">
+              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram">
+                  <i class="fa fa-instagram"></i>
+              </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="section" id="about">
-  <div class="container">
+  <div class="container" style="display: flex; align-items: center;">
     <div class="card" data-aos="fade-up" data-aos-offset="10">
-        <div CLASS="container">
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div class="card-body">
-                <div class="h4 mt-0 title">About</div>
-                <p>Hello! I am Anthony Barnett. Web Developer, Graphic Designer and Photographer.</p>
-                <p>Creative CV is a HTML resume template for professionals. Built with Bootstrap 4, Now UI Kit and FontAwesome, this modern and responsive design template is perfect to showcase your portfolio, skills and experience. <a href="https://templateflip.com/templates/creative-cv/" target="_blank">Learn More</a></p>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <div class="card-body">
+        {% with about as a%}
+            {% with phone as p %}
+      <div class="row">
+        <div class="col-lg-6 col-md-12" style="width: 50%">
+          <div class="card-body" style="padding: 10px;">
+            <div class="h4 mt-0 title">About</div>
+            <p>{{ a.about_description }}</p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12" style="width: 50%">
+          <div class="card-body" style="padding: 10px; ">
+              <div style="        display: flex;
+        flex-direction: column;
+        justify-content: space-around; overflow: visible">
                 <div class="h4 mt-0 title">Basic Information</div>
                 <div class="row">
                   <div class="col-sm-4"><strong class="text-uppercase">Age:</strong></div>
-                  <div class="col-sm-8">24</div>
+                  <div class="col-sm-8">{{ a.age }}</div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
-                  <div class="col-sm-8">anthony@company.com</div>
+                  <div class="col-sm-8">{{ a.email }}</div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-sm-4"><strong class="text-uppercase">Phone:</strong></div>
-                  <div class="col-sm-8">+1718-111-0011</div>
+                  <div class="col-sm-8">+{{ p }}</div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-sm-4"><strong class="text-uppercase">Address:</strong></div>
-                  <div class="col-sm-8">140, City Center, New York, U.S.A</div>
+                  <div class="col-sm-8">{{ a.address }}</div>
                 </div>
                 <div class="row mt-3">
                   <div class="col-sm-4"><strong class="text-uppercase">Language:</strong></div>
-                  <div class="col-sm-8">English, German, French</div>
+                  <div class="col-sm-8">{{ a.language }}</div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
+      </div>
+                {% endwith %}
+        {% endwith %}
     </div>
   </div>
 </div>
@@ -129,165 +141,91 @@
     <div class="h4 text-center mb-4 title">Professional Skills</div>
     <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="card-body">
+      {% for c1, c2 in skills %}
         <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">HTML</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div><span class="progress-value">80%</span>
+            <div class="container" style="padding: 15px 3%;">
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">{{ c1.name }}</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="{{ c1.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ c1.percent }}%;"></div><span class="progress-value">{{ c1.percent }}%</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">CSS</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div><span class="progress-value">75%</span>
+                {% if c2 %}
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">{{ c2.name }}</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="{{ c2.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ c2.percent }}%;"></div><span class="progress-value">{{ c2.percent }}%</span>
+                  </div>
+                </div>
               </div>
+                {% endif %}
             </div>
-          </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">JavaScript</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div><span class="progress-value">60%</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">SASS</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div><span class="progress-value">60%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Bootstrap</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div><span class="progress-value">75%</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Photoshop</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div><span class="progress-value">70%</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      {% endfor %}
       </div>
     </div>
   </div>
 </div>
 <div class="section" id="experience">
   <div class="container cc-experience">
-    <div class="h4 text-center mb-4 title">Work Experience</div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>March 2016 - Present</p>
-            <div class="h5">CreativeM</div>
+    <div class="h4 text-center mb-4 title" style="font-size: 28px;">Work Experience</div>
+      {% for experience in experiences %}
+        <div class="card">
+          <div class="row">
+            <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500" style="height: 210px;">
+              <div class="card-body cc-experience-header" style="height: 210px;">
+                <p>
+                    {{ experience.get_Start_Month }} {{ experience.start_date.year }} -
+                    {% if experience.is_Present %}
+                        PRESENT
+                    {% else %}
+                        {{ experience.get_End_Month }} {{ experience.end_date.year }}
+                    {% endif %}
+                </p>
+                <div class="h5">{{ experience.name }}</div>
+              </div>
+
+            </div>
+            <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height:210px">
+              <div class="card-body">
+                <div class="h5"><h4>{{ experience.position }}</h4></div>
+                <p>{{ experience.description }}</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Front End Developer</div>
-            <p>Euismod massa scelerisque suspendisse fermentum habitant vitae ullamcorper magna quam iaculis, tristique sapien taciti mollis interdum sagittis libero nunc inceptos tellus, hendrerit vel eleifend primis lectus quisque cubilia sed mauris. Lacinia porta vestibulum diam integer quisque eros pulvinar curae, curabitur feugiat arcu vivamus parturient aliquet laoreet at, eu etiam pretium molestie ultricies sollicitudin dui.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>April 2014 - March 2016</p>
-            <div class="h5">WebNote</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Web Developer</div>
-            <p>Euismod massa scelerisque suspendisse fermentum habitant vitae ullamcorper magna quam iaculis, tristique sapien taciti mollis interdum sagittis libero nunc inceptos tellus, hendrerit vel eleifend primis lectus quisque cubilia sed mauris. Lacinia porta vestibulum diam integer quisque eros pulvinar curae, curabitur feugiat arcu vivamus parturient aliquet laoreet at, eu etiam pretium molestie ultricies sollicitudin dui.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>April 2013 - February 2014</p>
-            <div class="h5">WEBM</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Intern</div>
-            <p>Euismod massa scelerisque suspendisse fermentum habitant vitae ullamcorper magna quam iaculis, tristique sapien taciti mollis interdum sagittis libero nunc inceptos tellus, hendrerit vel eleifend primis lectus quisque cubilia sed mauris. Lacinia porta vestibulum diam integer quisque eros pulvinar curae, curabitur feugiat arcu vivamus parturient aliquet laoreet at, eu etiam pretium molestie ultricies sollicitudin dui.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      {% endfor %}
   </div>
 </div>
-<div class="section">
+<div class="section" id="education">
   <div class="container cc-education">
-    <div class="h4 text-center mb-4 title">Education</div>
+    <div class="h4 text-center mb-4 title" style="font-size: 28px;">Education</div>
+      {% for e in education %}
     <div class="card">
       <div class="row">
         <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
           <div class="card-body cc-education-header">
-            <p>2013 - 2015</p>
-            <div class="h5">Master's Degree</div>
+            <p>{{ e.start_date.year }} -
+                {% if e.is_Present %}
+                    PRESENT
+                {% else %}
+                    {{ e.end_date.year }}
+                {% endif %}
+            </p>
+            <div class="h5">{{ e.degree }}</div>
           </div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
+        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height: 0px;">
           <div class="card-body">
-            <div class="h5">Master of Information Technology</div>
-            <p class="category">University of Computer Science</p>
-            <p>Euismod massa scelerisque suspendisse fermentum habitant vitae ullamcorper magna quam iaculis, tristique sapien taciti mollis interdum sagittis libero nunc inceptos tellus, hendrerit vel eleifend primis lectus quisque cubilia sed mauris. Lacinia porta vestibulum diam integer quisque eros pulvinar curae, curabitur feugiat arcu vivamus parturient aliquet laoreet at, eu etiam pretium molestie ultricies sollicitudin dui.</p>
+            <div class="h5">{{ e.degree_specific }}</div>
+            <p class="category">{{ e.school }}</p>
+            <p>{{ e.description }}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2009 - 2013</p>
-            <div class="h5">Bachelor's Degree</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Bachelor of Computer Science</div>
-            <p class="category">University of Computer Science</p>
-            <p>Euismod massa scelerisque suspendisse fermentum habitant vitae ullamcorper magna quam iaculis, tristique sapien taciti mollis interdum sagittis libero nunc inceptos tellus, hendrerit vel eleifend primis lectus quisque cubilia sed mauris. Lacinia porta vestibulum diam integer quisque eros pulvinar curae, curabitur feugiat arcu vivamus parturient aliquet laoreet at, eu etiam pretium molestie ultricies sollicitudin dui.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2007 - 2009</p>
-            <div class="h5">High School</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Science and Mathematics</div>
-            <p class="category">School of Secondary board</p>
-            <p>Euismod massa scelerisque suspendisse fermentum habitant vitae ullamcorper magna quam iaculis, tristique sapien taciti mollis interdum sagittis libero nunc inceptos tellus, hendrerit vel eleifend primis lectus quisque cubilia sed mauris. Lacinia porta vestibulum diam integer quisque eros pulvinar curae, curabitur feugiat arcu vivamus parturient aliquet laoreet at, eu etiam pretium molestie ultricies sollicitudin dui.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      {% endfor %}
   </div>
 </div>
 </div>
@@ -295,7 +233,7 @@
     <script src="{% static 'website/js/core/jquery.3.2.1.min.js' %}"></script>
     <script src="{% static 'website/js/core/popper.min.js' %}"></script>
     <script src="{% static 'website/js/core/bootstrap.min.js' %}"></script>
-    <script src="{% static 'website/js/now-ui-kit.js' %}js/now-ui-kit.js?v=1.1.0"></script>
+    <script src="{% static 'website/js/now-ui-kit.js' %}"></script>
     <script src="{% static 'website/js/aos.js' %}"></script>
     <script src="{% static 'website/scripts/main.js' %}"></script>
 {% endblock %}

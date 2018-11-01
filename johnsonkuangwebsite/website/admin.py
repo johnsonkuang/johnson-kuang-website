@@ -15,7 +15,24 @@ class VideoAdmin(admin.ModelAdmin):
 class ImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('__str__',)
 
+
+class ResumeEntryBasicInfoAdmin(admin.ModelAdmin):
+    list_display = ('age', 'phone', 'language')
+
+class ResumeEntryEducationAdmin(admin.ModelAdmin):
+    list_display = ('school', 'degree', 'start_date', 'end_date')
+
+class ResumeSkillAdmin(admin.ModelAdmin):
+    list_display = ('name', 'percent')
+
+class ResumeWorkExperienceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'start_date', 'end_date', 'position')
+
 # Register your models here.
+admin.site.register(ResumeEntryBasicInfo,ResumeEntryBasicInfoAdmin)
+admin.site.register(ResumeEntryEducation,ResumeEntryEducationAdmin)
+admin.site.register(ResumeSkill,ResumeSkillAdmin)
+admin.site.register(ResumeWorkExperience,ResumeWorkExperienceAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Image, ImageAdmin)
 

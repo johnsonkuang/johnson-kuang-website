@@ -17,8 +17,30 @@ def index(request):
 def about(request):
     return render(request, 'website/about.html')
 
+#helper function to pack the list into two per row
+def pack(_list):
+    new_list = list(zip(_list[::2], _list[1::2]))
+    if len(_list) % 2:
+        new_list.append((_list.last(), None))
+    return new_list
+
 def resume(request):
-    return render(request, 'website/resume.html')
+    banner = Image.objects.get(caption='Resume Banner')
+    experiences = ResumeWorkExperience.objects.all()
+    skills = ResumeSkill.objects.all()
+    skills = pack(skills)
+    education = ResumeEntryEducation.objects.all()
+    about = ResumeEntryBasicInfo.objects.all()[0]
+    phone_number = "%s%s%s-%s%s%s-%s%s%s%s" % tuple(str(about.phone))
+    context = {
+        'banner': banner,
+        'experiences': experiences,
+        'skills': skills,
+        'education': education,
+        'about': about,
+        'phone': phone_number,
+    }
+    return render(request, 'website/resume.html', context)
 
 
 def projects(request):
