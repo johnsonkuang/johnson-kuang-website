@@ -50,8 +50,8 @@ def post_list(request, tag_slug=None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
-
-    paginator = Paginator(object_list, 3)  # 3 posts in each page
+    print(object_list.count())
+    paginator = Paginator(object_list, 10)  # 3 posts in each page
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -61,12 +61,15 @@ def post_list(request, tag_slug=None):
     except EmptyPage:
         # If page is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
-    posts = Post.published.all()
+    #posts = Post.published.all()
+
+    all_tags = Tag.objects.all()
     return render(request,
                   'blog/post/list.html',
                   {'page': page,
                    'posts': posts,
-                   'tag': tag})
+                   'tag': tag,
+                   'tags': all_tags})
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post,
