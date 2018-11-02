@@ -38,12 +38,16 @@ EMAIL_HOST_PASSWORD = 'h"dhC\!KD[FN%u(.+rpTp,Q\'\Cs\'J&)-Ka\'K>6yq'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+SITE_ID = 1
+
 
 # Application definition
 
 INSTALLED_APPS = [
     'website',
     'blog',
+    'taggit',
+    'markdown',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,8 +56,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'easy_thumbnails',
-
+    'image_cropping',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,7 +76,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND_PARAMS = {}
+
 ROOT_URLCONF = 'johnsonkuangwebsite.urls'
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.app_directories.load_template_source',
+)
 
 TEMPLATES = [
     {

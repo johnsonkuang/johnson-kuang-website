@@ -1,16 +1,105 @@
 {% extends "website/base.html" %}
 
-{% block pagetitle %}About{% endblock %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load cropping %}
 
+{% block pagetitle %}About{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/about.css' %}">
+{% endblock %}
 {% block content %}
 <!-- reference 1: https://ana-santos.com/about/-->
     <!-- simple but gets the job done: https://osvaldas.info/about-->
     <!--http://www.goldsquare.co/about-->
     <!--Nice simple style, worth modeling: https://www.devonstank.com/about/-->
-    <div class="jumbotron">
-        <h1>This is a nice UI</h1>
+
+    <div class="container" style="padding-top: 69px;">
+        <img src="{% cropped_thumbnail banner "cropping" scale=1.0 %}" class="img-responsive fill">
+    </div>
+    <div class="jumbotron" style="text-align: center; margin-bottom: 0px;">
+        <div class="container">
+            <h1>A few fun facts about myself . . .</h1>
+            <h4>I love home-cooking, I am an avid reader; I'm definitely single, my favorite number is 2, and I was hit by a car when I was 3;
+                I'm not a huge fan of writing essays, I play video games like it's my life,
+            I am a 16 year-old aspiring entrepreneur, I do downhill skiing, my favorite food is beef noodles (with handmade noodles),
+            </h4>
+        </div>
+
+    </div>
+    <section class="grid" id="photos">
+        {% for image in gallery %}
+            <div class="cell">
+                <img src="{% thumbnail image.image 400x300 box=image.cropping crop detail %}" style="width: 100%; height: auto;" class="responsive-image img-responsive">
+            </div>
+        {% endfor %}
+    </section>
+
+    <div class="container" style="margin-top: 40px;">
+        <h1>Understanding who I am as a person</h1>
+        <p>
+            My walk through life has led me to meet a lot of interesting people, do a lot of really cool things, and experience a lot of exhilarating adventures. During the warmer months, I enjoy traveling and kayaking in Lake Washington. During the colder months, I’ll definitely be up north, tearing it up on some steep mountain slope. Although, most of the year, you’ll find me behind a computer screen.
+        </p>
+        <p>
+            From a young age, I was fascinated by computers. Learning to code has been my single most favorite hobby (next to playing the violin and fishing that is) and it is part of the reason for the existence of this website. I look forward to sharing the challenges I face, the things I find meaningful, and new insights I have.
+        </p>
+
+    </div>
+
+
+    <div class="container">
+        <h1>Where I come from</h1>
+        <p>
+            I grew up in the Canadian equivalent of Seattle: Vancouver. Here you’ll find nice people, good food, and a whole lot of rain. For the first 6 years of my life, Vancouver and Richmond were my stomping grounds.
+        </p>
+        <p>
+            It’s been well over 10 years since I left Vancouver, and since then, I have made several great friends and met several famous people along the way. This is my world, and it’s a messy one full of emotions and ideas. Step into my life and you will find a very disorganized desk with papers in five distinct piles: important things (miscellaneous), homework, textbooks, other books, and finally poetry. Each pile has its uses even if I don’t know what it may be at the moment.
+        </p>
+    <!--Image Needed Of me in Canada-->
+    </div>
+    <div class="container" style="background-color: #f0f0f0; width: 100%; padding: 10px 0;">
+        <div class="container">
+            <h1>What I do</h1>
+            <p>
+                <span><strong>School?</strong></span>
+                Asides from being a student, I like to take naps and taste good food. I’m 5’ 6” and I hope to grow a lot more in the coming years. I’m a night owl. You can find me sleeping in every morning and burning the midnight oil into each night. I can’t schedule any morning appointments because I’m always late.
+            </p>
+
+            <p>
+                <span><strong>Personal Life and Habits?</strong></span>
+                Asides from being a student, I like to take naps and taste good food. Sleeping assists in growing and I need as much assistance as i can get. As for trying good food, my goal is to one day visit each continent once and taste its fine delicacies. Having tasted so much good food already, I thought it would nice to learn to make my own as well. This website exists to document my journey through life
+            </p>
+            <p>
+                I grew up blessed with a very dedicated mother who treats us to many culinary delights every day. For this reason, I’ve formed a distinct appreciation for all types of good food. My philosophy towards food is try first and judge second. If I like the first bite, I’ll take a second, all the way until I’ve had enough.
+            </p>
+            <!--Images to the right of some food that Mom has cooked-->
+            <p>
+                <span><strong>Competitions?</strong></span>
+                Why yes, I do many competitions. From Science Olympiad to DECA, I have had a very fulfilling high school experience in this regard. From late-night cramming to post-awards excitement, competing represent some of my best memories from high school.
+            </p>
+            <!--Full Sized Image DECA-->
+        </div>
     </div>
     <div class="container">
-
+        <h1>What are my passions</h1>
+        <p>
+            Between school and competitions, there’s still time left in between. I like to fill those long hours with violin playing, deep-sea fishing, computer programming, reading chinese novels, skiing, ramen, and so much more.
+        </p>
+        <p>
+            Once I challenged a friend in my research lab to a spicy ramen eating contest (hachi ramen x2 hotness). Unfortunately, I lost, and the experience of eating wasn’t all too pleasant. But it was a unique opportunity to bond with my fellow lab members and we shared a great time (at the expense of my taste buds).
+        </p>
+        <p>
+            Another time, I went on a ski trip with family friends up north to Sun Peaks Ski Resort. On the way down on the first day, I took a wrong turn and ended up going down the steepest run at the resort with a snowboarder friend of mine. The snow was nice and fine, completely powder, and the weather was great, a few stray rays of sunshine pierced through the dense cloud cover. We came across a run that was completely untouched albeit a little steep and so we just went ahead. It was quite the rush when we made it to the bottom, all covered with snow.
+        </p>
+        <p>
+            Or another time, I went crabbing in the Puget Sound. After a day of attaching chicken drumsticks to the cages, tossing them overboard, and hauling them up hours late, we ended up bringing back 24 crabs! It was quite the haul and we ended giving all the excess to our neighbours (yes, I spell it the English way).
+        </p>
+        <h4 style="margin-top: 20px; font-size: 1.5em;">
+            As you can see, outside of school, a lot happens and I want to write about all of it. I can’t wait to share!
+        </h4>
+    </div>
+    <div class="container">
+        <h1>My Instagram Feed</h1>
+        <div class="taggbox-container" style="width:100%;height:100%;overflow: auto;"><script defer src="//7499608.com/app/js/embed.min.js" type="text/javascript"></script><div class="taggbox-socialwall" data-wall-id="first-wall-9841">  </div></div>
     </div>
 {% endblock %}

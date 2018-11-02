@@ -1,0 +1,13 @@
+{% for post in latest_posts %}
+    <div class="item d-flex align-items-center">
+
+      {% if post.image %}<div class="image" style="height: 100%; display: flex; align-items: center;"><img src="{{ post.image.url }}" alt="..." class="img-fluid"></div>{% endif %}
+        <div class="title">
+           <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
+            <div class="d-flex align-items-center">
+                <div class="views"><i class="icon-eye"></i></div>
+                <div class="comments"><i class="icon-comment"></i>{{ post.comments.count }}</div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

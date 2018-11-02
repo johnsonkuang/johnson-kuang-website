@@ -1,21 +1,130 @@
 {% extends 'website/base.html' %}
 
+{% load blog_tags %}
+{% load staticfiles %}
 {% block pagetitle %}
     Blog
 {% endblock %}
 
+{% block stylesheets %}
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'blog/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'blog/vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Custom icon font-->
+    <link rel="stylesheet" href="{% static 'blog/css/fontastic.css' %}">
+    <!-- Google fonts - Open Sans-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <!-- Fancybox-->
+    <link rel="stylesheet" href="{% static 'blog/vendor/@fancyapps/fancybox/jquery.fancybox.mintest.css' %}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'blog/css/style.default.css' %} " id="theme-stylesheet">
+{% endblock %}
+
+
+<style>
+    section {
+        display: grid;
+        grid-template-columns: auto minmax(800px, 3fr) 1fr;
+    }
+    main {
+        grid-column: 1 / 2;
+    }
+    aside{
+        grid-column: 2 / 3;
+    }
+</style>
 {% block content %}
-    <h1>TThis is List</h1>
-    {% for post in posts %}
-        <h2>
-              <a href="{{ post.get_absolute_url }}">
-                {{ post.title }}
-              </a>
-        </h2>
-        <p class="date">
-            Published {{ post.publish }} by {{ post.author }}
-        </p>
-    {{ post.body| truncatewords:30 | linebreaks }}
-  {% endfor %}
-    {% include "blog/post/pagination.html" with page=page_obj %}
+    <div class="container" style="">
+      <div class="row">
+        <!-- Latest Posts -->
+        <section>
+        <main class="posts-listing col-lg-8">
+          <div class="container" style="width: auto;">
+            <div class="row">
+                {% if tag %}
+                    <div style="padding-left: 15px;"><a href="{% url 'blog:post_list' %}">
+                            <h3 style="padding:0px; margin-top: 0px;">
+                                <span class="back-icon glyphicon glyphicon-chevron-left" id="back-icon" style="font-weight:lighter;font-size: 0.8em;" aria-hidden="true"></span>
+                                Back to Home
+                            </h3>
+                    </a></div>
+                {% endif %}
+            </div>
+            <div class="row">
+              {% for post in posts %}
+                <div class="post col-xl-6">
+                        <div class="post-thumbnail"><a href="{{ post.get_absolute_url }}">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}{#  {{ thumbnail post.image 200x200 box=posts.cropping detail }} #}" alt="..." class="img-fluid">
+                            {% endif %}
+                        </a></div>
+                    <div class="post-details">
+                          <div class="post-meta d-flex justify-content-between">
+                                <div class="date meta-last" style="font-size: 1.2em">{{ post.get_date_month_year }} </div>
+                          {% if post.tags %}
+                                <div class="category">
+                                <span style="text-transform: uppercase; font-size: 1.2em;">Tags: </span>
+                                    {% for tag in post.tags.all %}
+                                            <a href="{% url "blog:post_list_by_tag" tag.slug %}" style="font-weight: lighter;">
+                                                #{{ tag.name }}
+                                            </a>
+                                            {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                          {% endif %}
+                          </div>
+                          <h3 class="h4"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                          <p class="text-muted">{{ post.body|markdown|truncatewords_html:30 }}</p>
+                          <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                                  <div class="title"><span>Johnson Kuang</span></div></a>
+                                <div class="date"><i class="icon-clock"></i>2 months ago</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments.count }}</div>
+                          </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% include "blog/post/pagination.html" with page=posts %}
+
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <h2>Johnson's Corner of the Internet</h2>
+            <p>This is my blog. I've written {% total_posts %} posts so far.</p>
+            <h3>Latest posts</h3>
+            <div class="blog-posts">
+                {% show_latest_posts 3 %}
+            </div>
+          </div>
+            <div class="widget latest-posts">
+                <h3>Most commented posts</h3>
+                <div class="blog-posts">
+                    {% get_most_commented_posts 3 %}
+                </div>
+                <p><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed!</a></p>
+            </div>
+            <div class="widget tags">
+              <h3>Tags</h3>
+            <ul class="list-inline">
+                {% for tag in tags %}
+                    <li class="list-inline-item"><a href="{% url "blog:post_list_by_tag" tag.slug %}" class="tag">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+        </aside>
+        </section>
+      </div>
+    </div>
+    <!--/container-->
+
+    <script src="{% static 'blog/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'blog/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'blog/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'blog/vendor/@fancyapps/fancybox/jquery.fancybox.mintest.js' %}"></script>
+    <script src="{% static 'blog/js/front.js' %}"></script>
+
 {% endblock %}
