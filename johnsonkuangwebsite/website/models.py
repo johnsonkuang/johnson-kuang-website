@@ -4,6 +4,8 @@ from django.db.models.signals import pre_delete, post_delete, pre_save, post_sav
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from datetime import date
+
 from image_cropping import ImageRatioField
 from sortedm2m.fields import SortedManyToManyField
 from website.utils.fileutils import UniquePathAndRename
@@ -139,5 +141,48 @@ class Video(models.Model):
 
     def __str__(self):
         return self.name + ": " + str(self.video)
+
+
+class ResumeEntryEducation(models.Model):
+    school = models.CharField(max_length=255)
+    degree = models.CharField(max_length=255)
+    degree_specific = models.CharField(max_length=255, blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.TextField()
+
+    def is_Present(self):
+        return self.end_date > date.today()
+
+class ResumeEntryBasicInfo(models.Model):
+    #Meant to store all basic info in one entry
+    age = models.IntegerField()
+    email = models.EmailField()
+    phone = models.IntegerField()
+    address = models.CharField(max_length=255)
+    language = models.CharField(max_length=255)
+    about_description = models.TextField()
+
+class ResumeSkill(models.Model):
+    name = models.CharField(max_length=255)
+    percent = models.IntegerField()
+    percent.help_text = 'You must choose an int between 0 and 100 representing precentage'
+
+class ResumeWorkExperience(models.Model):
+    name = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    position = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def get_Start_Month(self):
+        return self.start_date.strftime("%B")
+
+    def get_End_Month(self):
+        return self.end_date.strftime("%B")
+
+    def is_Present(self):
+        return self.end_date > date.today()
+
 
 
