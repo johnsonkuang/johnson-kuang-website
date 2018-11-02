@@ -4,6 +4,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 from django.urls import reverse
+from taggit.managers import TaggableManager
+from image_cropping import ImageRatioField
+
+from website.utils.fileutils import UniquePathAndRename
 
 # Create your models here.
 
@@ -15,6 +19,10 @@ class PublishedManager(models.Manager):
                           .filter(status='published')
 
 class Post(models.Model):
+    tags = TaggableManager()
+    image = models.ImageField(blank=True, upload_to=UniquePathAndRename("blog/posts", True), max_length=255)
+
+    cropping = ImageRatioField('image', '245x245', size_warning=True)
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # custom manager.
     STATUS_CHOICES = (
@@ -41,8 +49,32 @@ class Post(models.Model):
                              self.publish.strftime('%d'),
                              self.slug])
 
+    def get_date_month_year(self):
+        returnString = str(self.publish.day) + " " + self.publish.strftime('%B') + " | " + str(self.publish.year)
+        return returnString
+
     class Meta:
         ordering = ('-publish',)
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.name, self.post)
+
+

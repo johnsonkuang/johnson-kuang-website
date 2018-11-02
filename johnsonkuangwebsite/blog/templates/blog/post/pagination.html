@@ -1,13 +1,22 @@
-<div class="pagination">
-  <span class="step-links">
+{% if page.has_other_pages %}
+  <ul class="pagination pagination-template d-flex justify-content-center">
     {% if page.has_previous %}
-      <a href="?page={{ page.previous_page_number }}">Previous</a>
+      <li class="page-item"><a href="?page={{ page.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+    {% else %}
+        <li class="disabled"><i class="fa fa-angle-left"></i></li>
     {% endif %}
-    <span class="current">
-      Page {{ page.number }} of {{ page.paginator.num_pages }}.
-    </span>
-      {% if page.has_next %}
-        <a href="?page={{ page.next_page_number }}">Next</a>
+    {% for i in page.paginator.page_range %}
+      {% if page.number == i %}
+        <li class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a href="?page={{ i }}">{{ i }}</a></li>
       {% endif %}
-  </span>
-</div>
+    {% endfor %}
+    {% if page.has_next %}
+        <li class="page-item"><a href="?page={{ page.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+    {% else %}
+        <li class="disabled"><i class="fa fa-angle-right"></i></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
