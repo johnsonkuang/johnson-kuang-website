@@ -6,19 +6,21 @@ from website.models import *
 # Create your views here.
 def index(request):
     load = Video.objects.get(name='load')
-    pic = Image.objects.get(caption='About 1 No Blur')
-    print(pic.image.height)
+    about = Image.objects.get(name='about_parallax')
+    blog = Image.objects.get(name='blog_parallax')
+
     context = {
         'load': load,
-        'about': pic,
+        'about': about,
+        'blog': blog,
     }
     return render(request, 'website/index.html', context)
 
 def about(request):
-    banner = Image.objects.get(name='about_banner')
+    #banner = Image.objects.get(name='about_banner')
     gallery = About_Gallery.objects.all()
     context = {
-        'banner': banner,
+     #   'banner': banner,
         'gallery': gallery,
     }
     return render(request, 'website/about.html', context)
