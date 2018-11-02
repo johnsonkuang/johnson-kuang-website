@@ -31,18 +31,18 @@
                 </a>
             </li>
             <li>
-                <a href="#skill" class="smooth-scroll nav-link"><i class="fa fa-cogs fa-2x">
+                <a href="#skill" class="smooth-scroll nav-link"><i class="fa fa-code fa-2x">
                 </i>
                 <span class="nav-text">
-                    Experience
+                    Skills
                 </span>
                 </a>
             </li>
             <li>
-                <a href="#experience" class="smooth-scroll nav-link"><i class="fa fa-code fa-2x">
+                <a href="#experience" class="smooth-scroll nav-link"><i class="fa fa-cogs fa-2x">
                 </i>
                 <span class="nav-text">
-                    Skills
+                    Experience
                 </span>
                 </a>
             </li>
@@ -66,7 +66,7 @@
       <div class="page-header-image" data-parallax="true" style="background-image: url('{{ banner.image.url }}');"></div>
       <div class="container">
         <div class="content-center">
-            <div class="cc-profile-image"><a href="#"><img src="{{ MEDIA_URL }}images/test1.JPG" alt="Image"/></a></div>
+            <div class="cc-profile-image"><a href="#"><img src="{{ headshot.image.url }}" alt="Image"/></a></div>
             <div class="h1 title">Johnson Kuang</div>
             <p class="category text-white">A Student with a Dream</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="#" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>
         </div>
@@ -96,13 +96,15 @@
             {% with phone as p %}
       <div class="row">
         <div class="col-lg-6 col-md-12" style="width: 50%">
-          <div class="card-body" style="padding: 10px;">
+          <div class="card-body" style="padding: 10px 50px;">
             <div class="h4 mt-0 title">About</div>
+              {% autoescape off %}
             <p>{{ a.about_description }}</p>
+              {% endautoescape %}
           </div>
         </div>
         <div class="col-lg-6 col-md-12" style="width: 50%">
-          <div class="card-body" style="padding: 10px; ">
+          <div class="card-body" style="padding: 10px 50px; ">
               <div style="        display: flex;
         flex-direction: column;
         justify-content: space-around; overflow: visible">
@@ -138,7 +140,7 @@
 </div>
 <div class="section" id="skill">
   <div class="container">
-    <div class="h4 text-center mb-4 title">Professional Skills</div>
+    <div class="h4 text-center mb-4 title" style="font-size: 28px;">Professional Skills</div>
     <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
       <div class="card-body">
       {% for c1, c2 in skills %}

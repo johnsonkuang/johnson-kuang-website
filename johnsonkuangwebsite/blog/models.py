@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from image_cropping import ImageRatioField
@@ -73,6 +74,9 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('created',)
+
+    def get_month_year(self):
+        return self.created.strftime('%B %Y')
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.name, self.post)

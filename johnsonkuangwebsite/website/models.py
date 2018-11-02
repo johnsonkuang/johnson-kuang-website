@@ -110,7 +110,7 @@ class Image(models.Model):
     # size is "width x height"
 
     def __str__(self):
-        return self.caption
+        return self.name
 
 
 class Video(models.Model):
@@ -158,10 +158,13 @@ class ResumeEntryBasicInfo(models.Model):
     #Meant to store all basic info in one entry
     age = models.IntegerField()
     email = models.EmailField()
-    phone = models.IntegerField()
+    phone = models.BigIntegerField()
     address = models.CharField(max_length=255)
     language = models.CharField(max_length=255)
     about_description = models.TextField()
+
+    def __str__(self):
+        return 'Basic Info'
 
 class ResumeSkill(models.Model):
     name = models.CharField(max_length=255)

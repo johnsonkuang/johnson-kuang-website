@@ -67,9 +67,8 @@
                                 <span style="text-transform: uppercase; font-size: 1.2em;">Tags: </span>
                                     {% for tag in post.tags.all %}
                                             <a href="{% url "blog:post_list_by_tag" tag.slug %}" style="font-weight: lighter;">
-                                                #{{ tag.name }}
+                                                {{ tag.name }}
                                             </a>
-                                            {% if not forloop.last %}, {% endif %}
                                     {% endfor %}
                                 </div>
                           {% endif %}

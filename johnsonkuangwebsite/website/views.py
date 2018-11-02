@@ -33,7 +33,8 @@ def pack(_list):
     return new_list
 
 def resume(request):
-    banner = Image.objects.get(caption='Resume Banner')
+    banner = Image.objects.get(name='seattle_background')
+    headshot = Image.objects.get(name='resume_headshot')
     experiences = ResumeWorkExperience.objects.all()
     skills = ResumeSkill.objects.all()
     skills = pack(skills)
@@ -42,6 +43,7 @@ def resume(request):
     phone_number = "%s%s%s-%s%s%s-%s%s%s%s" % tuple(str(about.phone))
     context = {
         'banner': banner,
+        'headshot': headshot,
         'experiences': experiences,
         'skills': skills,
         'education': education,

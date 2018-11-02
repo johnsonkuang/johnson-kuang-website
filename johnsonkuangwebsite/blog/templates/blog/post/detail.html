@@ -1,60 +1,228 @@
 
 {% extends 'website/base.html' %}
 {% load blog_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load widget_tweaks %}
+
+
+{% block head %}
+    <!--Change accordingly to change the way it's described on previews-->
+      <meta property="og:url"           content="{{ post.get_absolute_url }}" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Johnson's Corner of the Internet" />
+      <meta property="og:description"   content="Welcome to my website! Here I share my story!" />
+      <meta property="og:image"         content="{{ post.image.url }}" />
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'blog/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'blog/vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Custom icon font-->
+    <link rel="stylesheet" href="{% static 'blog/css/fontastic.css' %}">
+    <!-- Google fonts - Open Sans-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <!-- Fancybox-->
+    <link rel="stylesheet" href="{% static 'blog/vendor/@fancyapps/fancybox/jquery.fancybox.mintest.css' %}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'blog/css/style.default.css' %} " id="theme-stylesheet">
+{% endblock %}
 
 {% block pagetitle %}
     {{ post.title }}
 {% endblock %}
 
 {% block content %}
-    <h1>TThis is Detail</h1>
-    <h1>{{ post.title }}</h1>
-      <p class="date">
-        Published {{ post.publish }} by {{ post.author }}
-      </p>
-      {{ post.body|markdown }}
-    <p>
-      <a href="{% url "blog:post_share" post.id %}">
-        Share this post
-      </a>
-    </p>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=290227411481586&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
-    <h2>Similar posts</h2>
-    {% for post in similar_posts %}
-      <p>
-        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-      </p>
-    {% empty %}
-      There are no similar posts yet.
-    {% endfor %}
+    <div class="container" style="margin-top: 60px;">
+        <div class="row">
+        <main class="post blog-post col-lg-8">
+          <div class="container" style="width: 100%;">
+            <div class="post-single">
+              <div class="post-thumbnail"><img src="{{ post.image.url }}" alt="..." class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="category">
+                      {% if post.tags %}
+                          <div class="category">
+                          <span style="text-transform: uppercase; font-size: 1.2em;">Tags: </span>
+                              {% for tag in post.tags.all %}
+                                      <a href="{% url "blog:post_list_by_tag" tag.slug %}" style="font-weight: lighter;">
+                                          {{ tag.name }}
+                                      </a>
+                              {% endfor %}
+                          </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <h1>{{ post.title }}<a id="bookmark-this" title="Bookmark This Page" href="javascript:void(0)" onclick="return johnson_favorite(this)"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="title"><span>Johnson Kuang</span></div></a>
+                  <div class="d-flex align-items-center flex-wrap">
+                    <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                    <div class="views"><i class="icon-eye"></i></div>
+                    <div class="comments meta-last"><i class="icon-comment">{{ post.comments.count }}</i></div>
+                  </div>
+                </div>
+                <div class="post-body">
+                  {% autoescape off %}
+                    {{ post.body|markdown }}
+                  {% endautoescape %}
+                </div>
+                <div class="post-tags">
+                    {% for tag in post.tags.all %}
+                            <a href="{% url "blog:post_list_by_tag" tag.slug %}" style="font-weight: lighter;">
+                                {{ tag.name }}
+                            </a>
+                    {% endfor %}
+                </div>
+                <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="{{ prev_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+                    <div class="icon prev"><i class="fa fa-angle-left" style="padding-top: 0.55em; padding-right: 0.17em;"></i></div>
+                    <div class="text"><strong class="text-primary">Previous Post </strong>
+                      <h6>{{ prev_post.title }}</h6>
+                    </div></a><a href="{{ next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                        <div class="text"><strong class="text-primary">Next Post </strong>
+                          <h6>{{ next_post.title }}</h6>
+                        </div>
+                        <div class="icon next"><i class="fa fa-angle-right" style="padding-top: 0.55em; padding-left: 0.17em;">   </i></div></a></div>
 
-    {% with comments.count as total_comments %}
-          <h2>
-            {{ total_comments }} comment{{ total_comments|pluralize }}
-          </h2>
-    {% endwith %}
 
-    {% for comment in comments %}
-      <div class="comment">
-        <p class="info">
-          Comment {{ forloop.counter }} by {{ comment.name }}
-          {{ comment.created }}
-        </p>
-        {{ comment.body|linebreaks }}
-      </div>
-    {% empty %}
-      <p>There are no comments yet.</p>
-    {% endfor %}
+                <h2 style="color: #00b0f0">
 
-    {% if new_comment %}
-      <h2>Your comment has been added.</h2>
-    {% else %}
-      <h2>Add a new comment</h2>
-      <form action="." method="post">
-        {{ comment_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Add comment"></p>
-      </form>
-    {% endif %}
+                    Share this post
+                        <a href="{% url "blog:post_share" post.id %}"><i class="fa fa-envelope"></i></a>
+                        <div class="fb-share-button"
+                        data-href="{{ post.get_absolute_url }}"
+                        data-layout="button_count">
+                      </div>
+                </h2>
+                <div class="post-comments">
+                    <h3 class="h6">Post Comments<span class="no-of-comments">({{ post.comments.count }})</span></h3>
+                  {% for comment in comments %}
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{% static 'website/img/user.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>{{ comment.name }}</strong><span class="date">{{ comment.get_month_year }}</span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>{{ comment.body }}</p>
+                    </div>
+                  </div>
+                  {% empty %}
+                      <div class="comment">
+                            <div>There are no comments yet.</div>
+                            <hr>
+                      </div>
+                  {% endfor %}
+                <div class="add-comment">
+                    {% if new_comment %}
+                      <h2>Your comment has been added.</h2>
+                    {% else %}
+                    <h3>Leave a reply</h3>
+                      <form action="." method="post" class="commenting-form">
+                        <div class="row">
+                            {{ comment_form.non_field_errors }}
+                          <div class="form-group col-md-6">
+                              {{ comment_form.name.errors }}
+                              {% render_field comment_form.name type="text" name="username" id="username" placeholder="Name" class+="form-control" %}
+                          </div>
+                          <div class="form-group col-md-6">
+                              {% render_field comment_form.email type="email" name="username" id="useremail" placeholder="Email Address (will not be published)" class="form-control" %}
+                          </div>
+                          <div class="form-group col-md-12">
+                              {% render_field comment_form.body name="usercomment" id="usercomment" placeholder="Type your comment" class="form-control" %}
+                          </div>
+                          <div class="form-group col-md-12">
+                              {% csrf_token %}
+                            <button type="submit" value="Add comment" class="btn btn-secondary">Submit Comment</button>
+                          </div>
+                        </div>
+                      </form>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+              <h3>Latest Posts</h3>
+            <div class="blog-posts" style="height: 20%;">
+                {% show_latest_posts 3 %}
+            </div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="widget latest-posts">
+                <h3>Most commented posts</h3>
+                <div class="blog-posts" style="height:20%;">
+                    {% get_most_commented_posts 3 %}
+                </div>
+                <p style="margin-top: 2em;"><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed!</a></p>
+            </div>
+          <!-- Widget [Tags Cloud Widget]-->
+          <div class="widget tags">
+              <h3>Tags</h3>
+            <ul class="list-inline">
+                {% for tag in tags %}
+                    <li class="list-inline-item"><a href="{% url "blog:post_list_by_tag" tag.slug %}" class="tag">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+        </aside>
+        </div>
+    </div>
 
+
+
+
+    <script src="{% static 'blog/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'blog/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'blog/vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'blog/vendor/@fancyapps/fancybox/jquery.fancybox.mintest.js' %}"></script>
+    <script src="{% static 'blog/js/front.js' %}"></script>
+
+    <script>
+    function johnson_favorite(a) {
+        pageTitle=document.title;
+        pageURL=document.location;
+        try {
+            // Internet Explorer solution
+            eval("window.external.AddFa-vorite(pageURL, pageTitle)".replace(/-/g,''));
+        }
+        catch (e) {
+            try {
+                // Mozilla Firefox solution
+                window.sidebar.addPanel(pageTitle, pageURL, "");
+            }
+            catch (e) {
+                // Opera solution
+                if (typeof(opera)=="object") {
+                    a.rel="sidebar";
+                    a.title=pageTitle;
+                    a.url=pageURL;
+                    return true;
+                } else {
+                    // The rest browsers (i.e Chrome, Safari)
+                    alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D to bookmark this page.');
+                }
+            }
+        }
+        return false;
+    }
+    </script>
 {% endblock %}

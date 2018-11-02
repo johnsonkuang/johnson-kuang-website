@@ -10,6 +10,7 @@ from .forms import *
 from blog.models import *
 
 
+
 class PostListView(ListView):
     queryset = Post.published.all()
     context_object_name = 'posts'
@@ -71,7 +72,33 @@ def post_list(request, tag_slug=None):
                    'tag': tag,
                    'tags': all_tags})
 
+def get_next_or_prev(models, item, direction):
+    '''
+    Returns the next or previous item of
+    a query-set for 'item'.
+
+    'models' is a query-set containing all
+    items of which 'item' is a part of.
+
+    direction is 'next' or 'prev'
+
+    '''
+    getit = False
+    if direction == 'prev':
+        models = models.reverse()
+    for m in models:
+        if getit:
+            return m
+        if item == m:
+            getit = True
+    if getit:
+        # This would happen when the last
+        # item made getit True
+        return models[0]
+    return False
+
 def post_detail(request, year, month, day, post):
+
     post = get_object_or_404(Post, slug=post,
                                    status='published',
                                    publish__year=year,
@@ -79,6 +106,8 @@ def post_detail(request, year, month, day, post):
                                    publish__day=day)
     # List of active comments for this post
     comments = post.comments.filter(active=True)
+    prev_post = get_next_or_prev(Post.objects.all(), post, 'prev')
+    next_post = get_next_or_prev(Post.objects.all(), post, 'next')
 
     new_comment = None
 
@@ -109,7 +138,9 @@ def post_detail(request, year, month, day, post):
                        'comments': comments,
                        'new_comment': new_comment,
                        'comment_form': comment_form,
-                       'similar_posts': similar_posts})
+                       'similar_posts': similar_posts,
+                       'prev_post': prev_post,
+                       'next_post': next_post,})
 
 def blog(request):
     return render(request, 'website/blog.html')
