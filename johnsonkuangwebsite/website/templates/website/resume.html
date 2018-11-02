@@ -3,20 +3,237 @@
 {% load staticfiles %}
 
 
-{% block pagetitle %}Johnson Kuang{% endblock %}
+{% block pagetitle %}Resume | CV{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{% static 'website/css/index.css' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'website/css/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'website/styles/main.css' %}?version=1.0.1" rel="stylesheet">
+    <link href="{% static 'website/css/resume.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block scripts %}
-
 {% endblock %} 
 
 
 {% block content %}
-<script>
+    <div class="area"></div>
+    <div class="main-menu">
+        <ul>
+            <li>
+                <a href="#about" class="smooth-scroll nav-link"><i class="fa fa-address-card fa-2x">
+                </i>
+                <span class="nav-text">
+                    About
+                </span>
+                </a>
+            </li>
+            <li>
+                <a href="#skill" class="smooth-scroll nav-link"><i class="fa fa-cogs fa-2x">
+                </i>
+                <span class="nav-text">
+                    Experience
+                </span>
+                </a>
+            </li>
+            <li>
+                <a href="#experience" class="smooth-scroll nav-link"><i class="fa fa-code fa-2x">
+                </i>
+                <span class="nav-text">
+                    Skills
+                </span>
+                </a>
+            </li>
+            <li>
+                <a href="#education" class="smooth-scroll nav-link"><i class="fa fa-graduation-cap fa-2x">
+                </i>
+                <span class="nav-text">
+                    Education
+                </span>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-</script>
-<h1>Resume</h1>
+    <div class="page-content" id="pg-content">
+      <div>
+<div class="profile-page">
+  <div class="wrapper">
+    <div class="page-header page-header-small" filter-color="blue" style="margin-top:0px">
+        <!--TODO: Change to image of me-->
+      <div class="page-header-image" data-parallax="true" style="background-image: url('{{ banner.image.url }}');"></div>
+      <div class="container">
+        <div class="content-center">
+            <div class="cc-profile-image"><a href="#"><img src="{{ MEDIA_URL }}images/test1.JPG" alt="Image"/></a></div>
+            <div class="h1 title">Johnson Kuang</div>
+            <p class="category text-white">A Student with a Dream</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="#" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>
+        </div>
+      </div>
+      <div class="section">
+        <div class="container">
+          <div class="button-container">
+              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram">
+                  <i class="fa fa-instagram"></i>
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="about">
+  <div class="container" style="display: flex; align-items: center;">
+    <div class="card" data-aos="fade-up" data-aos-offset="10">
+        {% with about as a%}
+            {% with phone as p %}
+      <div class="row">
+        <div class="col-lg-6 col-md-12" style="width: 50%">
+          <div class="card-body" style="padding: 10px;">
+            <div class="h4 mt-0 title">About</div>
+            <p>{{ a.about_description }}</p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12" style="width: 50%">
+          <div class="card-body" style="padding: 10px; ">
+              <div style="        display: flex;
+        flex-direction: column;
+        justify-content: space-around; overflow: visible">
+                <div class="h4 mt-0 title">Basic Information</div>
+                <div class="row">
+                  <div class="col-sm-4"><strong class="text-uppercase">Age:</strong></div>
+                  <div class="col-sm-8">{{ a.age }}</div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
+                  <div class="col-sm-8">{{ a.email }}</div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Phone:</strong></div>
+                  <div class="col-sm-8">+{{ p }}</div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Address:</strong></div>
+                  <div class="col-sm-8">{{ a.address }}</div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Language:</strong></div>
+                  <div class="col-sm-8">{{ a.language }}</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+                {% endwith %}
+        {% endwith %}
+    </div>
+  </div>
+</div>
+<div class="section" id="skill">
+  <div class="container">
+    <div class="h4 text-center mb-4 title">Professional Skills</div>
+    <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+      <div class="card-body">
+      {% for c1, c2 in skills %}
+        <div class="row">
+            <div class="container" style="padding: 15px 3%;">
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">{{ c1.name }}</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="{{ c1.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ c1.percent }}%;"></div><span class="progress-value">{{ c1.percent }}%</span>
+                  </div>
+                </div>
+              </div>
+                {% if c2 %}
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">{{ c2.name }}</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="{{ c2.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ c2.percent }}%;"></div><span class="progress-value">{{ c2.percent }}%</span>
+                  </div>
+                </div>
+              </div>
+                {% endif %}
+            </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section" id="experience">
+  <div class="container cc-experience">
+    <div class="h4 text-center mb-4 title" style="font-size: 28px;">Work Experience</div>
+      {% for experience in experiences %}
+        <div class="card">
+          <div class="row">
+            <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500" style="height: 210px;">
+              <div class="card-body cc-experience-header" style="height: 210px;">
+                <p>
+                    {{ experience.get_Start_Month }} {{ experience.start_date.year }} -
+                    {% if experience.is_Present %}
+                        PRESENT
+                    {% else %}
+                        {{ experience.get_End_Month }} {{ experience.end_date.year }}
+                    {% endif %}
+                </p>
+                <div class="h5">{{ experience.name }}</div>
+              </div>
+
+            </div>
+            <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height:210px">
+              <div class="card-body">
+                <div class="h5"><h4>{{ experience.position }}</h4></div>
+                <p>{{ experience.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+  </div>
+</div>
+<div class="section" id="education">
+  <div class="container cc-education">
+    <div class="h4 text-center mb-4 title" style="font-size: 28px;">Education</div>
+      {% for e in education %}
+    <div class="card">
+      <div class="row">
+        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
+          <div class="card-body cc-education-header">
+            <p>{{ e.start_date.year }} -
+                {% if e.is_Present %}
+                    PRESENT
+                {% else %}
+                    {{ e.end_date.year }}
+                {% endif %}
+            </p>
+            <div class="h5">{{ e.degree }}</div>
+          </div>
+        </div>
+        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height: 0px;">
+          <div class="card-body">
+            <div class="h5">{{ e.degree_specific }}</div>
+            <p class="category">{{ e.school }}</p>
+            <p>{{ e.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+</div>
+    </div>
+    <script src="{% static 'website/js/core/jquery.3.2.1.min.js' %}"></script>
+    <script src="{% static 'website/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'website/js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static 'website/js/now-ui-kit.js' %}"></script>
+    <script src="{% static 'website/js/aos.js' %}"></script>
+    <script src="{% static 'website/scripts/main.js' %}"></script>
 {% endblock %}
