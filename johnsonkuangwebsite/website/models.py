@@ -88,8 +88,15 @@ def banner_delete(sender, instance, **kwargs):
         instance.image.delete(True)
 '''
 
+class About_Gallery(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='about/gallery/', max_length=255)
+    cropping = ImageRatioField('image', '400x300', free_crop=True)
+
 class Image(models.Model):
+    name = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to='images/', max_length=255)
+    cropping = ImageRatioField('image', '2000x500', free_crop=True)
     caption = models.CharField(max_length=255, blank=True, null=True)
     alt_text = models.CharField(max_length=255, blank=True, null=True)
     project = models.ForeignKey(Project, blank=True, null=True, on_delete=models.SET_NULL)

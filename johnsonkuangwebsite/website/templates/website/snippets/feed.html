@@ -1,0 +1,1197 @@
+<html lang="en"><head>
+        <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <base href="https://taggbox.com/app/">
+        <title>First Wall | Live Socialwall</title>
+        <link href="/app/favicon.ico" type="image/x-icon" rel="icon"><link href="/app/favicon.ico" type="image/x-icon" rel="shortcut icon">        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css">
+        <!---->
+
+	<link rel="stylesheet" type="text/css" href="/app/css/../plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/../plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/../plugins/bootstrap/css/bootstrap-480-767-grid.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/../plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/../plugins/bootstrap-modal/css/bootstrap-modal.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/../plugins/button-spiner/ladda-themeless.min.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/users-embed.css?time=1540792932">
+	<link rel="stylesheet" type="text/css" href="/app/css/custom-modal.css?time=1540792932">
+	<link rel="stylesheet" type="text/css" href="/app/css/fonts-family/all-fonts.css?time=1540792932">
+
+	<link rel="stylesheet" type="text/css" href="/app/css/emojione.min.css">
+	<link rel="stylesheet" type="text/css" href="/app/css/jquery.cssemoticons.css">
+
+        <script type="text/javascript" src="https://taggbox.com:8443/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect(':8443');
+            socket.emit('messages', 'hi');
+        </script>
+
+	<script type="text/javascript" src="/app/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/app/js/underscore-min.js"></script>
+	<script type="text/javascript" src="/app/js/backbone-min.js"></script>
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="plugin/respond.min.js"></script>
+        <script type="text/javascript" src="plugin/excanvas.min.js"></script>
+        <![endif]-->
+
+
+    <style type="text/css"></style></head>
+    <body class="page-container-bg-solid wPostFull safari">
+        <!-- BEGIN CONTAINER -->
+
+        <div class="page-container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div id="controllerContent">
+                	<div class="controller" id="w">
+	<div class="action" id="windex">
+		<script type="text/javascript">
+		var wallUrl = "14095";
+		var theme = "20";
+        socket.on(wallUrl, function(data) {
+	    	$.ajax({
+				url:  "https://taggbox.com/app/w/syncwall/" + data,
+	            cache: false,
+	            dataType: "json",
+	            timeout: (1000 * 60 * 7),
+	            success: function (response) {
+	                if (response.javascript) {
+	                	var responseJs = response.javascript;
+						for(var i=0;i<responseJs.length;i++)
+						{
+							eval(responseJs[i]);
+						}
+	                }
+	                if($('#wPosts .item').length==0 && theme != 29)
+	                {
+	                	window.location.reload();
+	                }
+
+	                if($('#wPosts .tweet').length==1 && theme == 29)
+	                {
+
+	                	window.location.reload();
+	                }
+	            }
+	        });
+		});
+</script>
+
+<script type="text/javascript" src="/app/js/multi-language.js"></script><script type="text/javascript" src="/app/theme/Empty/js/post.js?v=1540792932"></script>
+<script id="wPostTemplate" type="text/template">
+<div id="postId<%= id %>" class="feedId<%= feedId %> postItem item flatCard col-ms-6 col-xs-12 <%= network.class %> <% if(type == 1){ %>onlyTextCard<% } %>" data-post-id="<%= id %>" data-created="<%= createdAt %>" data-highlight="<%= highlight %>" data-pin="<%= pin %>" style="<%= padding %>" <% if(customPost.status == 1) {%> data-after="<%= customPost.after %>" data-every="<%= customPost.every %>" data-startRepeating="<%= customPost.repeating %>" <%}%>>
+    <div class="dataDiv" style="display: none;">
+		<%= popUpData %>
+	</div>
+	<div class="post" style="background-color:<%= font.cardColor %>">
+        <div class="postContent">
+        	<% if(file){ %>
+				<div class="image" onclick="Application.wall.showPost(<%= id %>);">
+					<% if(carausel==0 && network.id==2){ %>
+						<% if(themeType == 1) { %>
+						<img data-original="<%= link %>media/?size=m" alt="" class="initLazyLoad img-responsive" />
+						<% } else { %>
+						<img src="<%= link %>media/?size=m" alt="" class="img-responsive" />
+						<% } %>
+					<% } %>
+					<% if(carausel==1 || network.id!=2){ %>
+						<% if(themeType == 1) { %>
+						<%
+							if(id == 1) {
+						%>
+						<img src="/app<%= file %>" alt="" class="img-responsive" />
+						<%
+							} else {
+						%>
+						<img data-original="optimize?src=<%= encode_media %>&w=<%= personalization.minimumPostWidth%>" alt="" class="initLazyLoad img-responsive" />
+						<%
+							}
+						%>
+						<% } else { %>
+						<img src="<%= file %>" alt="" class="img-responsive" />
+						<%
+							}
+						%>
+
+					<% } %>
+					<% if(embed){ %>
+					<div class="videoIcon"><img src="img/play.png" alt=""></div>
+					<% } %>
+				</div>
+			<% } %>
+			<% if((type == 3 || type == 5) && !file){ %>
+				<div class="image" onclick="Application.wall.showPost(<%= id %>);">
+					<img src="img/blank.jpg" alt="" class="img-responsive" />
+
+					<div class="videoIcon"><img src="img/play.png" alt=""></div>
+
+				</div>
+			<% } %>
+            <div class="postContentCard" onclick="Application.wall.showPost(<%= id %>);">
+                <%= cta%>
+                <% if(content) { %>
+				<div class="postedTxt setFont font<%= font.font %>" style="font-size:<%= font.fontsize %>; color:<%= font.fontColor %>;">
+					<% if(contentTitle){ %>
+					<h1><%= contentTitle %></h1>
+					<% } %>
+					<p>
+						<%= content %>
+					</p>
+					</div>
+				<%} %>
+
+                <h4>
+                    <div class="postNetwork" data-network="<%= network.name %>">
+						<i class="fa <%= network.icon %>" style="color:<%= font.iconColor %>" >
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img <% if(postAuthor == 0) { %> style="display:none;" <% } %> src="<%= author.picture %>" alt="" />
+                        <div class="postAuthorName" style="<% if(postAuthor == 0) { %> display:none; <% } %> color:<%= font.authorColor %>;">
+							<%= author.name %>
+						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="<% if(postAuthor == 0) { %> display:none; <% } %> color:<%= font.authorColor %>;" target="_blank">
+								@<%= author.username %>
+							</span>
+                            <div class="sepratedot" style="<% if(postAuthor == 0 || timePost == 0) { %> display:none; <% } %> color:<%= font.authorColor %>;"></div>
+                            <span class="timePost" style="<% if(timePost == 0) { %> display:none; <% } %> color:<%= font.authorColor %>;" data-livestamp="<%= createdAt %>">
+								a month ago
+							</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+
+                <div class="shareWrapper" data-color="" <% if(share.status == 0) { %> style="display:none" <% } %>>
+					<% if(network.id != 1 && type != 1) { %>
+					<a href="<%= share.facebook %>" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+					<% } %>
+					<a href="<%= share.twitter %>" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+					<% if(network.id != 1) { %>
+					<a href="<%= share.google %>" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+					<% } %>
+					<a href="<%= share.linkedin %>" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+</script><script id="wPopUpPost" type="text/template">
+<%
+embed = $('<textarea />').html(embed).text();
+var popUpClass = 'modal-only-text';
+type = parseInt(type);
+switch(type){
+	case 2:
+	case 3:
+		popUpClass = 'modal-only-image';
+		break;
+	case 4:
+	case 5:
+		popUpClass = 'modal-text-image';
+		break;
+}
+
+
+if(themeType == 2){
+	popUpClass += ' disModalPopup';
+}
+else {
+	popUpClass += ' webModalPopup';
+}
+%>
+	<div id="modalPost" class="modalId<%= id %> cstmModalPopup taggModalShow fade <%= popUpClass %> themeModal<%= theme %>" tabindex="-1" aria-hidden="false">
+        <div class="popupModalBg"></div>
+        <div class="taggModal">
+            <div class="taggModalContent">
+            	<% if(themeType == 1){ %>
+                <div class="taggModalClose">
+                    <button type="button" class="close" data-dismiss="modal" onclick="Application.wall.hideModal();" aria-label="Close"></button>
+                </div>
+                <% } %>
+                <% if(network.id != 2 || carausel == 1) { %>
+                <div class="taggImageHolder blur-bg" style="background-image:url(<%= file %>);">
+                	<% if(embed){ %>
+						<%= embed %>
+					<% }else if(file){  %>
+						<img src="<%= file %>" alt="" class="img-responsive" />
+					<% } %>
+				</div>
+				<% } %>
+				<% if(network.id == 2 && carausel == 0) { %>
+                <div class="taggImageHolder blur-bg" style="background-image:url(<%= link %>media/?size=l);">
+                	<% if(embed){ %>
+						<%= embed %>
+					<% }else if(file){  %>
+						<img src="<%= link %>media/?size=l" alt="" class="img-responsive" />
+					<% } %>
+				</div>
+				<% } %>
+                <div class="taggContentHolder" style="background-color:<%= font.cardColor %>">
+                    <div class="modalContent">
+                        <h4 class="modal-title">
+                            <img data-type="postAuthor" style="<% if(postAuthor == 0) { %> display:none; <% } %>" src="<%= author.picture %>" alt="" />
+                            <div class="postNetwork" data-network="<%= network.name %>"
+							style="<% if(theme == 46){ %>border-bottom-color:<%= font.iconColor %><% } %>">
+								<i class="fa <%= network.icon %>" style="color:<%= font.iconColor %>" >
+								</i>
+							</div>
+                            <div class="modalPopupAutName" style="color:<%= font.authorColor %>;"><%= author.name %></div>
+                            <a class="authorHandleName" style="<% if(postAuthor == 0) { %> display:none; <% } %>color:<%= font.authorColor %>;" href="javascript:void(0);" target="_blank"> @<%= author.username %> </a>
+                            <div class="sepratedot" style="<% if(postAuthor == 0 || timePost == 0) { %> display:none; <% } %>color:<%= font.authorColor %>;"></div>
+                            <span style="<% if(timePost == 0) { %> display:none; <% } %>color:<%= font.authorColor %>;" class="timePost" data-livestamp="<%= createdAt %>"><%= createdAtFormated %></span>
+                        </h4>
+						<div class="clear"></div>
+						<div class="modalOnlyContnt">
+                        <div class="setFont font<%= font.font %>" style="font-size:<%= font.fontsize %>; color:<%= font.fontColor %>;">
+                            <% if(contentTitle){ %>
+								<h1><%= contentTitle %></h1>
+							<% } %>
+							<p class="chtrLimits">
+							<%= content %>
+							</p>
+                        </div>
+                        </div>
+						<div class="clear"></div>
+                        <div class="socialPanel">
+						<% if(network.id) { %>
+	                        <a class="popupSocialButton <%= network.name %>" target="_blank" href="<%= link %>">
+								<i class="fa  <%= network.icon %>"></i> View on <%= network.name %> </a>
+							<% } %>
+                        	<div class="socialIconPanel">
+                        		<span> Share </span>
+                        		<% if(network.id != 1 && type != 1) { %>
+								<a href="<%= share.facebook %>" class="fbPanel" target="_blank">
+									<i class="fa fa-facebook"></i>
+								</a>
+								<% } %>
+								<a href="<%= share.twitter %>" class="twPanel" target="_blank">
+									<i class="fa fa-twitter"></i
+								</a>
+
+								<% if(network.id != 1) { %>
+								<a href="<%= share.google %>" class="googlePanel" target="_blank">
+									<i class="fa fa-google-plus"></i>
+								</a>
+								<% } %>
+								<a href="<%= share.linkedin %>" class="linkedinPanel" target="_blank">
+									<i class="fa fa-linkedin" aria-hidden="true">
+									</i>
+								</a>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<div class="embedPostFull themesWrapper scrlBarComan themeStart20 themeType1 " style="">
+	<div style="width: 100%;text-align:center;">
+	<div class="ff-filter-holder isotopeFIlter20">
+		<span class="ff-filter ff-type-all">
+			<a href="https://taggbox.com/?ref=embedbanner" title="Taggbox" target="_blank" style="color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); border: 1px solid rgb(51, 51, 51);" class="ff-type-branding" data-color="#333333" data-border="1px solid #333333" data-background-color="#ffffff">Powered By Taggbox</a>
+		</span>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$('.ff-filter-holder .ff-filter a').css({'color':'#333333','border':'1px solid #333333','background-color':'#ffffff'});
+		$('.ff-filter-holder .ff-filter a').attr({'data-color':'#333333','data-border':'1px solid #333333','data-background-color':'#ffffff'});
+	})
+</script>
+
+	<div class="themeModernCard">
+		<div id="wPosts" class="isotope theme20 " style="height: 3087.5px; position: relative;">
+
+			<div class="grid-sizer flatCard col-ms-6 col-xs-12" style="min-width: 0px;"></div>			<div id="postId235335032" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335032" data-created="1540271843" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 0px; top: 0px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1540271843","id":"235335032","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"active firstPost ","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/9ea8b9a4d2aeedccdf1f46caca787d92\/5C7E5608\/t51.2885-15\/sh0.08\/e35\/p640x640\/43816351_496355404108409_2488162330770168708_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzllYThiOWE0ZDJhZWVkY2NkZjFmNDZjYWNhNzg3ZDkyLzVDN0U1NjA4L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvcDY0MHg2NDAvNDM4MTYzNTFfNDk2MzU1NDA0MTA4NDA5XzI0ODgxNjIzMzA3NzAxNjg3MDhfbi5qcGc=","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JwUTNvbENobW1qWmJRRHcwYl9KeXNOZTR5MUplUVF3dW1kNy1JMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F\u0026description=To+celebrate+the+end+of+cross+country%2C+we+briefly+became+the+boys+swim+and+dive+team.+Cross+country%3A+the+love+of+my+life+yet+my+worst+enemy%2C+good+for+me+yet+bad+for+me%2C+fun+yet+exhausting%2C+finished+yet+only+briefly.+Track+2019.+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=To+celebrate+the+end+of+cross+country%2C+we+briefly+became+the+boys+swim+and+dive+team.+Cross+country%3A+the+love+of+my+life+yet+my+worst+enemy%2C+good+for+me+yet+bad+for+me%2C+fun+yet+exhausting%2C+finished+yet+only+briefly.+Track+2019.+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F\u0026summary=To+celebrate+the+end+of+cross+country%2C+we+briefly+became+the+boys+swim+and+dive+team.+Cross+country%3A+the+love+of+my+life+yet+my+worst+enemy%2C+good+for+me+yet+bad+for+me%2C+fun+yet+exhausting%2C+finished+yet+only+briefly.+Track+2019.+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0\/","themeType":"1","carausel":"0","created":"2018-10-23 10:47:23","content":"To celebrate the end of cross country, we briefly became the boys swim and dive team. Cross country: the love of my life yet my worst enemy, good for me yet bad for me, fun yet exhausting, finished yet only briefly. Track 2019.","fullcontent":"To celebrate the end of cross country, we briefly became the boys swim and dive team. Cross country: the love of my life yet my worst enemy, good for me yet bad for me, fun yet exhausting, finished yet only briefly. Track 2019.","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335032);">
+																		<img data-original="https://www.instagram.com/p/BpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0/media/?size=m" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="https://www.instagram.com/p/BpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0/media/?size=m" style="display: block;">
+																				</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335032);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">To celebrate the end of cross country, we briefly became the boys swim and dive team. Cross country: the love of my life yet my worst enemy, good for me yet bad for me, fun yet exhausting, finished yet only briefly. Track 2019.</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">6 days ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F&amp;description=To+celebrate+the+end+of+cross+country%2C+we+briefly+became+the+boys+swim+and+dive+team.+Cross+country%3A+the+love+of+my+life+yet+my+worst+enemy%2C+good+for+me+yet+bad+for+me%2C+fun+yet+exhausting%2C+finished+yet+only+briefly.+Track+2019.+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=To+celebrate+the+end+of+cross+country%2C+we+briefly+became+the+boys+swim+and+dive+team.+Cross+country%3A+the+love+of+my+life+yet+my+worst+enemy%2C+good+for+me+yet+bad+for+me%2C+fun+yet+exhausting%2C+finished+yet+only+briefly.+Track+2019.+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBpQ3olChmmjZbQDw0b_JysNe4y1JeQQwumd7-I0%2F&amp;summary=To+celebrate+the+end+of+cross+country%2C+we+briefly+became+the+boys+swim+and+dive+team.+Cross+country%3A+the+love+of+my+life+yet+my+worst+enemy%2C+good+for+me+yet+bad+for+me%2C+fun+yet+exhausting%2C+finished+yet+only+briefly.+Track+2019.+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335034" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335034" data-created="1538377023" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 360px; top: 0px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1538377023","id":"235335034","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/0ee82ec8d09744c32e4e73d36955bccd\/5C85A52A\/t51.2885-15\/sh0.08\/e35\/s640x640\/42002478_2196677223929382_5725893992543862486_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzBlZTgyZWM4ZDA5NzQ0YzMyZTRlNzNkMzY5NTViY2NkLzVDODVBNTJBL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvNDIwMDI0NzhfMjE5NjY3NzIyMzkyOTM4Ml81NzI1ODkzOTkyNTQzODYyNDg2X24uanBn","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JvWVpqVGRCbU9jQUhYZzlWZ2lDN3UyN2N5aTFwYkthallOd29NMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F\u0026description=Fun+times+%F0%9F%99%83+%23hoco2018+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Fun+times+%F0%9F%99%83+%23hoco2018+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F\u0026summary=Fun+times+%F0%9F%99%83+%23hoco2018+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0\/","themeType":"1","carausel":"1","created":"2018-10-01 12:27:03","content":"Fun times 🙃 #hoco2018","fullcontent":"Fun times 🙃 #hoco2018","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335034);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzBlZTgyZWM4ZDA5NzQ0YzMyZTRlNzNkMzY5NTViY2NkLzVDODVBNTJBL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvNDIwMDI0NzhfMjE5NjY3NzIyMzkyOTM4Ml81NzI1ODkzOTkyNTQzODYyNDg2X24uanBn&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzBlZTgyZWM4ZDA5NzQ0YzMyZTRlNzNkMzY5NTViY2NkLzVDODVBNTJBL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvNDIwMDI0NzhfMjE5NjY3NzIyMzkyOTM4Ml81NzI1ODkzOTkyNTQzODYyNDg2X24uanBn&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335034);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Fun times <img class="emojione" alt="🙃" src="svg/1f643.svg?v=2.2.2"> #hoco2018</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">a month ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F&amp;description=Fun+times+%F0%9F%99%83+%23hoco2018+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Fun+times+%F0%9F%99%83+%23hoco2018+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBoYZjTdBmOcAHXg9VgiC7u27cyi1pbKajYNwoM0%2F&amp;summary=Fun+times+%F0%9F%99%83+%23hoco2018+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335037" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335037" data-created="1535782481" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 360px; top: 461px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1535782481","id":"235335037","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/81e061b9062c116b092def220d6b6d62\/5C4DEF05\/t51.2885-15\/sh0.08\/e35\/s640x640\/38923011_2354937941459238_2329936865211187200_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzgxZTA2MWI5MDYyYzExNmIwOTJkZWYyMjBkNmI2ZDYyLzVDNERFRjA1L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzg5MjMwMTFfMjM1NDkzNzk0MTQ1OTIzOF8yMzI5OTM2ODY1MjExMTg3MjAwX24uanBn","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JuTEUydl9oaGRNUlB4WlZHdndmSHJabjZQYmNONlFZTDRRdWhjMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F\u0026description=Me%2C+as+senior+year+approaches+like+impending+doom.+Also+me%2C+crushed+by+the+weight+of+two+words+and+four+letters+%E2%80%9CCollege+Applications%2C+EE%2C+IA%E2%80%9D.+Let%E2%80%99s+make+it+a+good+one%2C+if+you%E2%80%99re+trying+to+find+me%2C+start+by+looking+about+six+feet+under.+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Me%2C+as+senior+year+approaches+like+impending+doom.+Also+me%2C+crushed+by+the+weight+of+two+words+and+four+letters+%E2%80%9CCollege+Applications%2C+EE%2C+IA%E2%80%9D.+Let%E2%80%99s+make+it+a+good+one%2C+if+you%E2%80%99re+trying+to+find+me%2C+start+by+looking+about+six+feet+under.+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F\u0026summary=Me%2C+as+senior+year+approaches+like+impending+doom.+Also+me%2C+crushed+by+the+weight+of+two+words+and+four+letters+%E2%80%9CCollege+Applications%2C+EE%2C+IA%E2%80%9D.+Let%E2%80%99s+make+it+a+good+one%2C+if+you%E2%80%99re+trying+to+find+me%2C+start+by+looking+about+six+feet+under.+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0\/","themeType":"1","carausel":"0","created":"2018-09-01 11:44:41","content":"Me, as senior year approaches like impending doom. Also me, crushed by the weight of two words and four letters “College Applications, EE, IA”. Let’s make it a good one, if you’re trying to find me, start by looking about six feet under.","fullcontent":"Me, as senior year approaches like impending doom. Also me, crushed by the weight of two words and four letters “College Applications, EE, IA”. Let’s make it a good one, if you’re trying to find me, start by looking about six feet under.","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335037);">
+																		<img data-original="https://www.instagram.com/p/BnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0/media/?size=m" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="https://www.instagram.com/p/BnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0/media/?size=m" style="display: block;">
+																				</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335037);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Me, as senior year approaches like impending doom. Also me, crushed by the weight of two words and four letters “College Applications, EE, IA”. Let’s make it a good one, if you’re trying to find me, start by looking about six feet under.</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">2 months ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F&amp;description=Me%2C+as+senior+year+approaches+like+impending+doom.+Also+me%2C+crushed+by+the+weight+of+two+words+and+four+letters+%E2%80%9CCollege+Applications%2C+EE%2C+IA%E2%80%9D.+Let%E2%80%99s+make+it+a+good+one%2C+if+you%E2%80%99re+trying+to+find+me%2C+start+by+looking+about+six+feet+under.+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Me%2C+as+senior+year+approaches+like+impending+doom.+Also+me%2C+crushed+by+the+weight+of+two+words+and+four+letters+%E2%80%9CCollege+Applications%2C+EE%2C+IA%E2%80%9D.+Let%E2%80%99s+make+it+a+good+one%2C+if+you%E2%80%99re+trying+to+find+me%2C+start+by+looking+about+six+feet+under.+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBnLE2v_hhdMRPxZVGvwfHrZn6PbcN6QYL4Quhc0%2F&amp;summary=Me%2C+as+senior+year+approaches+like+impending+doom.+Also+me%2C+crushed+by+the+weight+of+two+words+and+four+letters+%E2%80%9CCollege+Applications%2C+EE%2C+IA%E2%80%9D.+Let%E2%80%99s+make+it+a+good+one%2C+if+you%E2%80%99re+trying+to+find+me%2C+start+by+looking+about+six+feet+under.+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335039" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335039" data-created="1532747782" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 0px; top: 598px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1532747782","id":"235335039","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/7ea161bb370fc935308b273ad0a92157\/5C4DA4A1\/t51.2885-15\/sh0.08\/e35\/p640x640\/37137773_223971141778894_1666835902309072896_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzdlYTE2MWJiMzcwZmM5MzUzMDhiMjczYWQwYTkyMTU3LzVDNERBNEExL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvcDY0MHg2NDAvMzcxMzc3NzNfMjIzOTcxMTQxNzc4ODk0XzE2NjY4MzU5MDIzMDkwNzI4OTZfbi5qcGc=","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0Jsd29vRW1oanBmR2ZUNXlhdGg1eU9CTU1ENnJhOGJoT2RBNWNzMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F\u0026description=Boston.+Hot.+Humid.+Future.+Home.+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Boston.+Hot.+Humid.+Future.+Home.+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F\u0026summary=Boston.+Hot.+Humid.+Future.+Home.+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0\/","themeType":"1","carausel":"0","created":"2018-07-28 08:46:22","content":"Boston. Hot. Humid. Future. Home.","fullcontent":"Boston. Hot. Humid. Future. Home.","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335039);">
+																		<img data-original="https://www.instagram.com/p/BlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0/media/?size=m" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="https://www.instagram.com/p/BlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0/media/?size=m" style="display: block;">
+																				</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335039);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Boston. Hot. Humid. Future. Home.</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">3 months ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F&amp;description=Boston.+Hot.+Humid.+Future.+Home.+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Boston.+Hot.+Humid.+Future.+Home.+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlwooEmhjpfGfT5yath5yOBMMD6ra8bhOdA5cs0%2F&amp;summary=Boston.+Hot.+Humid.+Future.+Home.+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335040" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335040" data-created="1532280219" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 360px; top: 992px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1532280219","id":"235335040","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"\u0026lt;video width=\u0026quot;100%\u0026quot; class=\u0026quot;videoPlayer\u0026quot; height=\u0026quot;530\u0026quot; type=\u0026quot;video\/mp4\u0026quot; preload=\u0026quot;none\u0026quot; \u0026gt;\u0026lt;source src=\u0026quot;https:\/\/scontent.cdninstagram.com\/vp\/ae7238d0f7e061e3b526088154b4051c\/5BD98F3A\/t50.2886-16\/37110307_232023930951401_2089952303372042240_n.mp4\u0026quot;\u0026gt;\u0026lt;\/video\u0026gt;","mediaUrl":"https:\/\/scontent.cdninstagram.com\/vp\/ae7238d0f7e061e3b526088154b4051c\/5BD98F3A\/t50.2886-16\/37110307_232023930951401_2089952303372042240_n.mp4","file":"https:\/\/scontent.cdninstagram.com\/vp\/75d51e553afba8af78285c80e8209ec9\/5BD9078B\/t51.2885-15\/e15\/s640x640\/36961202_248298739111260_7354260320413548544_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzc1ZDUxZTU1M2FmYmE4YWY3ODI4NWM4MGU4MjA5ZWM5LzVCRDkwNzhCL3Q1MS4yODg1LTE1L2UxNS9zNjQweDY0MC8zNjk2MTIwMl8yNDgyOTg3MzkxMTEyNjBfNzM1NDI2MDMyMDQxMzU0ODU0NF9uLmpwZw==","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JsaFNscmZoTFM0NzVWWjZMZGlSZEsxdWJMczg5OFNOSElETG13MC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"5","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F\u0026description=Let+them+eat+cake.+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Let+them+eat+cake.+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F\u0026summary=Let+them+eat+cake.+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0\/","themeType":"1","carausel":"0","created":"2018-07-22 22:53:39","content":"Let them eat cake.","fullcontent":"Let them eat cake.","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335040);">
+																		<img data-original="https://www.instagram.com/p/BlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0/media/?size=m" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="https://www.instagram.com/p/BlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0/media/?size=m" style="display: block;">
+																					<div class="videoIcon"><img src="img/play.png" alt=""></div>
+									</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335040);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Let them eat cake.</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">3 months ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F&amp;description=Let+them+eat+cake.+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Let+them+eat+cake.+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBlhSlrfhLS475VZ6LdiRdK1ubLs898SNHIDLmw0%2F&amp;summary=Let+them+eat+cake.+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335043" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335043" data-created="1530768759" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 0px; top: 1143px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1530768759","id":"235335043","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/4b50408c6be4d6f2014c3bf91bb6666f\/5C7D5D95\/t51.2885-15\/sh0.08\/e35\/s640x640\/36136441_404364186736376_587052403648364544_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzRiNTA0MDhjNmJlNGQ2ZjIwMTRjM2JmOTFiYjY2NjZmLzVDN0Q1RDk1L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzYxMzY0NDFfNDA0MzY0MTg2NzM2Mzc2XzU4NzA1MjQwMzY0ODM2NDU0NF9uLmpwZw==","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JrMXA4SXZoZlFBcjRJcHVLLWFIVkRNcDRIVjc2bkphNGVITUswMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F\u0026description=Happy+Fourth+of+July%21+Like+good+Christian+children+we+observe+the+fireworks+ban+%28partially+because+we+couldn%E2%80%99t+get+our+hands+on+any%29+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Happy+Fourth+of+July%21+Like+good+Christian+children+we+observe+the+fireworks+ban+%28partially+because+we+couldn%E2%80%99t+get+our+hands+on+any%29+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F\u0026summary=Happy+Fourth+of+July%21+Like+good+Christian+children+we+observe+the+fireworks+ban+%28partially+because+we+couldn%E2%80%99t+get+our+hands+on+any%29+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/Bk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00\/","themeType":"1","carausel":"1","created":"2018-07-05 11:02:39","content":"Happy Fourth of July! Like good Christian children we observe the fireworks ban (partially because we couldn’t get our hands on any)","fullcontent":"Happy Fourth of July! Like good Christian children we observe the fireworks ban (partially because we couldn’t get our hands on any)","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335043);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzRiNTA0MDhjNmJlNGQ2ZjIwMTRjM2JmOTFiYjY2NjZmLzVDN0Q1RDk1L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzYxMzY0NDFfNDA0MzY0MTg2NzM2Mzc2XzU4NzA1MjQwMzY0ODM2NDU0NF9uLmpwZw==&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzRiNTA0MDhjNmJlNGQ2ZjIwMTRjM2JmOTFiYjY2NjZmLzVDN0Q1RDk1L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzYxMzY0NDFfNDA0MzY0MTg2NzM2Mzc2XzU4NzA1MjQwMzY0ODM2NDU0NF9uLmpwZw==&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335043);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Happy Fourth of July! Like good Christian children we observe the fireworks ban (partially because we couldn’t get our hands on any)</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">4 months ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F&amp;description=Happy+Fourth+of+July%21+Like+good+Christian+children+we+observe+the+fireworks+ban+%28partially+because+we+couldn%E2%80%99t+get+our+hands+on+any%29+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Happy+Fourth+of+July%21+Like+good+Christian+children+we+observe+the+fireworks+ban+%28partially+because+we+couldn%E2%80%99t+get+our+hands+on+any%29+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBk1p8IvhfQAr4IpuK-aHVDMp4HV76nJa4eHMK00%2F&amp;summary=Happy+Fourth+of+July%21+Like+good+Christian+children+we+observe+the+fireworks+ban+%28partially+because+we+couldn%E2%80%99t+get+our+hands+on+any%29+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335250" class="feedId34227 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335250" data-created="1530495767" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 360px; top: 1451px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1530495767","id":"235335250","feedId":"34227","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/7368ea0126a2fc6b78d9df2953f41d18\/5C86107E\/t51.2885-15\/sh0.08\/e35\/s640x640\/35983897_449806552149281_6562773658228490240_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzczNjhlYTAxMjZhMmZjNmI3OGQ5ZGYyOTUzZjQxZDE4LzVDODYxMDdFL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzU5ODM4OTdfNDQ5ODA2NTUyMTQ5MjgxXzY1NjI3NzM2NTgyMjg0OTAyNDBfbi5qcGc=","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JrdGhQN05CSGFOS0ptaWw5MVMtWmFEazd1VHF6Q3oycjh3MEJzMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F\u0026description=Guess+what%3F+It%E2%80%99s+crab+season%21+%F0%9F%A6%80%F0%9F%A6%80%F0%9F%A6%80+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Guess+what%3F+It%E2%80%99s+crab+season%21+%F0%9F%A6%80%F0%9F%A6%80%F0%9F%A6%80+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F\u0026summary=Guess+what%3F+It%E2%80%99s+crab+season%21+%F0%9F%A6%80%F0%9F%A6%80%F0%9F%A6%80+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0\/","themeType":"1","carausel":"1","created":"2018-07-02 07:12:47","content":"Guess what? It’s crab season! 🦀🦀🦀","fullcontent":"Guess what? It’s crab season! 🦀🦀🦀","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335250);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzczNjhlYTAxMjZhMmZjNmI3OGQ5ZGYyOTUzZjQxZDE4LzVDODYxMDdFL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzU5ODM4OTdfNDQ5ODA2NTUyMTQ5MjgxXzY1NjI3NzM2NTgyMjg0OTAyNDBfbi5qcGc=&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzczNjhlYTAxMjZhMmZjNmI3OGQ5ZGYyOTUzZjQxZDE4LzVDODYxMDdFL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzU5ODM4OTdfNDQ5ODA2NTUyMTQ5MjgxXzY1NjI3NzM2NTgyMjg0OTAyNDBfbi5qcGc=&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335250);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Guess what? It’s crab season! <img class="emojione" alt="🦀" src="svg/1f980.svg?v=2.2.2"><img class="emojione" alt="🦀" src="svg/1f980.svg?v=2.2.2"><img class="emojione" alt="🦀" src="svg/1f980.svg?v=2.2.2"></p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">4 months ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F&amp;description=Guess+what%3F+It%E2%80%99s+crab+season%21+%F0%9F%A6%80%F0%9F%A6%80%F0%9F%A6%80+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Guess+what%3F+It%E2%80%99s+crab+season%21+%F0%9F%A6%80%F0%9F%A6%80%F0%9F%A6%80+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBkthP7NBHaNKJmil91S-ZaDk7uTqzCz2r8w0Bs0%2F&amp;summary=Guess+what%3F+It%E2%80%99s+crab+season%21+%F0%9F%A6%80%F0%9F%A6%80%F0%9F%A6%80+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335047" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335047" data-created="1526255377" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 0px; top: 1638px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1526255377","id":"235335047","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/07f723f44b667ff74ad6cb5225b0e470\/5C7133F8\/t51.2885-15\/sh0.08\/e35\/s640x640\/31412266_2406851385995481_8420471095353671680_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzA3ZjcyM2Y0NGI2NjdmZjc0YWQ2Y2I1MjI1YjBlNDcwLzVDNzEzM0Y4L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMzE0MTIyNjZfMjQwNjg1MTM4NTk5NTQ4MV84NDIwNDcxMDk1MzUzNjcxNjgwX24uanBn","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JpdkpXTGNoUXdNOVJ6Q010eVVCbmZPbWNqV3RkaXMwcU5zMmdZMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F\u0026description=It+took+quite+a+lot+of+effort+to+push+me+to+be+the+young+man+I+am+today.+Thank+you%2C+sainted+mother+Kuang+never+settling+for+but+the+best+for+me.+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=It+took+quite+a+lot+of+effort+to+push+me+to+be+the+young+man+I+am+today.+Thank+you%2C+sainted+mother+Kuang+never+settling+for+but+the+best+for+me.+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F\u0026summary=It+took+quite+a+lot+of+effort+to+push+me+to+be+the+young+man+I+am+today.+Thank+you%2C+sainted+mother+Kuang+never+settling+for+but+the+best+for+me.+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0\/","themeType":"1","carausel":"0","created":"2018-05-14 05:19:37","content":"It took quite a lot of effort to push me to be the young man I am today. Thank you, sainted mother Kuang never settling for but the best for me.","fullcontent":"It took quite a lot of effort to push me to be the young man I am today. Thank you, sainted mother Kuang never settling for but the best for me.","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335047);">
+																		<img data-original="https://www.instagram.com/p/BivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0/media/?size=m" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="https://www.instagram.com/p/BivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0/media/?size=m" style="display: block;">
+																				</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335047);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">It took quite a lot of effort to push me to be the young man I am today. Thank you, sainted mother Kuang never settling for but the best for me.</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">6 months ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F&amp;description=It+took+quite+a+lot+of+effort+to+push+me+to+be+the+young+man+I+am+today.+Thank+you%2C+sainted+mother+Kuang+never+settling+for+but+the+best+for+me.+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=It+took+quite+a+lot+of+effort+to+push+me+to+be+the+young+man+I+am+today.+Thank+you%2C+sainted+mother+Kuang+never+settling+for+but+the+best+for+me.+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBivJWLchQwM9RzCMtyUBnfOmcjWtdis0qNs2gY0%2F&amp;summary=It+took+quite+a+lot+of+effort+to+push+me+to+be+the+young+man+I+am+today.+Thank+you%2C+sainted+mother+Kuang+never+settling+for+but+the+best+for+me.+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335048" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335048" data-created="1501610090" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 360px; top: 2408px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1501610090","id":"235335048","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/cdad75e1ede0c3ccba42ba4028e3ec39\/5C63D4DF\/t51.2885-15\/sh0.08\/e35\/s640x640\/20478550_132885770562422_1149937838070956032_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwL2NkYWQ3NWUxZWRlMGMzY2NiYTQyYmE0MDI4ZTNlYzM5LzVDNjNENERGL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg1NTBfMTMyODg1NzcwNTYyNDIyXzExNDk5Mzc4MzgwNzA5NTYwMzJfbi5qcGc=","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JYUXFNTm5odEg0UDAybXQzbmM1dkhQTFJaRkV4OXNfbzQxZkxrMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F\u0026description=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F\u0026summary=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0\/","themeType":"1","carausel":"1","created":"2017-08-01 23:24:50","content":"We had a blast at the happiest place on earth (PS I\u0027m terrible at shooting straight) PC: @matt_weng and @graciedi","fullcontent":"We had a blast at the happiest place on earth (PS I\u0027m terrible at shooting straight) PC: @matt_weng and @graciedi","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335048);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwL2NkYWQ3NWUxZWRlMGMzY2NiYTQyYmE0MDI4ZTNlYzM5LzVDNjNENERGL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg1NTBfMTMyODg1NzcwNTYyNDIyXzExNDk5Mzc4MzgwNzA5NTYwMzJfbi5qcGc=&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwL2NkYWQ3NWUxZWRlMGMzY2NiYTQyYmE0MDI4ZTNlYzM5LzVDNjNENERGL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg1NTBfMTMyODg1NzcwNTYyNDIyXzExNDk5Mzc4MzgwNzA5NTYwMzJfbi5qcGc=&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335048);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">We had a blast at the happiest place on earth (PS I'm terrible at shooting straight) PC: @matt_weng and @graciedi</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">a year ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F&amp;description=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F&amp;summary=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335049" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335049" data-created="1501610090" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 0px; top: 2133px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1501610090","id":"235335049","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/94cbd1dd2baf5db623390772e0f00d7c\/5C869661\/t51.2885-15\/sh0.08\/e35\/s640x640\/20478611_1443486685700744_5906737117664378880_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzk0Y2JkMWRkMmJhZjVkYjYyMzM5MDc3MmUwZjAwZDdjLzVDODY5NjYxL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg2MTFfMTQ0MzQ4NjY4NTcwMDc0NF81OTA2NzM3MTE3NjY0Mzc4ODgwX24uanBn","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JYUXFNTm5odEg0UDAybXQzbmM1dkhQTFJaRkV4OXNfbzQxZkxrMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F\u0026description=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F\u0026summary=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0\/","themeType":"1","carausel":"1","created":"2017-08-01 23:24:50","content":"We had a blast at the happiest place on earth (PS I\u0027m terrible at shooting straight) PC: @matt_weng and @graciedi","fullcontent":"We had a blast at the happiest place on earth (PS I\u0027m terrible at shooting straight) PC: @matt_weng and @graciedi","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335049);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzk0Y2JkMWRkMmJhZjVkYjYyMzM5MDc3MmUwZjAwZDdjLzVDODY5NjYxL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg2MTFfMTQ0MzQ4NjY4NTcwMDc0NF81OTA2NzM3MTE3NjY0Mzc4ODgwX24uanBn&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzk0Y2JkMWRkMmJhZjVkYjYyMzM5MDc3MmUwZjAwZDdjLzVDODY5NjYxL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg2MTFfMTQ0MzQ4NjY4NTcwMDc0NF81OTA2NzM3MTE3NjY0Mzc4ODgwX24uanBn&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335049);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">We had a blast at the happiest place on earth (PS I'm terrible at shooting straight) PC: @matt_weng and @graciedi</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="color:">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">a year ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F&amp;description=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F&amp;summary=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335051" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335051" data-created="1501610090" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 360px; top: 1913px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1501610090","id":"235335051","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/9f2f488a13d8cbdd548fd422a0b8df46\/5C6A8434\/t51.2885-15\/sh0.08\/e35\/s640x640\/20478965_1937566046482357_5197877607550418944_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzlmMmY0ODhhMTNkOGNiZGQ1NDhmZDQyMmEwYjhkZjQ2LzVDNkE4NDM0L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg5NjVfMTkzNzU2NjA0NjQ4MjM1N181MTk3ODc3NjA3NTUwNDE4OTQ0X24uanBn","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JYUXFNTm5odEg0UDAybXQzbmM1dkhQTFJaRkV4OXNfbzQxZkxrMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F\u0026description=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F\u0026summary=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0\/","themeType":"1","carausel":"1","created":"2017-08-01 23:24:50","content":"We had a blast at the happiest place on earth (PS I\u0027m terrible at shooting straight) PC: @matt_weng and @graciedi","fullcontent":"We had a blast at the happiest place on earth (PS I\u0027m terrible at shooting straight) PC: @matt_weng and @graciedi","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335051);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzlmMmY0ODhhMTNkOGNiZGQ1NDhmZDQyMmEwYjhkZjQ2LzVDNkE4NDM0L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg5NjVfMTkzNzU2NjA0NjQ4MjM1N181MTk3ODc3NjA3NTUwNDE4OTQ0X24uanBn&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzlmMmY0ODhhMTNkOGNiZGQ1NDhmZDQyMmEwYjhkZjQ2LzVDNkE4NDM0L3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjA0Nzg5NjVfMTkzNzU2NjA0NjQ4MjM1N181MTk3ODc3NjA3NTUwNDE4OTQ0X24uanBn&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335051);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">We had a blast at the happiest place on earth (PS I'm terrible at shooting straight) PC: @matt_weng and @graciedi</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">a year ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F&amp;description=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBXQqMNnhtH4P02mt3nc5vHPLRZFEx9s_o41fLk0%2F&amp;summary=We+had+a+blast+at+the+happiest+place+on+earth+%28PS+I%27m+terrible+at+shooting+straight%29+PC%3A+%40matt_weng+and+%40graciedi+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="postId235335053" class="feedId34226 postItem item flatCard col-ms-6 col-xs-12 instagramTaggbox  completeFadeIn" data-post-id="235335053" data-created="1501035753" data-highlight="0" data-pin="0" style="padding: 7.5px; margin: 0px; min-width: 0px; visibility: visible; opacity: 1; transition: opacity 1s ease 0s; position: absolute; left: 0px; top: 2628px;">
+    <div class="dataDiv" style="display: none;">
+		{"createdAt":"1501035753","id":"235335053","feedId":"34226","hash":{"hash":0,"hashString":null,"replaceHash":null},"initialPostClass":"","embed":"","mediaUrl":"","file":"https:\/\/scontent.cdninstagram.com\/vp\/28bc90db972b744c02a13c6a4f9a7ce5\/5C516F8A\/t51.2885-15\/sh0.08\/e35\/s640x640\/20393747_153602608544117_4880313218947350528_n.jpg","encode_media":"aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzI4YmM5MGRiOTcyYjc0NGMwMmExM2M2YTRmOWE3Y2U1LzVDNTE2RjhBL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjAzOTM3NDdfMTUzNjAyNjA4NTQ0MTE3XzQ4ODAzMTMyMTg5NDczNTA1Mjhfbi5qcGc=","encode_link":"aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9wL0JXX2l1enNCV0t3MFQ0WThoak82UTZKTDFaaUROUkZONklwMlpnMC9tZWRpYS8\/c2l6ZT1t","blankImage":"img\/blackBg.jpg","type":"4","highlight":"0","pin":"0","timePost":"1","padding":"padding:7.5px;margin: 0px;","postAuthor":"1","author":{"name":"jk.uang","username":"jk.uang","picture":"https:\/\/ui-avatars.com\/api\/?name=jk.uang\u0026background=fff\u0026color=000"},"network":{"id":"2","name":"Instagram","class":"instagramTaggbox","description":"instagram","networkId":"2","icon":"fa-instagram"},"font":{"font":"4","fontsize":"13px","cardColor":"#ffffff","authorColor":"#333333","fontColor":"#333333","iconColor":""},"background":{"blurBackground":"1","blurColor":""},"personalization":{"id":"14095","owner":"9841","createdBy":"0","createdAt":"0","created":"2018-10-29 11:17:06","updatedBy":"0","updatedAt":"0","modifiedBy":"0","modified":"2018-10-29 11:17:06","deleted":"0","wallId":"14095","name":"Personalization for First Wall","theme":"20","themeType":"1","gridRows":"4","gridCols":"4","css":null,"backgroundColor":null,"transparent":"1","backgroundImage":null,"bannerImage":null,"font":null,"color":"#FFFFFF","ccolor":"#FFFFFF","acolor":"#000000","tcolor":"#000000","size":"8","postText":null,"postAuthor":"1","postTime":"1","postFeatured":"1","postShare":null,"autoUpdate":"1","minimumPostWidth":"300","padding":"15","showText":null,"autoScroll":"0","enableAutomaticScroll":null,"scrollDelay":"50","slideDelay":"10","loadMoreStatus":"1","numberOfPosts":"0","trimcontent":"1","showHideOldPost":"0","showHideOlderPost":"0","animateBackground":"1","postDuration":null,"waveDirection":null,"postShape":null,"columnCount":"5","ctaStatus":null,"cssStatus":"0","playFullVideo":"0","randomizePost":"0","tickerStatus":"0","filterStatus":"1","socstatus":"","buttonText":null,"w_language":null,"custom_lan_data":null,"buttonUrl":null,"feeds":null,"ctaTextColor":"#FFFFFF","ctaButtonColor":"#000000","hideUrls":"1","status":"0","retweetexclude":"0","hashtag_highlight":"0","hashtag_feed":"0","hashtag_all":"0","hashtag_color":"#000000"},"cardWidth":"300","generalType":1,"share":{"status":"1","facebook":"https:\/\/www.facebook.com\/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F\u0026description=Wonder+if+this+is+real...+via+%23taggbox","google":"https:\/\/plus.google.com\/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F","twitter":"https:\/\/twitter.com\/intent\/tweet?text=Wonder+if+this+is+real...+via+%23taggbox\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F","linkedin":"https:\/\/www.linkedin.com\/shareArticle?mini=true\u0026url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F\u0026summary=Wonder+if+this+is+real...+via+%23taggbox"},"link":"https:\/\/www.instagram.com\/p\/BW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0\/","themeType":"1","carausel":"1","created":"2017-07-26 07:52:33","content":"Wonder if this is real...","fullcontent":"Wonder if this is real...","contentTitle":"","cta":"","customPost":{"status":0}}	</div>
+	<div class="post" style="background-color:#ffffff">
+        <div class="postContent">
+        					<div class="image" onclick="Application.wall.showPost(235335053);">
+																	<img data-original="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzI4YmM5MGRiOTcyYjc0NGMwMmExM2M2YTRmOWE3Y2U1LzVDNTE2RjhBL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjAzOTM3NDdfMTUzNjAyNjA4NTQ0MTE3XzQ4ODAzMTMyMTg5NDczNTA1Mjhfbi5qcGc=&amp;w=300" alt="" class="initLazyLoad img-responsive completeLazyLoad" src="optimize?src=aHR0cHM6Ly9zY29udGVudC5jZG5pbnN0YWdyYW0uY29tL3ZwLzI4YmM5MGRiOTcyYjc0NGMwMmExM2M2YTRmOWE3Y2U1LzVDNTE2RjhBL3Q1MS4yODg1LTE1L3NoMC4wOC9lMzUvczY0MHg2NDAvMjAzOTM3NDdfMTUzNjAyNjA4NTQ0MTE3XzQ4ODAzMTMyMTg5NDczNTA1Mjhfbi5qcGc=&amp;w=300" style="display: block;">
+
+														</div>
+						            <div class="postContentCard" onclick="Application.wall.showPost(235335053);">
+                                				<div class="postedTxt setFont font4" style="font-size:13px; color:#333333;">
+										<p class="emojiApplied emojiOneApplied">Wonder if this is real...</p>
+					</div>
+								<h4>
+                    <div class="postNetwork" data-network="Instagram">
+						<i class="fa fa-instagram" style="">
+						</i>
+					</div>
+                    <div class="authorDetails">
+                        <img src="https://ui-avatars.com/api/?name=jk.uang&amp;background=fff&amp;color=000" alt="" data-check="checked">
+                        <div class="postAuthorName" style="color:#333333;">
+							jk.uang						</div>
+                        <div class="authrHandleTime">
+                            <span class="authrHandle" style="color:#333333;" target="_blank">
+								@jk.uang							</span>
+                            <div class="sepratedot" style="color:#333333;"></div>
+                            <span class="timePost" style="color:#333333;">a year ago</span>
+                        </div>
+					<div class="clearfix"></div>
+                    </div>
+                </h4>
+                <div class="shareWrapper" data-color="">
+										<a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F&amp;description=Wonder+if+this+is+real...+via+%23taggbox" class="fbShare" target="_blank">
+						<i class="fa fa-share icon" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://twitter.com/intent/tweet?text=Wonder+if+this+is+real...+via+%23taggbox&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F" class="twShare" target="_blank">
+						<i class="fa fa-twitter" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F" class="gpShare" target="_blank">
+						<i class="fa fa-google-plus" aria-hidden="true">
+						</i>
+					</a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FBW_iuzsBWKw0T4Y8hjO6Q6JL1ZiDNRFN6Ip2Zg0%2F&amp;summary=Wonder+if+this+is+real...+via+%23taggbox" class="liShare" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true">
+						</i>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+		</div>
+		<div id="wCustomPosts" style="display: none;">
+					</div>
+	</div>
+
+		<div class="col-md-12 text-center loadMoreWrapper loadmorebtn20" id="wMorePosts">
+		<div class="appendLoader" style="display:none; margin-bottom:30px;">
+			<img width="30px" src="https://taggbox.com/app/image/loader.svg">
+		</div>
+		<button id="appendBtn" class="loadMoreBtn ladda-button" data-style="zoom-in" data-spinner-color="#333333" style="color: rgb(51, 51, 51); border: 1px solid rgb(51, 51, 51); background-color: rgb(255, 255, 255); margin-bottom: 20px;" onclick="Application.wall.sync.append(this);" data-offset="0" data-time="1540792932" data-wall="14095" data-lastid="">Show More</button>
+	</div>
+	<div class="col-md-12 text-center loadMoreWrapper" id="wNoMorePosts" style="display: block;">
+		<a href="javascript:void(0);" class="loadMoreBtn" style="text-decoration: none; color: rgb(51, 51, 51); border: 1px solid rgb(51, 51, 51); background-color: rgb(255, 255, 255); margin-bottom: 20px;">No More Posts</a>
+	</div>
+	</div>
+
+
+
+<!---- Trigger------>
+<a class="commanBtn btn-sm triggerFullScreen" onclick="javascript:$(document).fullScreen(!0);" style="display: none;"><i class="icon-size-fullscreen icons"></i>&nbsp; Enable Full Screen</a>
+
+<!---- Branding Starts here------>
+
+
+<!---- Branding End here------>
+
+
+
+<!---- For Announcement Overlay start--->
+<!---- For Announcement Overlay end--->
+<script>
+            $(document).ready(function () {
+				if(window.self !== window.top)
+				{}else{
+					setInterval(function () {
+                    $('#upgradeScreen').show();
+                    setTimeout(function () {
+                        $('#upgradeScreen').hide();
+                    }, 10000);
+                }, 1000 * 60);
+				}
+            });
+
+
+		if(window.self !== window.top)
+		{
+			$('.triggerFullScreen').hide();
+		}
+	  if(navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)){
+		$('.triggerFullScreen').hide();
+	  }
+	</script>
+    <script>
+        var isInIFrame = (window.location != window.parent.location) ? true : false;
+        if (isInIFrame == true) {
+        	$('.triggerFullScreen').hide();
+            /*$(".taggboxBranding").hide();
+            $(".powered-footer").show();*/
+        }
+
+        function d(c) {
+            var b, a;
+            if (!this.length)
+                return this;
+            b = this[0];
+            b.ownerDocument ? a = b.ownerDocument : (a = b, b = a.documentElement);
+            if (null == c) {
+                if (!a.exitFullscreen && !a.webkitExitFullscreen && !a.webkitCancelFullScreen && !a.msExitFullscreen && !a.mozCancelFullScreen)
+                    return null;
+                c = !!a.fullscreenElement || !!a.msFullscreenElement || !!a.webkitIsFullScreen || !!a.mozFullScreen;
+                return!c ? c : a.fullscreenElement || a.webkitFullscreenElement || a.webkitCurrentFullScreenElement || a.msFullscreenElement || a.mozFullScreenElement || c
+            }
+            c ? (c = b.requestFullscreen || b.webkitRequestFullscreen || b.webkitRequestFullScreen || b.msRequestFullscreen || b.mozRequestFullScreen) && c.call(b) : (c = a.exitFullscreen || a.webkitExitFullscreen || a.webkitCancelFullScreen || a.msExitFullscreen || a.mozCancelFullScreen) && c.call(a);
+            return this
+        }
+        $.fn.fullScreen = d;
+        $.fn.toggleFullScreen = function () {
+            return d.call(this, !d.call(this))
+        };
+        var e, f, g;
+        e = document;
+        e.webkitCancelFullScreen ? (f = "webkitfullscreenchange", g = "webkitfullscreenerror") : e.msExitFullscreen ? (f = "MSFullscreenChange", g = "MSFullscreenError") : e.mozCancelFullScreen ? (f = "mozfullscreenchange", g = "mozfullscreenerror") : (f = "fullscreenchange", g = "fullscreenerror");
+        $(document).bind(f, function () {
+            $(document).trigger(new $.Event("fullscreenchange"))
+        });
+        $(document).bind(g, function () {
+            $(document).trigger(new $.Event("fullscreenerror"))
+        });
+        $(document).bind("fullscreenchange", function () {
+            if ($(document).fullScreen()) {
+                $('.triggerFullScreen').hide();
+            } else {
+                $('.triggerFullScreen').show();
+            }
+        });
+
+        $(document).bind("fullscreenerror", function () {
+            $('.triggerFullScreen').show();
+        });
+
+		var checkscreenSize;
+		checkscreenSize = setInterval(function(){
+			if((window.fullScreen) || (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+				$('.triggerFullScreen').hide();
+				clearInterval(checkscreenSize);
+				checkscreenSize = null;
+			}
+		},1000);
+
+	$(function () {
+		setTimeout(function () {
+			$('.triggerFullScreen').hide();
+		}, 20000);
+	});
+</script>
+<script>
+	$(function() {
+		var theme = "20";
+		var appliedData = {
+			currentInDate : "2018-10-29 11:32:12",
+			myIpCheck : "67.170.83.112",
+			analyticsStatus : "0",
+			custom_lan_data : 'false',
+			w_language : "",
+			plan_id : "1",
+			user_id:"9841",
+			currentInDate : "2018-10-29 11:32:12",
+			url : "14095",
+			theme : 20,
+			themeType:1,
+			loadMoreStatus:1,
+			numberOfPosts:'25',
+			fontSize:'13',
+			cardColor:'#ffffff',
+            minimumPostWidth:300,
+            randomizePost:0,
+            playFullVideo:0,
+            animateBackground:1,
+            transparent:1,
+            backgroundColor:'#ffffff',
+            slideDelay:10,
+            scrollDelay:'50',
+            columnCount:5,
+            postFeatured:1,
+            transitionDuration: '0'
+		};
+		if(theme != 36)
+		{
+			Application.wall.init1(
+				'w',
+				'index',
+				'#wPosts',
+				appliedData,
+				'',
+				[]			);
+		}
+		else
+		{
+			showPost('14095','w',appliedData,function() {
+				Application.wall.init(
+					'w',
+					'index',
+					'#wPosts',
+					appliedData,
+					'',
+					[]				)
+			});
+		}
+	});
+
+</script>	</div>
+</div>                </div>
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+
+
+
+	<script type="text/javascript" src="/app/js/../plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/app/js/../plugins/js.cookie.min.js"></script>
+	<script type="text/javascript" src="/app/js/emojione.js"></script>
+	<script type="text/javascript" src="/app/js/jquery.cssemoticons.js"></script>
+	<script type="text/javascript" src="/app/js/moment.js"></script>
+	<script type="text/javascript" src="/app/js/livestamp.js"></script>
+	<script type="text/javascript" src="/app/js/isotope.pkgd.min.js"></script>
+	<script type="text/javascript" src="/app/js/imagesloaded.pkgd.min.js"></script>
+	<script type="text/javascript" src="/app/js/../plugins/button-spiner/spin.min.js"></script>
+	<script type="text/javascript" src="/app/js/../plugins/button-spiner/ladda.min.js"></script>
+
+	<script type="text/javascript" src="/app/js/app.min.js"></script>
+	<script type="text/javascript" src="/app/js/layout.min.js"></script>
+	<script type="text/javascript" src="/app/js/application-webembed.js?time=1540792932"></script>
+	<script type="text/javascript" src="/app/js/vimeoPlayer.js"></script>
+	<script type="text/javascript" src="/app/js/postmessage.js?time=1540792932"></script>
+	<script type="text/javascript" src="/app/js/contentlimit.js?time=1540792932"></script>
+
+
+    <style>
+.controller,.action {
+	height: inherit;
+}
+</style>
+	<script>
+	Application.init({
+
+      container: "#container",
+
+      baseUrl: "https://taggbox.com/app/",
+      basePath: "app/",
+
+      currentIp: "67.170.83.112",
+
+      initNotifyNSync: 0,
+      watchWall: 0,
+      url: 0,
+      notified: 1540792932.3673,
+      synced: 1540792932.3673,
+      notifyController:"w"
+    });
+    </script>
+	<script>
+
+
+
+    try{
+		// default is PNG but you may also use SVG
+	    emojione.imageType = 'svg';
+
+	    // default is ignore ASCII smileys like :) but you can easily turn them on
+	    emojione.ascii = true;
+
+	    // if you want to host the images somewhere else
+	    // you can easily change the default paths
+	    emojione.imagePathPNG = 'png/';
+	    emojione.imagePathSVG = 'svg/';
+	} catch (error) {
+
+	}
+
+</script>
+</body></html>

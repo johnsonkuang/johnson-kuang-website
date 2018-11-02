@@ -81,8 +81,6 @@
     <Content Include="website\static\website\js\jquery.validate.unobtrusive.js" />
     <Content Include="website\static\website\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="website\static\website\js\modernizr-2.6.2.js" />
-    <Content Include="website\static\website\js\respond.js" />
-    <Content Include="website\static\website\js\respond.min.js" />
     <Content Include="website\templates\website\about.html" />
     <Content Include="website\templates\website\base.html" />
     <Content Include="website\templates\website\index.html" />
