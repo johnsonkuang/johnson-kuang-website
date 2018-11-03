@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^resume/', views.resume, name='resume'),
     url(r'^projects/', views.projects, name='projects'),
     url(r'^sandbox/', views.sandbox, name='sandbox'),
+    url(r'^termsofuse/', views.terms, name='terms'),
 ]

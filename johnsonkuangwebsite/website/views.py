@@ -60,3 +60,6 @@ def projects(request):
 
 def sandbox(request):
     return render(request, 'website/sandbox.html')
+
+def terms(request):
+    return render(request, 'website/termsofuse.html')

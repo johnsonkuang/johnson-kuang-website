@@ -39,19 +39,17 @@
 
     {% endblock %}
 
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- Bootstrap core CSS -->
+      <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet">
+      <!-- Material Design Bootstrap -->
+      <link href="{% static 'website/css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Buttons CSS -->
+    <link href="{% static 'website/css/buttons.css' %}" rel="stylesheet">
 
-
-	<!-- jQuery: v1.9.1 necessary for Bootstrap's JavaScript plugins -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-	<!-- Bootstrap: Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'website/css/navbar.css'%}?version=0.0.1">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/navbar.css'%}?version=0.0.2">
     <title>
         {% block pagetitle %}
             {{ request.resolver_match.url_name }}
@@ -76,6 +74,14 @@
 
 </head>
 <body>
+     <!-- JQuery -->
+      <script type="text/javascript" src="{% static 'website/js/jquery-3.3.1.min.js' %}"></script>
+      <!-- Bootstrap tooltips -->
+      <script type="text/javascript" src="{% static 'website/js/popper.min.js' %}"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script type="text/javascript" src="{% static 'website/js/bootstrap.min.js' %}"></script>
+      <!-- MDB core JavaScript -->
+      <script type="text/javascript" src="{% static 'website/js/mdb.min.js' %}"></script>
     {% block navbar %}
         <header>
             <h1 class="logo">Logo</h1>
@@ -100,6 +106,59 @@
 
     {% block content %}
     {% endblock %}
- 
+
+    <footer class="page-footer font-small special-color-dark pt-4">
+        <!--Footer Elements-->
+        <div class="container text-center text-md-left" style="padding-left: 25px; padding-right: 25px;">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <!--Content-->
+                    <h5 class="text-uppercase">Johnson Kuang</h5>
+                    <p>Contact: (425) 273-3269, johnsonkuang@outlook.com</p>
+                </div>
+                <!--Grid column-->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                </div>
+                <!--Grid column-->
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <!--navigation-->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <span>
+                <!--Facebook-->
+                <a class="btn-floating btn-fb" type="button" role="button"><i class="fa fa-facebook"></i></a>
+            </span>
+            <span>
+                <!--Linkedin-->
+                <a class="btn-floating btn-li" type="button" role="button"><i class="fa fa-linkedin"></i></a>
+            </span>
+            <span>
+                <!--Instagram-->
+                <a class="btn-floating btn-ins" type="button" role="button"><i class="fa fa-instagram"></i></a>
+            </span>
+            <span>
+                <!--Youtube-->
+                <a class="btn-floating btn-yt" type="button" role="button"><i class="fa fa-youtube"></i></a>
+            </span>
+            <span>
+                <!--Github-->
+                <a class="btn-floating btn-git" type="button" role="button"><i class="fa fa-github"></i></a>
+            </span>
+            <span>
+                <!--Reddit-->
+                <a class="btn-floating btn-reddit" type="button" role="button"><i class="fa fa-reddit-alien"></i></a>
+            </span>
+        </div>
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            <a href="https://www.freeprivacypolicy.com/privacy/view/5cded7b468a8dbf6de6ad8c947a7c33d">Privacy Policy</a> | <a href="{% url 'website:terms' %}">Terms of Use</a> | &copy; 2018 Copyright: A Johnson Kuang Production | <em>Ask and You Shall Receive</em> | <a href="{% url 'website:index' %}">johnsonkuang.com</a>
+        </div>
+    </footer>
+
 </body>
 </html>
