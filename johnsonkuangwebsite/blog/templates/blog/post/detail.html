@@ -6,8 +6,9 @@
 {% load widget_tweaks %}
 
 
-{% block head %}
+{% block inserthead %}
     <!--Change accordingly to change the way it's described on previews-->
+
       <meta property="og:url"           content="{{ post.get_absolute_url }}" />
       <meta property="og:type"          content="website" />
       <meta property="og:title"         content="Johnson's Corner of the Internet" />
@@ -44,7 +45,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
-    <div class="container" style="margin-top: 60px;">
+    <div class="container" style="padding-top: 60px;">
         <div class="row">
         <main class="post blog-post col-lg-8">
           <div class="container" style="width: 100%;">
