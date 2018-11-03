@@ -8,5 +8,4 @@ django_taggit==0.22.2
 Markdown==2.6.11
 psycopg2
 django-widget-tweaks
-git+https://github.com/FrancoisConstant/django-visits#egg=visit
 pytz

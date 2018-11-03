@@ -2,7 +2,7 @@ $(document).ready(function () {
     //TODO: remove localStorage.setItem
     if (localStorage.getItem('popState') != 'shown') {
         $('body').css({backgroundColor: '#FFF'})
-        $("#popup").delay(200).fadeIn(500);
+        $("#popup").delay(0).fadeIn(700);
         localStorage.setItem('popState', 'shown');
         $('#popup').delay(4000).fadeOut(600);
 

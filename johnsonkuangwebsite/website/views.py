@@ -6,10 +6,12 @@ from website.models import *
 # Create your views here.
 def index(request):
     load = Video.objects.get(name='load')
+    load_image = Image.objects.get(name='home_load_graphic')
     about = Image.objects.get(name='about_parallax')
     blog = Image.objects.get(name='blog_parallax')
 
     context = {
+        'load_pic': load_image,
         'load': load,
         'about': about,
         'blog': blog,

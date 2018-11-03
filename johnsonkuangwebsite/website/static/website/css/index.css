@@ -1,58 +1,108 @@
-#popup {
-  height: 100%;
-  width: 100%;
-  z-index: 99;
+.load-image {
+        width: 80%;
+        height: auto;
+        position: relative;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .load-text {
+        position:inherit    ;
+        text-transform: uppercase;
+        font-family: 'Lato', 'Segoe UI Light';
+        text-align: center;
+        background-color: #00b0f0;
+        font-size: 1.4em;
+        border-radius: 15px;
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+
+        height: auto;
+        margin-top: 0;
+    !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inner-wrapper {
+        vertical-align: center;
+        text-align: center;
+        width: 100%;
+        color: #FFF;
+    }
+
+@media screen and (min-width: 800px){
+    .load-image {
+        position: relative;
+        width: 80%;
+        height: auto;
+        padding-top: 15%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .load-text {
+        position: inherit;
+        text-transform: uppercase;
+        font-family: 'Lato', 'Segoe UI Light';
+        text-align: center;
+        background-color: #00b0f0;
+        font-size: 1.5em;
+        border-radius: 15px;
+        width: 90%;
+        margin: auto;
+
+        height: 10%;
+        margin-top: 0;
+    !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inner-wrapper {
+        position: relative;
+        vertical-align: center;
+        text-align: center;
+        width: 100%;
+        color: #FFF;
+    }
 }
 
-.fullscreen-bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: 99;
-}
 
-.fullscreen-bg__video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 99;
-}
+@media screen and (min-width: 1200px) {
+    .load-image {
+        width: 80%;
+        height: auto;
+        padding-top: 15%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
 
-@media (min-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    height: 300%;
-    top: -100%;
-  }
-}
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    width: 100%;
-  }
-}
-@media (max-width: 767px) {
-  .fullscreen-bg {
-    background: url("../img/videoframe.jpg") center center/cover no-repeat;
-  }
+    .load-text {
+        text-transform: uppercase;
+        font-family: 'Lato', 'Segoe UI Light';
+        text-align: center;
+        background-color: #00b0f0;
+        font-size: 2.5em;
+        border-radius: 15px;
+        width: 90%;
+        margin: auto;
 
-  .fullscreen-bg__video {
-    display: none;
-  }
-}
-@media (max-width: 768px) {
-  .initial-load {
-    height: 100vh;
-    width: 75%;
-    margin: auto;
-  }
-}
-.initial-load {
-  height: 100vh;
-  margin: auto;
-}
+        height: 10%;
+        margin-top: 0;
+    !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-/*# sourceMappingURL=index.css.map */
+    .inner-wrapper {
+        vertical-align: center;
+        text-align: center;
+        width: 100%;
+        color: #FFF;
+    }
+}

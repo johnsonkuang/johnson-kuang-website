@@ -27,7 +27,7 @@
     <!-- Fancybox-->
     <link rel="stylesheet" href="{% static 'blog/vendor/@fancyapps/fancybox/jquery.fancybox.mintest.css' %}">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{% static 'blog/css/style.default.css' %} " id="theme-stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/style.default.css' %}?version=1.0.1" id="theme-stylesheet">
 {% endblock %}
 
 {% block pagetitle %}
@@ -96,16 +96,30 @@
                         </div>
                         <div class="icon next"><i class="fa fa-angle-right" style="padding-top: 0.55em; padding-left: 0.17em;">   </i></div></a></div>
 
+                <div class="row">
+                    <h2 style="color: #00b0f0">
+                        Share this post
 
-                <h2 style="color: #00b0f0">
-
-                    Share this post
-                        <a href="{% url "blog:post_share" post.id %}"><i class="fa fa-envelope"></i></a>
+                    </h2>
+                        <div class="button-container" style="width: 100%">
+                                 <a class="btn btn-default btn-round btn-lg btn-icon" href="{% url "blog:post_share" post.id %}">
+                                     <i class="fa fa-envelope"></i>
+                                 </a>
+                                 <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                  </a>
+                                  <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter">
+                                    <i class="fa fa-twitter"></i>
+                                  </a>
+                                  <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram">
+                                      <i class="fa fa-instagram"></i>
+                                  </a>
+                              </div>
                         <div class="fb-share-button"
-                        data-href="{{ post.get_absolute_url }}"
-                        data-layout="button_count">
-                      </div>
-                </h2>
+                            data-href="{{ post.get_absolute_url }}"
+                            data-layout="button_count">
+                        </div>
+                </div>
                 <div class="post-comments">
                     <h3 class="h6">Post Comments<span class="no-of-comments">({{ post.comments.count }})</span></h3>
                   {% for comment in comments %}
@@ -161,7 +175,7 @@
           <!-- Widget [Latest Posts Widget]        -->
           <div class="widget latest-posts">
               <h3>Latest Posts</h3>
-            <div class="blog-posts" style="height: 20%;">
+            <div class="blog-posts" style="height: 200px;">
                 {% show_latest_posts 3 %}
             </div>
           </div>
@@ -171,7 +185,7 @@
                 <div class="blog-posts" style="height:20%;">
                     {% get_most_commented_posts 3 %}
                 </div>
-                <p style="margin-top: 2em;"><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed!</a></p>
+                <div><p style="margin-top: 3em;"><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed! <i class="fa fa-rss-square" style="color: #FF9900"></i></a></p></div>
             </div>
           <!-- Widget [Tags Cloud Widget]-->
           <div class="widget tags">

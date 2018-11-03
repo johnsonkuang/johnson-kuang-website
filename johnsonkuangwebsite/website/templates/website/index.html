@@ -6,7 +6,7 @@
 {% block pagetitle %}Johnson Kuang{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static 'website/css/index.css' %}?version=2"/>
+    <link rel="stylesheet" href="{% static 'website/css/index.css' %}?version=0.0.1"/>
 {% endblock %}
 
 {% block scripts %}
@@ -22,7 +22,7 @@
     <!--TODO: find way to hide the rest of the page on load-->
     <div style="display:none; z-index: 99; max-width: 100%;" id="popup">
         <div class="fullscreen-bg">
-            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="max-width: 100%; z-index: 99">
+            <video loop muted autoplay poster="" class="fullscreen-bg__video" style="max-width: 100%; z-index: 1000;">
                 <source src="{{ load.video.url }}" type="video/mp4">
             </video>
         </div>
@@ -30,8 +30,19 @@
 
     <!--TODO adjust the height of the sections to make it more aesthetically pleasing-->
     <!--TODO get graphic for the welcome page-->
-    <section>
-        <div style="height: 100vh">
+
+    <!--TODO find a nice background color for first section-->
+    <section style="background-color: ">
+        <div class="container" style="height: 100vh; display: flex; align-items: center;">
+            <div>
+                <img src="{{ load_pic.image.url }}" class="img-fluid load-image">
+                <!--add div for text below-->
+                <div class="load-text">
+                    <div class="inner-wrapper">
+                        Logically Minded // Adventurous at heart
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -59,7 +70,7 @@
 
     <div class="parallax-window" data-parallax="scroll">
         <!--For the parallax code feature-->
-            <embed style="height:60vh; width:100%;" src="{% static 'website/embeds/code_feature_home.html' %}?version=1">
+            <embed style="height:60vh; width:100%;" src="{% static 'website/embeds/code_feature_home.html' %}?version=4">
     </div>
     <section>
         <div class="container">
