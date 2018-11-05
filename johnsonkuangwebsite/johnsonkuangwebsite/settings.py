@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'taggit',
     'markdown',
     'widget_tweaks',
+    'crispy_forms',
+    'control_panel',
+    'accounts',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -156,6 +159,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
@@ -163,3 +168,6 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['media']))
+
+#accounts
+LOGIN_REDIRECT_URL = 'website:index'

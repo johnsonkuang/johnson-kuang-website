@@ -8,4 +8,5 @@ django_taggit==0.22.2
 Markdown==2.6.11
 psycopg2
 django-widget-tweaks
+django-crispy-forms
 pytz

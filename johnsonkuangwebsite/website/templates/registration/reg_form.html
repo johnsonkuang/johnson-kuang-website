@@ -1,0 +1,41 @@
+{% extends 'website/base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container" style="padding-top: 80px; padding-bottom: 10px;">
+    <div class="row">
+        <div class="col-md-8 col-sm-6">
+            <h1>Register for JohnsonKuang.com today!</h1>
+            <style>
+                input {
+                    opacity: 1!important;
+
+                }
+                .form-check{
+                    padding: 0;
+
+                }
+                .form-check-label {
+                    width: 100%;
+                }
+                .form-check-input {
+                        padding-left: 100px;
+                        position: absolute;
+                        left: 200px;
+                    z-index:998;
+                    }
+            </style>
+            <form method="post">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <!--Some Graphic-->
+        </div>
+    </div>
+
+    </div>
+{% endblock %}

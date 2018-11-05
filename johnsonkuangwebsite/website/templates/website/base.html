@@ -1,4 +1,4 @@
-﻿        <!-- theme stylesheet-->
+        <!-- theme stylesheet-->
 {% load blog_tags %}
 <!DOCTYPE html>
 
@@ -91,6 +91,7 @@
                             <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog:post_list' %}">Blog</a></li>
                             <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
                             <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>
+                            <li><a href="#">Register</a> </li>
                         {% endwith %}
                     </ul>
             </nav>
@@ -103,114 +104,66 @@
     {% block content %}
     {% endblock %}
     <!-- Footer -->
-    <footer class="page-footer font-small blue pt-4">
-        <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left">
+    <footer class="page-footer font-small pt-4 special-color-dark">
+        <!--Footer Elements-->
+        <div class="container text-center text-md-left" style="">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <!--Content-->
+                    <h5 class="text-uppercase">Johnson Kuang</h5>
+                    <p>Contact: (425) 273-3269, johnsonkuang@outlook.com</p>
+                    <!--Facebook-->
+                    <a class="btn-floating btn-md btn-fb" role="button"><i class="fa fa-lg fa-facebook"></i></a>
+                    <!--Linkedin-->
+                    <a class="btn-floating btn-md btn-li" role="button"><i class="fa fa-lg fa-linkedin"></i></a>
+                    <!--Instagram-->
+                    <a class="btn-floating btn-md btn-ins" role="button"><i class="fa fa-lg fa-instagram"></i></a>
+                    <!--Youtube-->
+                    <a class="btn-floating btn-md btn-yt" role="button"><i class="fa fa-lg fa-youtube"></i></a>
+                    <!--Github-->
+                    <a class="btn-floating btn-md btn-git" role="button"><i class="fa fa-lg fa-github"></i></a>
+                    <!--Email-->
+                    <a class="btn-floating btn-md btn-email" role="button"><i class="fa fa-lg fa-envelope-o"></i></a>
+                    <!--Reddit-->
+                    <a class="btn-floating btn-md btn-red" role="button"><i class="fa fa-lg fa-reddit-alien"></i></a>
+                </div>
+                <!--Grid column-->
+                <div class="col-md-3 mb-md-0 mb-3">
 
-          <!-- Grid row -->
-          <div class="row">
-
-            <!-- Grid column -->
-            <div class="col-md-6 mt-md-0 mt-3">
-
-              <!-- Content -->
-              <h5 class="text-uppercase">Footer Content</h5>
-              <p>Here you can use rows and columns here to organize your footer content.</p>
-
+                </div>
+                <!--Grid column-->
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <!--navigation-->
+                    <h5 class="text-uppercase">Links</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled" style="font-size: 1.2em;">
+                                {% with request.resolver_match.url_name as url_name %}
+                                    <li class="nav-link" style="{% if url_name == 'index' %}font-weight: bolder{% endif %}"><a href="{% url 'website:index' %}">+ Home</a></li>
+                                    <li class="nav-link" style="{% if url_name == 'about' %}font-weight: bolder{% endif %}"><a href="{% url 'website:about' %}">+ About</a></li>
+                                    <li class="nav-link" style="{% if url_name == 'resume' %}font-weight: bolder{% endif %}"><a href="{% url 'website:resume' %}">+ Resume</a></li>
+                                {% endwith %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled" style="font-size: 1.2em">
+                                {% with request.resolver_match.url_name as url_name %}
+                                    <li class="nav-link" style="{% if url_name == 'post_list' %}font-weight: bolder{% endif %}"><a href="{% url 'blog:post_list' %}">+ Blog</a></li>
+                                    <li class="nav-link" style="{% if url_name == 'projects' %}font-weight: bolder{% endif %}"><a href="{% url 'website:projects' %}">+ Projects</a></li>
+                                    <li class="nav-link" style="{% if url_name == 'sandbox' %}font-weight: bolder{% endif %}"><a href="{% url 'website:sandbox' %}">+ Sandbox</a></li>
+                                {% endwith %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Grid column -->
-
-            <hr class="clearfix w-100 d-md-none pb-3">
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
-
-                <!-- Links -->
-                <h5 class="text-uppercase">Links</h5>
-
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="#!">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 3</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 4</a>
-                  </li>
-                </ul>
-
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-3 mb-md-0 mb-3">
-
-                <!-- Links -->
-                <h5 class="text-uppercase">Links</h5>
-
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="#!">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 3</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 4</a>
-                  </li>
-                </ul>
-
-              </div>
-              <!-- Grid column -->
-
-          </div>
-          <!-- Grid row -->
-
-        </div>
-        <!-- Footer Links -->
-        <div class="container">
-            <div class="mb-5 flex-center">
-
-            <!-- Facebook -->
-            <a class="fb-ic">
-              <i class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!-- Twitter -->
-            <a class="tw-ic">
-              <i class="fa fa-github fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!-- Google +-->
-            <a class="gplus-ic">
-              <i class="fa fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!--Linkedin -->
-            <a class="li-ic">
-              <i class="fa fa-envelope fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!--Instagram-->
-            <a class="ins-ic">
-              <i class="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-            </a>
-            <!--Pinterest-->
-            <a class="pin-ic">
-              <i class="fa fa-pinterest fa-lg white-text fa-2x"> </i>
-            </a>
-          </div>
         </div>
         <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-          <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
+        <div class="footer-copyright text-center py-3">
+            <a href="https://www.freeprivacypolicy.com/privacy/view/5cded7b468a8dbf6de6ad8c947a7c33d">Privacy Policy</a> | <a href="{% url 'website:terms' %}">Terms of Use</a> | &copy; 2018 Copyright: A Johnson Kuang Production | <em>Ask and You Shall Receive</em> | <a href="{% url 'website:index' %}">johnsonkuang.com</a>
         </div>
-        <!-- Copyright -->
-
-      </footer>
-      <!-- Footer -->
+    </footer>
 </body>
 </html>

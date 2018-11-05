@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+
+    <!-- Our custom style sheets -->
+    <link rel="stylesheet" href="{% static 'website/css/base.css' %}"/>
+    <!-- Font Awesome -->
+<link href="{% static 'website/css/buttons.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<h2>Sorry to see you go</h2>
+<p>Let me know if there is an issue with my website. I wish you the best in your journey ahead and I hope that our paths will cross again.</p>
+<p>If I have persuaded you to re-subscribe by the time you read this message visit this link: <a href="{% url 'website:newsletter_signup' %}">Subscribe!</a> </p>
+<br>
+<p>Best,</p>
+<p>Johnson Kuang</p>
+<p><em>Ask and you shall receive</em></p>
+</body>
+</html>
