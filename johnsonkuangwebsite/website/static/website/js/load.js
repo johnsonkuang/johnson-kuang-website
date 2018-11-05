@@ -7,9 +7,9 @@ $(document).ready(function () {
         $('#popup').delay(4000).fadeOut(600);
 
         //find good animation method to convert background back to white
-
+        setTimeout(location.reload.bind(location), 5000);
     }
-    $('body').animate({backgroundColor: '#FFFFFF'}, 'slow');
+
     $('#popup-close').click(function (e) // You are clicking the close button
     {
         $('#popup').fadeOut(); // Now the pop up is hidden.
@@ -17,4 +17,5 @@ $(document).ready(function () {
     $('#popup').click(function (e) {
         $('#popup').fadeOut();
     });
+
 });

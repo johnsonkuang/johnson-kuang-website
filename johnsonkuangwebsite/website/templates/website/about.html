@@ -14,15 +14,70 @@
     <!--http://www.goldsquare.co/about-->
     <!--Nice simple style, worth modeling: https://www.devonstank.com/about/-->
 
-    <div class="container" style="padding-top: 69px;">
-        {#  <!--<img src="{% cropped_thumbnail banner "cropping" scale=1.0 %}" class="img-responsive fill">-->#}
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:400,300,100);
+    h1{
+            font-family: adobe-garamond-pro;
+    font-weight: 400;
+    font-style: normal;
+        font-size: 2em;
+    letter-spacing: 0em;
+    line-height: 1em;
+    text-transform: none;
+    }
+        p {
+        font-family: 'Proxima Nova';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        letter-spacing: 0em;
+        line-height: 1.8em;
+        text-transform: none;
+        color: rgba(26,26,26,.75);
+    }
+    #overlay {
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        background: rgb(0,0,0);
+    }
+    #overlay h1{
+        font-weight: bold;
+        font-family: "Proxima Nova";
+        font-size: 50px;
+    }
+    #text{
+        position: absolute;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        color: white;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+    }
+    </style>
+    <!--TODO: STILL NEED A BANNER-->
+    
+    <div class="" style="position: relative; display: block; width: 100%; margin:0;">
+        <div id="overlay" style="height:50vh; width: 100%;">
+        <!--Image Needed-->
+        <div id="text" class="text-center">
+            <h4><em>Discover who I am...</em></h4>
+            <h1>My passions and my personality</h1>
+        </div>
     </div>
+    </div>
+
     <div class="jumbotron" style="text-align: center; margin-bottom: 0px;">
         <div class="container">
-            <h1>A few fun facts about myself . . .</h1>
+            <h1 style=" font-weight: lighter;">A few fun facts about myself . . .</h1>
             <h4>I love home-cooking, I am an avid reader; I'm definitely single, my favorite number is 2, and I was hit by a car when I was 3;
                 I'm not a huge fan of writing essays, I play video games like it's my life,
-            I am a 16 year-old aspiring entrepreneur, I do downhill skiing, my favorite food is beef noodles (with handmade noodles),
+            I am a 16 year-old aspiring entrepreneur, I do downhill skiing, my favorite food is beef noodles (with handmade noodles).
             </h4>
         </div>
 
@@ -78,6 +133,11 @@
                 Why yes, I do many competitions. From Science Olympiad to DECA, I have had a very fulfilling high school experience in this regard. From late-night cramming to post-awards excitement, competing represent some of my best memories from high school.
             </p>
             <!--Full Sized Image DECA-->
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6"><img src="{{ competition.image.url }}" style="width: 100%; height: auto;" class="img-fluid img-responsive"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6"><img src="{{ scioly.image.url }}" style="width: 100%; height: auto;" class="img-fluid img-responsive"></div>
+            </div>
+
         </div>
     </div>
     <div class="container">

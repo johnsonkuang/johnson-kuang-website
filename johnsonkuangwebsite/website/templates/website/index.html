@@ -6,13 +6,11 @@
 {% block pagetitle %}Johnson Kuang{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static 'website/css/index.css' %}?version=0.0.1"/>
+    <link rel="stylesheet" href="{% static 'website/css/index.css' %}?version=0.0.2"/>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'website/js/load.js' %}?version=1.0.2"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
 {% endblock %}
 
 
@@ -32,12 +30,12 @@
     <!--TODO get graphic for the welcome page-->
 
     <!--TODO find a nice background color for first section-->
-    <section style="background-color: ">
+    <section style="">
         <div class="container" style="height: 100vh; display: flex; align-items: center;">
             <div>
-                <img src="{{ load_pic.image.url }}" class="img-fluid load-image">
+                <img src="{{ load_pic.image.url }}" class="img-fluid load-image animated fadeIn">
                 <!--add div for text below-->
-                <div class="load-text">
+                <div class="load-text animated fadeIn">
                     <div class="inner-wrapper">
                         Logically Minded // Adventurous at heart
                     </div>
@@ -47,40 +45,44 @@
     </section>
 
     <!--TODO: crop the about photo-->
-    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ about.image.url }}" style="min-height: 70vh;"></div>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/About_Slide.jpg" style="min-height: 70vh;"></div>
     <section>
-        <div class="container">
-            <div style="height: 40vh;">
-                <h1 class="">About</h1>
+        <div class="container animated fadeIn">
+            <div style="height: 30vh;" class="text-center">
+                <h1 class="text-uppercase" style="font-family: 'Lato', 'Open Sans', 'Work Sans'; font-weight:300; font-size: 3.0em; background-color: #FFF; box-shadow: none; padding-top: 2%; padding-bottom: 2%;">About</h1>
+                <h5 style="font-family: 'Work Sans'">
+                    Welcome to the story of my life! If you’re looking for a good story, you won’t find it here, but what you will find is my humble life experiences up until now. Step into my life and look around, you’ll find a mess of passions, hobbies, and ideas. I’m more than willing to share and I'm looking forward to our time together... [<a href="{% url 'website:about' %}">More about Me</a>]
+                </h5>
+
+                <h4>Special thanks to Jedidiah Cheng for helping me create the awesome landing page graphic!</h4>
             </div>
         </div>
     </section>
 
     <!--TODO integrate a slider with parallax-->
-    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ blog.image.url }}" style="height:70vh;"></div>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/Vacation_Slide_3.jpg" style="height:70vh;"></div>
 
     <section>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:400,300,200,100);
+    </style>
         <div class="container">
-            <div style="height: 40vh;">
-                <h1 class="">Blog</h1>
-                <p>This is my blog. I've written {% total_posts %} posts so far.</p>
+            <div style="height: 22vh;" class="text-center">
+                <h1 class='text-uppercase' style="font-family: 'Lato', 'Open Sans', 'Work Sans'; font-weight:300!important; font-size: 3.0em; background-color: #FFF; box-shadow: none; padding-top: 2%; padding-bottom: 2%;">Life of Kuang</h1>
+                <h5 style="font-family: 'Work Sans';">
+                    What better way is there to share about myself than to write a blog? I love a good conversation. Although dialogue isn’t actually possible on this website, I can offer you the next best thing: commenting on my posts. This website will be where I share all the ups and downs of my life, from the wildest adventures to my innermost thoughts. Look forward to speedy reads about the life of Kuang. [<a href="{% url 'blog:post_list' %}" class="link">Read More</a>]
+                </h5>
             </div>
         </div>
     </section>
 
-    <div class="parallax-window" data-parallax="scroll">
+    <div class="parallax-window" data-parallax="scroll" style="height:60vh;">
         <!--For the parallax code feature-->
             <embed style="height:60vh; width:100%;" src="{% static 'website/embeds/code_feature_home.html' %}?version=4">
     </div>
-    <section>
-        <div class="container">
-            <div style="height: 20vh;">
-                <h1 class="">Footer</h1>
-            </div>
-        </div>
-    </section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="{% static 'website/js/parallax.js' %}"></script>
+    <script src="{% static 'website/js/load.js' %}?version=1.0.2"></script>
 {% endblock %}

@@ -68,20 +68,18 @@
         <div class="content-center">
             <div class="cc-profile-image"><a href="#"><img src="{{ headshot.image.url }}" alt="Image"/></a></div>
             <div class="h1 title">Johnson Kuang</div>
-            <p class="category text-white">A Student with a Dream</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="#" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>
+            <p class="category text-white">A Student with a Dream</p>
+            <!--<a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="#" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download CV</a>-->
         </div>
       </div>
       <div class="section">
         <div class="container">
           <div class="button-container">
-              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook">
-                <i class="fa fa-facebook"></i>
+              <a href="https://www.facebook.com/profile.php?id=100011236536457" class="btn btn-default btn-round btn-lg btn-icon" style="background-color:#FFF!important; color: #F0f0f0;"  rel="tooltip" title="Follow me on Facebook">
+                <i class="fa fa-facebook" style="color: #c0c0c0;"></i>
               </a>
-              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter">
-                <i class="fa fa-twitter"></i>
-              </a>
-              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram">
-                  <i class="fa fa-instagram"></i>
+              <a href="https://www.instagram.com/jk.uang/" class="btn btn-default btn-round btn-lg btn-icon" style="background-color:#FFF!important; color: #F0f0f0;" rel="tooltip" title="Follow me on Instagram">
+                  <i class="fa fa-instagram" style="color: #c0c0c0;"></i>
               </a>
           </div>
         </div>
@@ -185,14 +183,16 @@
                         {{ experience.get_End_Month }} {{ experience.end_date.year }}
                     {% endif %}
                 </p>
-                <div class="h5">{{ experience.name }}</div>
+                <div class="h5" style="text-transform: none;">{{ experience.name }}</div>
               </div>
 
             </div>
             <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height:210px">
               <div class="card-body">
                 <div class="h5"><h4>{{ experience.position }}</h4></div>
-                <p>{{ experience.description }}</p>
+                {% autoescape off %}
+                  <p>{{ experience.description }}</p>
+                  {% endautoescape %}
               </div>
             </div>
           </div>
@@ -206,8 +206,8 @@
       {% for e in education %}
     <div class="card">
       <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
+        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500" style="height: auto;">
+          <div class="card-body cc-education-header" style="padding-top: 110px;">
             <p>{{ e.start_date.year }} -
                 {% if e.is_Present %}
                     PRESENT
@@ -218,11 +218,13 @@
             <div class="h5">{{ e.degree }}</div>
           </div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height: 0px;">
+        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500" style="height: auto;">
           <div class="card-body">
             <div class="h5">{{ e.degree_specific }}</div>
             <p class="category">{{ e.school }}</p>
+              {% autoescape off %}
             <p>{{ e.description }}</p>
+              {% endautoescape %}
           </div>
         </div>
       </div>

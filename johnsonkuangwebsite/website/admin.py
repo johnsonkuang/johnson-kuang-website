@@ -33,7 +33,13 @@ class BannerAdmin(admin.ModelAdmin):
 class AboutGalleryAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('name',)
 
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email', 'date_added',)
+
+
 # Register your models here.
+admin.site.register(Newsletter)
+admin.site.register(NewsletterUser, NewsletterAdmin)
 admin.site.register(ResumeEntryBasicInfo,ResumeEntryBasicInfoAdmin)
 admin.site.register(ResumeEntryEducation,ResumeEntryEducationAdmin)
 admin.site.register(ResumeSkill,ResumeSkillAdmin)

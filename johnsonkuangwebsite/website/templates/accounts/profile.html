@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+
+{% block pagetitle %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top: 80px;">
+        <h1>Profile</h1>
+        <h3>Welcome Back, {{ user.first_name }} {{ user.last_name }}, it's nice to see you again</h3>
+        <p>I guess you want to know your info if you're on your page so here it is</p>
+        <div class="row">
+            <div class="col-lg-6"><i class="fa fa-user"></i>{{ user.username }}</div>
+        </div>
+
+    </div>
+{% endblock %}

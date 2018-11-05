@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,100);
 .load-image {
         width: 80%;
         height: auto;
@@ -10,6 +11,7 @@
         position:inherit    ;
         text-transform: uppercase;
         font-family: 'Lato', 'Segoe UI Light';
+        font-weight: 100;
         text-align: center;
         background-color: #00b0f0;
         font-size: 1.4em;

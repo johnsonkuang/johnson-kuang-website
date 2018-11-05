@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from image_cropping import ImageRatioField
+from website.models import *
 
 from website.utils.fileutils import UniquePathAndRename
 
@@ -36,6 +37,7 @@ class Post(models.Model):
     author = models.ForeignKey(User,
                                related_name='blog_posts', on_delete=models.CASCADE)
     body = models.TextField()
+    image_gallery = models.ManyToManyField(Image)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
