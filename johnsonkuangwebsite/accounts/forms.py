@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)    
+    email = forms.EmailField(required=True)
 
     helper = FormHelper()
     helper.form_method = 'POST'

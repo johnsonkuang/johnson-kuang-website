@@ -14,9 +14,6 @@
     <!--http://www.goldsquare.co/about-->
     <!--Nice simple style, worth modeling: https://www.devonstank.com/about/-->
 
-    <div class="container" style="padding-top: 69px;">
-        {#  <!--<img src="{% cropped_thumbnail banner "cropping" scale=1.0 %}" class="img-responsive fill">-->#}
-    </div>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Lato:400,300,100);
     h1{
@@ -38,10 +35,42 @@
         text-transform: none;
         color: rgba(26,26,26,.75);
     }
+    #overlay {
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        background: rgb(0,0,0);
+    }
+    #overlay h1{
+        font-weight: bold;
+        font-family: "Proxima Nova";
+        font-size: 50px;
+    }
+    #text{
+        position: absolute;
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        color: white;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+    }
     </style>
     <!--TODO: STILL NEED A BANNER-->
     
-
+    <div class="" style="position: relative; display: block; width: 100%; margin:0;">
+        <div id="overlay" style="height:50vh; width: 100%;">
+        <!--Image Needed-->
+        <div id="text" class="text-center">
+            <h4><em>Discover who I am...</em></h4>
+            <h1>My passions and my personality</h1>
+        </div>
+    </div>
+    </div>
 
     <div class="jumbotron" style="text-align: center; margin-bottom: 0px;">
         <div class="container">
