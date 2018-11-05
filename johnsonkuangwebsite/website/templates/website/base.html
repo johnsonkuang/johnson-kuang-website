@@ -85,7 +85,9 @@
 <body>
     {% block navbar %}
         <header>
-            <h1 class="logo">Logo</h1>
+            <link href="{% static 'website/fonts/proxima-nova-web-fonts-master/proxima-nova-web-fonts-master/fonts/fonts.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'website/fonts/proxima-nova-web-fonts-master/proxima-nova-web-fonts-master/fonts/fonts.min.css' %}" rel="stylesheet" type="text/css">
+            <h1 class="logo" style="color: #FFF; font-family: 'Proxima Nova';">Johnson Kuang</h1>
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <nav>
                     <ul>
@@ -96,7 +98,7 @@
                             <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog:post_list' %}">Blog</a></li>
                             <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
                             <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>
-                            <li><a href="#">Register</a> </li>
+                            <!--<li><a href="#">Register</a> </li>-->
                         {% endwith %}
                     </ul>
             </nav>
@@ -120,19 +122,19 @@
                     <h5 class="text-uppercase">Johnson Kuang</h5>
                     <p>Contact: (425) 273-3269, johnsonkuang@outlook.com</p>
                     <!--Facebook-->
-                    <a class="btn-floating btn-md btn-fb" role="button"><i class="fa fa-lg fa-facebook"></i></a>
+                    <a class="btn-floating btn-md btn-fb" role="button" href="https://www.facebook.com/profile.php?id=100011236536457"><i class="fa fa-lg fa-facebook"></i></a>
                     <!--Linkedin-->
-                    <a class="btn-floating btn-md btn-li" role="button"><i class="fa fa-lg fa-linkedin"></i></a>
+                    <a class="btn-floating btn-md btn-li" role="button" href="https://www.linkedin.com/in/johnson-kuang"><i class="fa fa-lg fa-linkedin"></i></a>
                     <!--Instagram-->
-                    <a class="btn-floating btn-md btn-ins" role="button"><i class="fa fa-lg fa-instagram"></i></a>
+                    <a class="btn-floating btn-md btn-ins" role="button" href="https://www.instagram.com/jk.uang/"><i class="fa fa-lg fa-instagram"></i></a>
                     <!--Youtube-->
-                    <a class="btn-floating btn-md btn-yt" role="button"><i class="fa fa-lg fa-youtube"></i></a>
+                    <a class="btn-floating btn-md btn-yt" role="button" href="https://www.youtube.com/channel/UCBw6FWxjxZOYrBzV6Q6lH-w?view_as=subscriber"><i class="fa fa-lg fa-youtube"></i></a>
                     <!--Github-->
-                    <a class="btn-floating btn-md btn-git" role="button"><i class="fa fa-lg fa-github"></i></a>
+                    <a class="btn-floating btn-md btn-git" role="button" href="https://github.com/johnsonkuang"><i class="fa fa-lg fa-github"></i></a>
                     <!--Email-->
-                    <a class="btn-floating btn-md btn-email" role="button"><i class="fa fa-lg fa-envelope-o"></i></a>
+                    <a class="btn-floating btn-md btn-email" role="button" href="mailto:johnsonkuang@outlook.com ?subject=Message to Johnson &amp;body=Your Email:"><i class="fa fa-lg fa-envelope-o"></i></a>
                     <!--Reddit-->
-                    <a class="btn-floating btn-md btn-red" role="button"><i class="fa fa-lg fa-reddit-alien"></i></a>
+                    <a class="btn-floating btn-md btn-red" role="button" href=""><i class="fa fa-lg fa-reddit-alien"></i></a>
                 </div>
                 <!--Grid column-->
                 <div class="col-md-3 mb-md-0 mb-3">
