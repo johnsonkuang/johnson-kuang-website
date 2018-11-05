@@ -17,6 +17,11 @@
 
     <link rel="shortcut icon" href="" />
 
+    <!-- for unminified version add this -->
+    <link rel="stylesheet" type="text/css" href="{% static 'website/fonts/proxima-nova-web-fonts-master/proxima-nova-web-fonts-master/fonts/fonts.css' %}" />
+    <!-- for minified version add this -->
+    <link rel="stylesheet" type="text/css" href="{% static 'website/fonts/proxima-nova-web-fonts-master/proxima-nova-web-fonts-master/fonts/fonts.min.css' %}" />
+
 {% block head %}
 {% endblock %}
 
@@ -131,28 +136,30 @@
                 </div>
                 <!--Grid column-->
                 <div class="col-md-3 mb-md-0 mb-3">
-
+                    <h5 class="text-uppercase" style="margin: 0; margin-top: 10px;">Subscribe for Updates </h5>
+                    <p>on the Life of Kuang, His Thoughts, and His Ideas!</p>
+                    <a class="btn" style="background-color: #00b0f0!important;" href="{% url 'website:newsletter_signup' %}">Click Here!</a>
                 </div>
                 <!--Grid column-->
                 <div class="col-md-3 mb-md-0 mb-3">
                     <!--navigation-->
                     <h5 class="text-uppercase">Links</h5>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <ul class="list-unstyled" style="font-size: 1.2em;">
                                 {% with request.resolver_match.url_name as url_name %}
-                                    <li class="nav-link" style="{% if url_name == 'index' %}font-weight: bolder{% endif %}"><a href="{% url 'website:index' %}">+ Home</a></li>
-                                    <li class="nav-link" style="{% if url_name == 'about' %}font-weight: bolder{% endif %}"><a href="{% url 'website:about' %}">+ About</a></li>
-                                    <li class="nav-link" style="{% if url_name == 'resume' %}font-weight: bolder{% endif %}"><a href="{% url 'website:resume' %}">+ Resume</a></li>
+                                    <li class="nav-link" style="{% if url_name == 'index' %}font-weight: bolder{% endif %}"><a href="{% url 'website:index' %}"><span>+ Home</span></a></li>
+                                    <li class="nav-link" style="{% if url_name == 'about' %}font-weight: bolder{% endif %}"><a href="{% url 'website:about' %}"><span>+ About</span></a></li>
+                                    <li class="nav-link" style="{% if url_name == 'resume' %}font-weight: bolder{% endif %}"><a href="{% url 'website:resume' %}"><span>+ Resume</span></a></li>
                                 {% endwith %}
                             </ul>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <ul class="list-unstyled" style="font-size: 1.2em">
                                 {% with request.resolver_match.url_name as url_name %}
-                                    <li class="nav-link" style="{% if url_name == 'post_list' %}font-weight: bolder{% endif %}"><a href="{% url 'blog:post_list' %}">+ Blog</a></li>
-                                    <li class="nav-link" style="{% if url_name == 'projects' %}font-weight: bolder{% endif %}"><a href="{% url 'website:projects' %}">+ Projects</a></li>
-                                    <li class="nav-link" style="{% if url_name == 'sandbox' %}font-weight: bolder{% endif %}"><a href="{% url 'website:sandbox' %}">+ Sandbox</a></li>
+                                    <li class="nav-link" style="{% if url_name == 'post_list' %}font-weight: bolder{% endif %}"><a href="{% url 'blog:post_list' %}"><span>+ Blog</span></a></li>
+                                    <li class="nav-link" style="{% if url_name == 'projects' %}font-weight: bolder{% endif %}"><a href="{% url 'website:projects' %}"><span>+ Projects</span></a></li>
+                                    <li class="nav-link" style="{% if url_name == 'sandbox' %}font-weight: bolder{% endif %}"><a href="{% url 'website:sandbox' %}"><span>+ Sandbox</span></a></li>
                                 {% endwith %}
                             </ul>
                         </div>
@@ -162,7 +169,7 @@
         </div>
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
-            <a href="https://www.freeprivacypolicy.com/privacy/view/5cded7b468a8dbf6de6ad8c947a7c33d">Privacy Policy</a> | <a href="{% url 'website:terms' %}">Terms of Use</a> | &copy; 2018 Copyright: A Johnson Kuang Production | <em>Ask and You Shall Receive</em> | <a href="{% url 'website:index' %}">johnsonkuang.com</a>
+            <a href="https://www.freeprivacypolicy.com/privacy/view/5cded7b468a8dbf6de6ad8c947a7c33d"><span>Privacy Policy</span></a> | <a href="{% url 'website:terms' %}"><span>Terms of Use</span></a> | <span>&copy; 2018 Copyright: A Johnson Kuang Production</span> | <span><em>Ask and You Shall Receive</em></span> | <a href="{% url 'website:index' %}"><span>johnsonkuang.com</span></a>
         </div>
     </footer>
 </body>

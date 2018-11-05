@@ -189,8 +189,12 @@ def index(request):
 def about(request):
     #banner = Image.objects.get(name='about_banner')
     gallery = About_Gallery.objects.all()
+    competition = Image.objects.get(name='DECA_Competition')
+    scioly = Image.objects.get(name='about_scioly')
     context = {
      #   'banner': banner,
+        'competition': competition,
+        'scioly':scioly,
         'gallery': gallery,
     }
     return render(request, 'website/about.html', context)

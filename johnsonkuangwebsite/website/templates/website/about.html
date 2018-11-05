@@ -17,12 +17,38 @@
     <div class="container" style="padding-top: 69px;">
         {#  <!--<img src="{% cropped_thumbnail banner "cropping" scale=1.0 %}" class="img-responsive fill">-->#}
     </div>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:400,300,100);
+    h1{
+            font-family: adobe-garamond-pro;
+    font-weight: 400;
+    font-style: normal;
+        font-size: 2em;
+    letter-spacing: 0em;
+    line-height: 1em;
+    text-transform: none;
+    }
+        p {
+        font-family: 'Proxima Nova';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        letter-spacing: 0em;
+        line-height: 1.8em;
+        text-transform: none;
+        color: rgba(26,26,26,.75);
+    }
+    </style>
+    <!--TODO: STILL NEED A BANNER-->
+    
+
+
     <div class="jumbotron" style="text-align: center; margin-bottom: 0px;">
         <div class="container">
-            <h1>A few fun facts about myself . . .</h1>
+            <h1 style=" font-weight: lighter;">A few fun facts about myself . . .</h1>
             <h4>I love home-cooking, I am an avid reader; I'm definitely single, my favorite number is 2, and I was hit by a car when I was 3;
                 I'm not a huge fan of writing essays, I play video games like it's my life,
-            I am a 16 year-old aspiring entrepreneur, I do downhill skiing, my favorite food is beef noodles (with handmade noodles),
+            I am a 16 year-old aspiring entrepreneur, I do downhill skiing, my favorite food is beef noodles (with handmade noodles).
             </h4>
         </div>
 
@@ -78,6 +104,11 @@
                 Why yes, I do many competitions. From Science Olympiad to DECA, I have had a very fulfilling high school experience in this regard. From late-night cramming to post-awards excitement, competing represent some of my best memories from high school.
             </p>
             <!--Full Sized Image DECA-->
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6"><img src="{{ competition.image.url }}" style="width: 100%; height: auto;" class="img-fluid img-responsive"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6"><img src="{{ scioly.image.url }}" style="width: 100%; height: auto;" class="img-fluid img-responsive"></div>
+            </div>
+
         </div>
     </div>
     <div class="container">
