@@ -16,8 +16,6 @@ class Profile(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField()
-    newsletter = models.ForeignKey(NewsletterUser, on_delete=models.SET_NULL, blank=True, null=True)
-    subscribed = models.BooleanField(default=False)
     bio = models.TextField(blank=True)
     location = models.CharField(max_length=255, blank=True)
 
@@ -29,19 +27,10 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        p = Profile.objects.create(user=instance)
-        if NewsletterUser.objects.filter(email=p.email).exists():
-            if p.subscribed:
-                n = NewsletterUser.objects.get(email=p.email)
-                p.newsletter = n
-        else:
-            if p.subscribed:
-                n = NewsletterUser.objects.created(email=p.email)
-                p.newsletter=n
-        p.save()
+        Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    p = instance.profile.save()
 

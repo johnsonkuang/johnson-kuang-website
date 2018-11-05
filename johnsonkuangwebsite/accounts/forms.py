@@ -4,10 +4,10 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.contrib.auth.forms import UserCreationForm
 
-class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    subscribed = forms.BooleanField(required=False, label='Subscribe to my newsletter!')
+from .models import *
 
+class RegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)    
 
     helper = FormHelper()
     helper.form_method = 'POST'
@@ -22,14 +22,15 @@ class RegistrationForm(UserCreationForm):
             'email',
             'password1',
             'password2',
-            'subscribed',
         )
-        labels = {
-            'subscribed': 'Subscribe to my newsletter!',
-        }
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
+        return user
