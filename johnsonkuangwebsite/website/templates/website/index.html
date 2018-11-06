@@ -6,7 +6,7 @@
 {% block pagetitle %}Johnson Kuang{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static 'website/css/index.css' %}?version=0.0.2"/>
+    <link rel="stylesheet" href="{% static 'website/css/index.css' %}?version=0.0.3"/>
 {% endblock %}
 
 {% block scripts %}
@@ -16,7 +16,13 @@
 
 
 {% block content %}
-
+    <STYLE>
+        @media screen and (max-width: 800px){
+            #popup {
+                display: none;
+            }
+        }
+    </STYLE>
     <!--TODO: find way to hide the rest of the page on load-->
     <div style="display:none; z-index: 99; max-width: 100%;" id="popup">
         <div class="fullscreen-bg">
@@ -48,7 +54,7 @@
     <div class="parallax-window" data-parallax="scroll" data-image-src="{{ MEDIA_URL }}images/About_Slide.jpg" style="min-height: 70vh;"></div>
     <section>
         <div class="container animated fadeIn">
-            <div style="height: 30vh;" class="text-center">
+            <div style="height: auto;" class="text-center">
                 <h1 class="text-uppercase" style="font-family: 'Lato', 'Open Sans', 'Work Sans'; font-weight:300; font-size: 3.0em; background-color: #FFF; box-shadow: none; padding-top: 2%; padding-bottom: 2%;">About</h1>
                 <h5 style="font-family: 'Work Sans'">
                     Welcome to the story of my life! If you’re looking for a good story, you won’t find it here, but what you will find is my humble life experiences up until now. Step into my life and look around, you’ll find a mess of passions, hobbies, and ideas. I’m more than willing to share and I'm looking forward to our time together... [<a href="{% url 'website:about' %}">More about Me</a>]
@@ -67,7 +73,7 @@
         @import url(https://fonts.googleapis.com/css?family=Lato:400,300,200,100);
     </style>
         <div class="container">
-            <div style="height: 22vh;" class="text-center">
+            <div style="height: auto;" class="text-center">
                 <h1 class='text-uppercase' style="font-family: 'Lato', 'Open Sans', 'Work Sans'; font-weight:300!important; font-size: 3.0em; background-color: #FFF; box-shadow: none; padding-top: 2%; padding-bottom: 2%;">Life of Kuang</h1>
                 <h5 style="font-family: 'Work Sans';">
                     What better way is there to share about myself than to write a blog? I love a good conversation. Although dialogue isn’t actually possible on this website, I can offer you the next best thing: commenting on my posts. This website will be where I share all the ups and downs of my life, from the wildest adventures to my innermost thoughts. Look forward to speedy reads about the life of Kuang. [<a href="{% url 'blog:post_list' %}" class="link">Read More</a>]
@@ -84,5 +90,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="{% static 'website/js/parallax.js' %}"></script>
-    <script src="{% static 'website/js/load.js' %}?version=1.0.2"></script>
+
+    <script>
+        if (screen && screen.width > 800) {
+          document.write('<script type="text/javascript" src="{% static 'website/js/load.js' %}"><\/script>');
+        }
+    </script>
 {% endblock %}
