@@ -36,10 +36,8 @@ def post_share(request, post_id):
             message = 'Read "{}" at {}\n\n{}\'s comments: {}'.format(post.title, post_url, cd['name'], cd['comments'])
             send_mail(subject, message, 'admin@myblog.com', [cd['to']])
             sent = True
-
     else:
         form = EmailPostForm()
-
     return render(request, 'blog/post/share.html', {'post': post,
                                                     'form': form,
                                                     'sent': sent})
@@ -102,7 +100,10 @@ def get_next_or_prev(models, item, direction):
 def post_detail(request, year, month, day, post):
 
     post = get_object_or_404(Post, slug=post,
-                                   status='published')
+                                   status='published',
+                                   publish__year=year,
+                                   publish__month=month,
+                                   publish__day=day)
     # List of active comments for this post
     comments = post.comments.filter(active=True)
     prev_post = get_next_or_prev(Post.objects.all(), post, 'prev')
