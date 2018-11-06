@@ -49,7 +49,10 @@
         <main class="post blog-post col-lg-8">
           <div class="container" style="width: 100%;">
             <div class="post-single">
+            {% if post.image %}
               <div class="post-thumbnail"><img src="{{ post.image.url }}" alt="..." class="img-fluid"></div>
+            {% else %}
+            {% endif %}
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
                   <div class="category">
@@ -105,6 +108,7 @@
                                  <a class="btn btn-default btn-round btn-lg btn-icon" href="{% url "blog:post_share" post.id %}">
                                      <i class="fa fa-envelope"></i>
                                  </a>
+                            <!--
                                  <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook">
                                     <i class="fa fa-facebook"></i>
                                   </a>
@@ -119,6 +123,7 @@
                             data-href="{{ post.get_absolute_url }}"
                             data-layout="button_count">
                         </div>
+                        -->
                 </div>
                 <div class="post-comments">
                     <h3 class="h6">Post Comments<span class="no-of-comments">({{ post.comments.count }})</span></h3>

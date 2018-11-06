@@ -1,10 +1,11 @@
 {% extends 'website/base.html' %}
 {% load blog_tags %}
+{% load crispy_forms_tags %}
 
 {% block title %}Share a post{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="padding-top: 80px; padding-bottom: 20px;">
         {% if sent %}
             <h1>E-mail successfully sent</h1>
             <p>
@@ -13,9 +14,10 @@
           {% else %}
             <h1>Share "{{ post.title }}" by e-mail</h1>
             <form action="." method="post">
-              {{ form.as_p }}
+
               {% csrf_token %}
-              <input type="submit" value="Send e-mail">
+                {% crispy form %}
+              <button type="submit" class="btn btn-default">Submit</button>
             </form>
           {% endif %}
     </div>

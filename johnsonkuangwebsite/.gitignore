@@ -1,5 +1,8 @@
 
 website/migrations/*
+blog/migrations/*
+accounts/migrations/*
 env/*
 db.sqlite3
 johnsonkuangwebsite/*
+
