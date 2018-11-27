@@ -58,7 +58,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'website/css/navbar.css'%}?version=0.0.1">
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/navbar.css'%}?version=0.0.2">
     <title>
         {% block pagetitle %}
             {{ request.resolver_match.url_name }}
@@ -87,7 +87,7 @@
         <header>
             <link href="{% static 'website/fonts/proxima-nova-web-fonts-master/proxima-nova-web-fonts-master/fonts/fonts.css' %}" rel="stylesheet" type="text/css">
             <link href="{% static 'website/fonts/proxima-nova-web-fonts-master/proxima-nova-web-fonts-master/fonts/fonts.min.css' %}" rel="stylesheet" type="text/css">
-            <h1 class="logo" style="color: #FFF; font-family: 'Proxima Nova';">Johnson Kuang</h1>
+            <h1 class="logo" style="color: #fff; font-family: 'Proxima Nova';">J/K</h1>
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <nav>
                     <ul>
@@ -98,7 +98,15 @@
                             <li class="{% if url_name == 'blog' %}active{% endif %}"><a href="{% url 'blog:post_list' %}">Blog</a></li>
                             <li class="{% if url_name == 'projects' %}active{% endif %}"><a href="{% url 'website:projects' %}">Projects</a></li>
                             <li class="{% if url_name == 'sandbox' %}active{% endif %}"><a href="{% url 'website:sandbox' %}">Sandbox</a></li>
+                            {% if user.is_authenticated %}
+                                {% if user.username == 'inglemoorscienceuser' %}
+                                    <li class="{% if url_name == 'science-olympiad-resources' %}active{% endif %}"><a href="{% url 'science-olympiad-resources' %}">Resources</a></li>
+                                {% endif %}
+                                <li class="{% if url_name == 'logout' %}active{% endif %}"><a href="{% url 'accounts:logout' %}?next=/">Logout</a></li>
+                            {% else %}
+                                <li class="{% if url_name == 'login' %}active{% endif %}"><a href="{% url 'accounts:login' %}">Login</a></li>
                             <!--<li><a href="#">Register</a> </li>-->
+                            {% endif %}
                         {% endwith %}
                     </ul>
             </nav>

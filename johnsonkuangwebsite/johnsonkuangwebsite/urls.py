@@ -11,6 +11,7 @@ from django.conf.urls import include
 from django.urls import path
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from website import views
 
 from website.sitemaps import *
 admin.autodiscover()
@@ -22,6 +23,7 @@ sitemaps = {
 urlpatterns = [
     url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'', include('website.urls'), name='website'),
+    url(r'^science-olympiad/resources', views.science_olympiad_resources, name='science-olympiad-resources'),
     url(r'^admin/', admin.site.urls),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^control/', include(('control_panel.urls', 'control_panel'), namespace='control_panel')),

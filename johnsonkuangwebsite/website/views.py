@@ -3,6 +3,9 @@ import os
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
+from lockdown.decorators import lockdown
+
+from django.contrib.auth.decorators import login_required
 
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
@@ -235,3 +238,11 @@ def sandbox(request):
 
 def term(request):
     return render(request, 'website/termsofuse.html')
+
+
+@lockdown()
+def science_olympiad_resources(request):
+    if request.user.is_authenticated:
+        return redirect("http://bit.ly/club_resources")
+    else:
+        return redirect('/accounts/login/')

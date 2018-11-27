@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'control_panel',
     'accounts',
+    'lockdown',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,6 +66,15 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_EXPIRE_SECONDS = 21600 #seconds
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+
+LOCKDOWN_PASSWORDS = ('inglemoor_vikings_ihs_scienceteam_beatbothell_crushcamas','scienceteam')
+
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
@@ -73,6 +83,7 @@ THUMBNAIL_PROCESSORS = (
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

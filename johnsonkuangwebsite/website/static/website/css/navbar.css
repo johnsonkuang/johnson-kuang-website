@@ -132,7 +132,7 @@ nav a:hover{
     transform: translateY(-7px) rotate(-90deg);
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 1280px){
     .nav-toggle-label {
         display: none;
     }
