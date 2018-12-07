@@ -3,6 +3,7 @@ website/migrations/*
 blog/migrations/*
 accounts/migrations/*
 env/*
-db.sqlite3
+db/db.sqlite3
 johnsonkuangwebsite/*
 
+/config.ini
