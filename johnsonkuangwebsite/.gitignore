@@ -1,9 +1,6 @@
+#!/usr/bin/env bash
 
-website/migrations/*
-blog/migrations/*
-accounts/migrations/*
-env/*
 db/db.sqlite3
-johnsonkuangwebsite/*
-
 /config.ini
+
+media/*
