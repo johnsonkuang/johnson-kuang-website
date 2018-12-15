@@ -20,6 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config = ConfigParser()
 config.read(os.path.join(BASE_DIR, 'config.ini'))
 
+dev_config = ConfigParser()
+dev_config.read(os.path.join(BASE_DIR, 'dev_config.ini'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -47,14 +50,24 @@ else:
     ALLOWED_HOSTS = []
 
 #Email settings
-EMAIL_BACKEND = config.get('Email', 'EMAIL_BACKEND')
-#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_HOST = config.get('Email', 'EMAIL_HOST')
-EMAIL_HOST_USER = config.get('Email', 'EMAIL_HOST_USER')
+if config.has_section('Email'):
+    EMAIL_BACKEND = config.get('Email', 'EMAIL_BACKEND')
+    #DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+    EMAIL_HOST = config.get('Email', 'EMAIL_HOST')
+    EMAIL_HOST_USER = config.get('Email', 'EMAIL_HOST_USER')
 
-EMAIL_HOST_PASSWORD = config.get('Email', 'EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config.getint('Email', 'EMAIL_PORT')
-EMAIL_USE_TLS = config.getboolean('Email', 'EMAIL_USE_TLS')
+    EMAIL_HOST_PASSWORD = config.get('Email', 'EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = config.getint('Email', 'EMAIL_PORT')
+    EMAIL_USE_TLS = config.getboolean('Email', 'EMAIL_USE_TLS')
+else:
+    EMAIL_BACKEND = dev_config.get('Email', 'EMAIL_BACKEND')
+    # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+    EMAIL_HOST = dev_config.get('Email', 'EMAIL_HOST')
+    EMAIL_HOST_USER = dev_config.get('Email', 'EMAIL_HOST_USER')
+
+    EMAIL_HOST_PASSWORD = dev_config.get('Email', 'EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = dev_config.getint('Email', 'EMAIL_PORT')
+    EMAIL_USE_TLS = dev_config.getboolean('Email', 'EMAIL_USE_TLS')
 
 SITE_ID = 1
 
@@ -95,7 +108,9 @@ else:
     SESSION_EXPIRE_SECONDS = config.getint('Session', 'SESSION_EXPIRE_SECONDS')
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
-LOCKDOWN_PASSWORDS = (config.get('Lockdown', 'LOCKDOWN_PASSWRODS'),)
+if config.has_option('Lockdown', 'LOCKDOWN_PASSWORDS'):
+    LOCKDOWN_PASSWORDS = (config.get('Lockdown', 'LOCKDOWN_PASSWORDS'),)
+
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (

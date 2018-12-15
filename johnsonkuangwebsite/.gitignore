@@ -4,3 +4,5 @@ db/db.sqlite3
 /config.ini
 
 media/*
+
+website/secret.py

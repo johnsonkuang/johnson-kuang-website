@@ -240,9 +240,11 @@ def term(request):
     return render(request, 'website/termsofuse.html')
 
 
+from website.secret import *
+
 @lockdown()
 def science_olympiad_resources(request):
     if request.user.is_authenticated:
-        return redirect("http://bit.ly/club_resources")
+        return redirect(return_link())
     else:
         return redirect('/accounts/login/')
