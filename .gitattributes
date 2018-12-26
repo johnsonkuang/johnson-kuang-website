@@ -1,7 +1,7 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
-* text=auto
+* text=false
 
 ###############################################################################
 # Set default behavior for command prompt diff.
@@ -43,6 +43,19 @@
 #*.jpg   binary
 #*.png   binary
 #*.gif   binary
+
+
+###############################################################################
+# behavior for docker files
+#
+# should be normalized (convert crlf => lf)
+###############################################################################
+*.css   text
+*.html  text
+*.js    text
+*.py    text
+*.sh    text
+
 
 ###############################################################################
 # diff behavior for common document formats
