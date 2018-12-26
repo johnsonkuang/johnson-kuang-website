@@ -109,7 +109,7 @@ else:
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
 if config.has_option('Lockdown', 'LOCKDOWN_PASSWORDS'):
-    LOCKDOWN_PASSWORDS = (config.get('Lockdown', 'LOCKDOWN_PASSWORDS'),)
+    LOCKDOWN_PASSWORDS = (config.get('Lockdown', 'LOCKDOWN_PASSWORDS').split(','))
 
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
