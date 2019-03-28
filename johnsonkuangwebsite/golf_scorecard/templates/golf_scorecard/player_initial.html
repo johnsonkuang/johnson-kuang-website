@@ -1,0 +1,52 @@
+{% extends 'website/base.html' %}
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container" style="padding-top: 120px; height: 50vh;">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h3 class="text-center">Enter the Number Players</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <style>
+                    .spacer {
+                        padding: 10px 0;
+                    }
+                </style>
+                <div class="input-group">
+                    <div class="spacer">
+                        {% render_field form.game_name type="text" name="name" id="name" placeholder="Game Name" class+="form-control" %}
+                    </div>
+
+
+                </div>
+                <div class="input-group">
+                    <div class="spacer">
+                        {% render_field form.num_players type="text" name="num_players" id="num_players" placeholder="Number of Players" class+="form-control" %}
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="col-sm-1" style="padding: 0;">
+                        <span class="input-group-btn" style="margin-top: 10px;">
+                            <button class="btn btn-outline-dark" type="submit" style="">Submit</button>
+                        </span>
+
+                    </div>
+                    <div class="col-sm-2" style="padding-left: 25px;">
+                        <span class="input-group-btn" style="margin-top: 10px;">
+                            <button class="btn btn-outline-dark-green"><a href="{% url 'golf:control_players_list' %}">Add Players</a></button>
+                        </span>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

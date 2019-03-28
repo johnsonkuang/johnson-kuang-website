@@ -27,8 +27,25 @@ class PlayerCreationForm(forms.ModelForm):
 
         #save the data by cleaning it
 
-class HoleForm(forms.ModelForm):
 
-    class Meta:
-        model = Holes
-        fields = ['']
+class PlayerSelectionForm(forms.Form):
+    players = forms.ModelMultipleChoiceField(label='Select Players',
+                                             widget=forms.SelectMultiple,
+                                             queryset=Person.objects.all())
+
+    num_players = 0
+    def set_globalvar_to_number(self, num):
+        global num_players
+        num_players = num
+
+    def __init__(self, *args, **kwargs):
+        num_players = kwargs.pop('num_players')
+        super(PlayerSelectionForm, self).__init__(*args, **kwargs)
+        self.set_globalvar_to_number(num=num_players)
+
+    def clean_players(self):
+        print('nope')
+        value = self.cleaned_data['players']
+        if len(value) > num_players:
+            raise forms.ValidationError("You can't select more than " + num_players + " players.")
+        return value

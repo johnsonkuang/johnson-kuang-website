@@ -1,0 +1,72 @@
+{% extends 'website/base.html' %}
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <script src="{% static 'golf_scorecard/js/scorecard.js' %}"></script>
+    <script>
+        var players =[
+            {% for player in game.players.all %}
+                {
+                    "name": "{{ player.name }}",
+                    "hcp": {{ player.hcp }},
+                    "team": null,
+                },
+            {% endfor %}
+        ];
+
+        var holes = [
+            {% for hole in holes %}
+                {
+                    "hole_number": {{ hole.hole_number }},
+                    "par": {{ hole.par }},
+                    "kp": {% if hole.kp %}true{% else %}false{% endif %},
+                    "hcp": {{ hole.hcp }}
+                },
+            {% endfor %}
+        ];
+    </script>
+
+<div class="container" style="padding-top: 120px; height: 50vh;">
+    <div class="row">
+            <h3 class="text-center">Useless Bay Golf Scorecard</h3>
+    <div class="col-12">
+                <form>
+                    <table id="scorecard">
+                        <tr>
+                            <td>Player Name</td>
+                            <td>Hdcp</td>
+                            <td>Team</td>
+                            {% for hole in holes %}
+                                <td>{{ hole.hole_number }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Par: </td>
+                            {% for hole in holes %}
+                                <td>{{ hole.par }}</td>
+                            {% endfor %}
+                        </tr>
+                        <!--Insert Rows Here-->
+                        <!-- position 2-->
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Handicap: </td>
+                            {% for hole in holes %}
+                                <td>{{ hole.hcp }}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                    <button onclick="">Next Row</button>
+                </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

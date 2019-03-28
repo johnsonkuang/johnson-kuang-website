@@ -1,0 +1,13 @@
+{% extends 'golf_scorecard/control_base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Delete Player</h1>
+        <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+            <button class="btn btn-danger" style="margin:0;" type="submit">Delete</button>
+        </form>
+
+</div>
+{% endblock %}

@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^control/', include(('control_panel.urls', 'control_panel'), namespace='control_panel')),
     url(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    url(r'^golf/', include('golf_scorecard.urls', 'golf'), name='golf'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

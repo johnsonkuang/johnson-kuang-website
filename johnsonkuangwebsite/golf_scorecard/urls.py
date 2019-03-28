@@ -5,12 +5,17 @@ from django.conf import settings
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
 from django.urls import path
-from .views import control_person_edit, control_player_detail, control_player_list
-
+from .views import *
+app_name='golf'
 urlpatterns = [
-    url(r'^newsletter/$', control_newsletter, name='control_newsletter'),
-    url(r'^newsletter-list/$', control_newsletter_list, name='control_newsletter_list'),
-    url(r'^newsletter-detail/(?P<pk>\d+)/$', control_newsletter_detail, name='control_newsletter_detail'),
-    url(r'^newsletter-edit/(?P<pk>\d+)/$', control_newsletter_edit, name='control_newsletter_edit'),
-    url(r'^newsletter-delete/(?P<pk>\d+)/$', control_newsletter_delete, name='control_newsletter_delete'),
+    url(r'^$', init_game, name='init_game'),
+    url(r'^players/', control_player, name='control_players'),
+    url(r'^players-list/$', control_player_list, name='control_players_list'),
+    url(r'^player-detail/(?P<pk>\d+)/$', control_player_detail, name='control_players_detail'),
+    url(r'^player-edit/(?P<pk>\d+)/$', control_person_edit, name='control_players_edit'),
+    url(r'^player-delete/(?P<pk>\d+)/$', control_player_delete, name='control_players_delete'),
+    url(r'^holes/$', holes, name='holes'),
+    url(r'^player-selection/', choose_players, name='player_selection'),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

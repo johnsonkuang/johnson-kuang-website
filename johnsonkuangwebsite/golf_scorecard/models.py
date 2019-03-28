@@ -1,7 +1,9 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
+'''
 class Team(models.Model):
     team1 = '1'
     team2 = '2'
@@ -20,6 +22,8 @@ class Team(models.Model):
 
     def calculate_teamscores(self):
         pass
+'''
+
 
 '''
 Usage:
@@ -36,7 +40,18 @@ class Person(models.Model):
     name = models.CharField(max_length=255, blank=False)
     hcp = models.IntegerField(blank=False)
 
+    def __str__(self):
+        return self.name
 
+    def get_absolute_url(self):
+        return reverse(
+            'golf:control_players_detail',
+            kwargs={
+                'pk': self.pk
+            }
+        )
+
+'''
 class PlayerManager(models.Manager):
     use_for_related_fields = True
     def add_player(self, player, team):
@@ -65,35 +80,28 @@ class Player(models.Model):
     def clear_team(self):
         self.team = None
         self.save()
-
-
-
+'''
 class Holes(models.Model):
-    par = models.IntegerField()
+    hole_number = models.IntegerField(default=0)
+    par = models.IntegerField(default=1)
     kp = models.BooleanField(default=False)
-    hcp = models.IntegerField()
+    hcp = models.IntegerField(default=0)
 
 
 class Game(models.Model):
     game_count = models.IntegerField()
     press = models.BooleanField(default=False)
-    winner = models.ForeignKey(Team, null=True, blank=True, on_delete=models.CASCADE)
+    #winner = models.ForeignKey(Team, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class GameInfo(models.Model):
     game_name = models.CharField(max_length=255)
     num_players = models.IntegerField(max_length=255, null=True, blank=True)
-
-    #before saving, attach object being passed to a Scorecard object
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        s = Scorecard.objects.create(game_info=self)
-        s.save()
-        self.save()
+    players = models.ManyToManyField(Person)
 
 class Scorecard(models.Model):
     game_info = models.OneToOneField(GameInfo, on_delete=models.CASCADE, primary_key=True)
-    players = models.ManyToManyField(Player, blank=True)
+    #players = models.ManyToManyField(Player, blank=True)
     holes = models.ManyToManyField(Holes, blank=True)
 
     games = models.ManyToManyField(Game, blank=True)
