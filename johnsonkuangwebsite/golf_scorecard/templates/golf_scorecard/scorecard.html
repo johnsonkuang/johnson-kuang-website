@@ -7,7 +7,7 @@
 {% load widget_tweaks %}
 
 {% block content %}
-    <script src="{% static 'golf_scorecard/js/scorecard.js' %}"></script>
+    <script src="{% static 'js/scorecard.js' %}?version=1.0.1"></script>
     <script>
         var players =[
             {% for player in game.players.all %}
@@ -31,11 +31,13 @@
         ];
     </script>
 
-<div class="container" style="padding-top: 120px; height: 50vh;">
+<div class="container" style="padding-top: 120px; height: 82vh;">
     <div class="row">
             <h3 class="text-center">Useless Bay Golf Scorecard</h3>
     <div class="col-12">
-                <form>
+    <h4>
+        Scorecard
+    </h4>
                     <table id="scorecard">
                         <tr>
                             <td>Player Name</td>
@@ -64,8 +66,67 @@
                             {% endfor %}
                         </tr>
                     </table>
-                    <button onclick="">Next Row</button>
-                </form>
+                    <button onclick="driver();">Next Row</button>
+                    <button disabled id="end"><a href="#"></a></button>
+                    <style>
+                        #gamesf #gamesb td{
+                            width: 100px;
+                            text-align: center;
+                        }
+                    </style>
+
+
+    <h4>
+                            This table will automatically display the game and the number of presses the user provides</h4>
+                    <table id="gamesf" style="margin-top: 20px;">
+
+                        <tr id="gameRowf">
+                            <td>Frontside</td>
+                            <td>Main Game</td>
+                        </tr>
+
+                    </table>
+                    <table id="gamesb" style="margin-top: 20px;">
+
+                        <tr id="gameRowb">
+                            <td>Backside</td>
+                            <td>Main Game</td>
+                        </tr>
+
+                    </table>
+
+                    <style>
+                        #KPS td{
+                            width: 50px;
+                            text-align: center;
+                        }
+                    </style>
+    <h4>
+        This table will show the kps, a * represents 1 kp, etc.
+    </h4>
+                    <table id="KPS" style="margin-top: 20px">
+                        <tr>
+                            <td></td>
+                            <td>3</td>
+                            <td>7</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td>KPs:</td>
+                            <td id="kp1"></td>
+                            <td id="kp2"></td>
+                            <td id="kp3"></td>
+                        </tr>
+                    </table>
+
+                    <h4>Earnings:</h4>
+                        <ul>
+                            <li id="p1"></li>
+                            <li id="p2"></li>
+                            <li id="p3"></li>
+                            <li id="p4"></li>
+                        </ul>
+
     </div>
     </div>
 </div>
